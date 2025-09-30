@@ -1,0 +1,56 @@
+﻿import Image from "next/image";
+import Link from "next/link";
+import { getGalleryItems } from "@/lib/cms";
+import { instagramUrl } from "@/config/navigation";
+
+export default async function GalleryPage() {
+  const galleryItems = await getGalleryItems();
+
+  return (
+    <div className="mx-auto max-w-5xl space-y-12 px-4 py-16 md:px-6">
+      <div className="space-y-3 text-center md:text-left">
+        <h1 className="text-4xl font-semibold text-slate-900 dark:text-white">Galería de proyectos</h1>
+        <p className="text-base text-slate-700 dark:text-slate-300">
+          Experiencias clínicas y formativas realizadas por BEING. Las imágenes se gestionan desde el CMS para mantener la galería actualizada.
+        </p>
+      </div>
+      <div className="grid gap-6 sm:grid-cols-2">
+        {galleryItems.map((item) => (
+          <figure
+            key={item.id}
+            className="space-y-3 rounded-2xl border border-slate-200 bg-white p-4 shadow-sm dark:border-slate-800 dark:bg-slate-900"
+          >
+            <div className="relative aspect-[4/3] overflow-hidden rounded-xl bg-slate-200">
+              <Image
+                src={item.imageUrl}
+                alt={item.alt}
+                fill
+                sizes="(min-width: 768px) 50vw, 100vw"
+                className="object-cover"
+              />
+            </div>
+            <figcaption className="space-y-1 text-sm text-slate-700 dark:text-slate-300">
+              <p className="font-semibold text-slate-900 dark:text-white">{item.title}</p>
+              {item.description ? <p>{item.description}</p> : null}
+            </figcaption>
+          </figure>
+        ))}
+      </div>
+      <aside className="rounded-2xl border border-emerald-200 bg-emerald-50 p-6 text-sm text-emerald-900 dark:border-emerald-900/60 dark:bg-emerald-900/20 dark:text-emerald-100">
+        <h2 className="text-base font-semibold">Más historias en Instagram</h2>
+        <p className="mt-2">
+          Sigue a BEING para ver registros de talleres, cápsulas educativas y testimonios.
+        </p>
+        <Link
+          href={instagramUrl}
+          target="_blank"
+          rel="noreferrer"
+          className="mt-4 inline-flex items-center gap-2 text-sm font-semibold underline-offset-4 hover:underline"
+        >
+          Ir a Instagram
+          <span aria-hidden>→</span>
+        </Link>
+      </aside>
+    </div>
+  );
+}
