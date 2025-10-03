@@ -58,9 +58,9 @@ export function ContactForm() {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-6 rounded-3xl border border-slate-200 bg-white p-8 shadow-md dark:border-slate-800 dark:bg-slate-900">
+    <form onSubmit={handleSubmit} className="space-y-6 rounded-3xl border border-soft bg-surface p-8 shadow-soft dark:border-slate-800 dark:bg-slate-900">
       <div className="space-y-1">
-        <label htmlFor="name" className="text-sm font-semibold text-slate-800 dark:text-slate-100">
+        <label htmlFor="name" className="text-sm font-semibold text-ink-primary dark:text-slate-100">
           Nombre completo
         </label>
         <input
@@ -71,12 +71,12 @@ export function ContactForm() {
           required
           value={formState.name}
           onInput={handleChange("name")}
-          className="w-full rounded-lg border border-slate-300 px-3 py-2 text-sm text-slate-900 shadow-sm focus:border-emerald-500 focus:outline-none focus:ring-2 focus:ring-emerald-200 dark:border-slate-700 dark:bg-slate-950 dark:text-white"
+          className="w-full rounded-lg border border-soft px-3 py-2 text-sm text-ink-teal shadow-sm transition focus:border-[color:var(--color-ink-emerald)] focus:outline-none focus:ring-2 focus:ring-[color:var(--color-accent-yellow)] dark:border-slate-700 dark:bg-slate-950 dark:text-white"
         />
       </div>
 
       <div className="space-y-1">
-        <label htmlFor="email" className="text-sm font-semibold text-slate-800 dark:text-slate-100">
+        <label htmlFor="email" className="text-sm font-semibold text-ink-primary dark:text-slate-100">
           Correo electrónico
         </label>
         <input
@@ -87,12 +87,12 @@ export function ContactForm() {
           required
           value={formState.email}
           onInput={handleChange("email")}
-          className="w-full rounded-lg border border-slate-300 px-3 py-2 text-sm text-slate-900 shadow-sm focus:border-emerald-500 focus:outline-none focus:ring-2 focus:ring-emerald-200 dark:border-slate-700 dark:bg-slate-950 dark:text-white"
+          className="w-full rounded-lg border border-soft px-3 py-2 text-sm text-ink-teal shadow-sm transition focus:border-[color:var(--color-ink-emerald)] focus:outline-none focus:ring-2 focus:ring-[color:var(--color-accent-yellow)] dark:border-slate-700 dark:bg-slate-950 dark:text-white"
         />
       </div>
 
       <div className="space-y-1">
-        <label htmlFor="reason" className="text-sm font-semibold text-slate-800 dark:text-slate-100">
+        <label htmlFor="reason" className="text-sm font-semibold text-ink-primary dark:text-slate-100">
           Motivo de consulta
         </label>
         <textarea
@@ -102,7 +102,7 @@ export function ContactForm() {
           required
           value={formState.reason}
           onInput={handleChange("reason")}
-          className="w-full rounded-lg border border-slate-300 px-3 py-2 text-sm text-slate-900 shadow-sm focus:border-emerald-500 focus:outline-none focus:ring-2 focus:ring-emerald-200 dark:border-slate-700 dark:bg-slate-950 dark:text-white"
+          className="w-full rounded-lg border border-soft px-3 py-2 text-sm text-ink-teal shadow-sm transition focus:border-[color:var(--color-ink-emerald)] focus:outline-none focus:ring-2 focus:ring-[color:var(--color-accent-yellow)] dark:border-slate-700 dark:bg-slate-950 dark:text-white"
         />
       </div>
 
@@ -115,20 +115,20 @@ export function ContactForm() {
           onChange={(event) =>
             setFormState((prev) => ({ ...prev, acceptsTerms: event.target.checked }))
           }
-          className="mt-1 h-4 w-4 rounded border-slate-300 text-emerald-500 focus:ring-emerald-500"
+          className="mt-1 h-4 w-4 rounded border-soft text-ink-primary focus:ring-[color:var(--color-accent-yellow)]"
           required
         />
-        <label htmlFor="terms" className="text-xs text-slate-700 dark:text-slate-300">
+        <label htmlFor="terms" className="text-xs text-ink-teal dark:text-slate-300">
           Acepto los <a className="underline" href="/politica-de-privacidad">términos y condiciones</a> del servicio.
         </label>
       </div>
 
       {errorMessage ? <p className="text-sm text-red-600">{errorMessage}</p> : null}
-      {status === "success" ? <p className="text-sm text-emerald-600">Gracias por tu mensaje. Te contactaremos pronto.</p> : null}
+      {status === "success" ? <p className="text-sm text-ink-emerald">Gracias por tu mensaje. Te contactaremos pronto.</p> : null}
 
       <button
         type="submit"
-        className="inline-flex w-full items-center justify-center rounded-full bg-emerald-500 px-6 py-3 text-sm font-semibold text-slate-900 transition hover:bg-emerald-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-emerald-600 disabled:cursor-not-allowed"
+        className="inline-flex w-full items-center justify-center rounded-full bg-accent-yellow px-6 py-3 text-sm font-semibold text-ink-primary transition hover:brightness-110 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-[color:var(--color-ink-primary)] focus-visible:ring-offset-[color:var(--color-surface)] disabled:cursor-not-allowed"
         disabled={status === "submitting"}
       >
         {status === "submitting" ? "Enviando…" : "Enviar solicitud"}

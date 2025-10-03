@@ -1,35 +1,169 @@
 ﻿@import "tailwindcss";
 
 :root {
-  --background: #f8fafc;
-  --foreground: #020617;
+  --color-mint-base: #789d80;
+  --color-teal-soft: #a6dce0;
+  --color-navy-deep: #0e2c4b;
+  --color-sun-accent: #f2c94c;
+  --color-terra-warm: #e38953;
+  --color-coral-heart: #d44b4e;
+  --color-lavender-soft: #7f66c9;
+  --color-slate-neutral: #7d7d97;
+  --color-mint-tint: #d4e4d0;
+  --color-navy-shadow: #0b243c;
+  --color-shell-peach: #ffe8db;
+
+  --font-display: "Quicksand", sans-serif;
+  --font-body: "Lexend Deca", sans-serif;
+  --font-script: "Caveat", cursive;
+
+  --shadow-soft: 0 16px 32px -24px rgba(14, 44, 75, 0.28);
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #020617;
-    --foreground: #f8fafc;
-  }
+  --color-background: var(--color-mint-tint);
+  --color-foreground: var(--color-navy-deep);
+  --color-primary: var(--color-sun-accent);
+  --font-sans: var(--font-body);
+  --font-display: var(--font-display);
+  --font-script: var(--font-script);
 }
 
 body {
   min-height: 100vh;
-  background-color: var(--background);
-  color: var(--foreground);
-  font-family: var(--font-sans), system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  background-color: #ffffff;
+  color: var(--color-navy-deep);
+  font-family: var(--font-body), system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  line-height: 1.65;
+}
+
+.skip-link {
+  position: absolute;
+  left: -9999px;
+  top: auto;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+}
+
+.skip-link:focus {
+  left: 1rem;
+  top: 1rem;
+  width: auto;
+  height: auto;
+  clip: auto;
+  padding: 0.75rem 1.25rem;
+  background-color: var(--color-navy-deep);
+  color: #ffffff;
+  border-radius: 0.75rem;
+  box-shadow: var(--shadow-soft);
+  z-index: 1000;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--font-display), "Quicksand", system-ui, sans-serif;
+  letter-spacing: 0.01em;
+  color: var(--color-navy-deep);
+}
+
+mark,
+.script-highlight {
+  background: linear-gradient(#f2c94c80 0 60%, transparent 60%);
+  color: inherit;
+  font-family: var(--font-script), "Caveat", cursive;
 }
 
 a {
-  color: inherit;
+  color: var(--color-navy-deep);
+  text-decoration-color: rgba(14, 44, 75, 0.45);
+  text-decoration-thickness: 0.15em;
+  text-underline-offset: 0.25em;
 }
 
 a:hover {
+  color: var(--color-lavender-soft);
+}
+
+:focus-visible {
+  outline: 3px solid var(--color-sun-accent);
+  outline-offset: 4px;
+}
+
+button,
+input,
+textarea,
+select {
+  font-family: inherit;
   color: inherit;
+}
+
+::selection {
+  background: rgba(242, 201, 76, 0.65);
+  color: var(--color-navy-deep);
+}
+
+.text-ink-primary {
+  color: var(--color-navy-deep);
+}
+
+.text-ink-teal {
+  color: var(--color-teal-soft);
+}
+
+.text-ink-plum {
+  color: var(--color-lavender-soft);
+}
+
+.text-ink-magenta {
+  color: var(--color-terra-warm);
+}
+
+.text-ink-emerald {
+  color: var(--color-mint-base);
+}
+
+.text-ink-coral {
+  color: var(--color-coral-heart);
+}
+
+.text-ink-muted {
+  color: var(--color-slate-neutral);
+}
+
+.text-ink-soft {
+  color: rgba(14, 44, 75, 0.7);
+}
+
+.bg-surface {
+  background-color: var(--color-mint-tint);
+}
+
+.bg-surface-alt {
+  background-color: var(--color-teal-soft);
+}
+
+.bg-banner {
+  background-color: var(--color-shell-peach);
+}
+
+.bg-accent-yellow {
+  background-color: var(--color-sun-accent);
+}
+
+.border-soft {
+  border-color: rgba(120, 157, 128, 0.35);
+}
+
+.border-strong {
+  border-color: rgba(14, 44, 75, 0.25);
+}
+
+.shadow-soft {
+  box-shadow: var(--shadow-soft);
 }

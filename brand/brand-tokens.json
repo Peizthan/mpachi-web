@@ -1,0 +1,30 @@
+﻿{
+  "color": {
+    "mintBase": "#789D80",
+    "tealSoft": "#A6DCE0",
+    "navyDeep": "#0E2C4B",
+    "sunAccent": "#F2C94C",
+    "terraWarm": "#E38953",
+    "coralHeart": "#D44B4E",
+    "lavenderSoft": "#7F66C9",
+    "slateNeutral": "#7D7D97",
+    "mintTint": "#D4E4D0",
+    "navyShadow": "#0B243C",
+    "shellPeach": "#FFE8DB"
+  },
+  "font": {
+    "display": "'Quicksand', sans-serif",
+    "body": "'Lexend Deca', sans-serif",
+    "script": "'Caveat', cursive"
+  },
+  "space": {
+    "xs": "0.5rem",
+    "sm": "1rem",
+    "md": "1.5rem",
+    "lg": "3rem"
+  },
+  "radius": {
+    "soft": "12px",
+    "pill": "999px"
+  }
+}

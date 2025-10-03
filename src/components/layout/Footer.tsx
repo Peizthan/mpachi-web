@@ -2,38 +2,61 @@
 import { instagramUrl } from "@/config/navigation";
 
 export function Footer() {
+  const currentYear = new Date().getFullYear();
+
   return (
-    <footer className="border-t border-slate-200 bg-slate-50 text-sm text-slate-600 dark:border-slate-800 dark:bg-slate-950 dark:text-slate-300">
-      <div className="mx-auto flex w-full max-w-6xl flex-col gap-6 px-4 py-10 md:flex-row md:items-start md:justify-between md:px-6">
-        <div className="max-w-sm space-y-2">
-          <p className="text-base font-semibold text-slate-900 dark:text-white">María Paz Jiménez</p>
-          <p>Psicóloga clínica especializada en bienestar emocional para niñas, niños, adolescentes y adultos.</p>
-        </div>
-        <div className="space-y-3">
-          <p className="text-sm font-semibold text-slate-800 dark:text-slate-100">Contacto</p>
-          <address className="not-italic space-y-1">
-            <p>
-              <a className="hover:underline" href="mailto:contacto@being.cl">
-                contacto@being.cl
-              </a>
+    <footer className="text-sm text-ink-primary">
+      <div className="bg-[color:var(--color-shell-peach)]">
+        <div className="mx-auto flex w-full max-w-6xl flex-col gap-6 px-4 py-10 md:flex-row md:items-start md:justify-between md:px-6">
+          <div className="max-w-sm space-y-2">
+            <p className="text-base font-semibold text-ink-primary">María Paz Jiménez</p>
+            <p className="text-ink-teal">
+              Psicóloga clínica especializada en bienestar emocional para niñas, niños, adolescentes y adultos.
             </p>
-            <p>
-              <a className="hover:underline" href="tel:+56900000000">
-                +56 9 0000 0000
-              </a>
-            </p>
-          </address>
-        </div>
-        <div className="space-y-3">
-          <p className="text-sm font-semibold text-slate-800 dark:text-slate-100">Redes sociales</p>
-          <Link className="inline-flex items-center gap-2 hover:underline" href={instagramUrl} target="_blank" rel="noreferrer">
-            <span aria-hidden>📸</span>
-            BEING en Instagram
-          </Link>
+          </div>
+          <div className="space-y-3">
+            <p className="text-sm font-semibold text-ink-primary">Contacto</p>
+            <address className="not-italic space-y-1 text-ink-teal">
+              <p>
+                <a className="hover:text-ink-magenta" href="mailto:mariapazj@gmail.com">
+                  mariapazj@gmail.com
+                </a>
+              </p>
+              <p>
+                <a className="hover:text-ink-magenta" href="tel:+595983448991">
+                  +595 983 448991
+                </a>
+              </p>
+            </address>
+          </div>
+          <div className="space-y-3">
+            <p className="text-sm font-semibold text-ink-primary">Redes sociales</p>
+            <Link
+              className="inline-flex items-center gap-2 text-ink-teal hover:text-ink-magenta"
+              href={instagramUrl}
+              target="_blank"
+              rel="noreferrer"
+            >
+              <svg
+                aria-hidden
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="1.5"
+                className="h-4 w-4"
+              >
+                <path strokeLinecap="round" strokeLinejoin="round" d="M8 3.75h8A4.25 4.25 0 0 1 20.25 8v8A4.25 4.25 0 0 1 16 20.25H8A4.25 4.25 0 0 1 3.75 16V8A4.25 4.25 0 0 1 8 3.75Z" />
+                <circle cx="12" cy="12" r="3.25" />
+                <path d="M16.5 7.5h.01" />
+              </svg>
+              @psi.mariapazjimenez
+            </Link>
+          </div>
         </div>
       </div>
-      <div className="border-t border-slate-200 bg-white px-4 py-4 text-xs text-slate-500 dark:border-slate-800 dark:bg-slate-950/60 md:px-6">
-        © {new Date().getFullYear()} María Paz Jiménez. Todos los derechos reservados.
+      <div className="border-t border-soft bg-[color:var(--color-shell-peach)] px-4 py-4 text-center text-xs text-ink-teal md:px-6">
+        {currentYear} María Paz Jiménez. Todos los derechos reservados.
       </div>
     </footer>
   );

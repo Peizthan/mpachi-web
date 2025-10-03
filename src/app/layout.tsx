@@ -1,17 +1,25 @@
 ﻿import type { Metadata, Viewport } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Quicksand, Lexend_Deca, Caveat } from "next/font/google";
 import "./globals.css";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+const quicksand = Quicksand({
   subsets: ["latin"],
+  weight: ["400", "500", "600"],
+  variable: "--font-brand-display",
 });
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
+const lexendDeca = Lexend_Deca({
   subsets: ["latin"],
+  weight: ["300", "400", "500"],
+  variable: "--font-brand-body",
+});
+
+const caveat = Caveat({
+  subsets: ["latin"],
+  weight: "400",
+  variable: "--font-brand-script",
 });
 
 export const metadata: Metadata = {
@@ -52,7 +60,7 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: "#163C4D",
+  themeColor: "#FFFFFF",
   colorScheme: "light",
 };
 
@@ -62,14 +70,9 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="es" className="scroll-smooth">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} bg-slate-50 text-slate-900 antialiased dark:bg-slate-950 dark:text-slate-100`}
-      >
-        <a
-          href="#contenido-principal"
-          className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:rounded-md focus:bg-slate-900 focus:px-4 focus:py-2 focus:text-white"
-        >
+    <html lang="es" className={`scroll-smooth ${quicksand.variable} ${lexendDeca.variable} ${caveat.variable}`}>
+      <body className="font-sans antialiased">
+        <a href="#contenido-principal" className="skip-link">
           Saltar al contenido principal
         </a>
         <Header />

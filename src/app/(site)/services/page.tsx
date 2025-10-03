@@ -33,7 +33,7 @@ const faqs = [
   {
     question: "¿Cómo se reserva una sesión inicial?",
     answer:
-      "Completa el formulario en la sección de contacto indicando disponibilidad y el motivo de consulta. Recibirás una respuesta en menos de 48 horas hábiles.",
+      "Completa el formulario en la sección de contacto indicando disponibilidad y el motivo de consulta. Recibirás una respuesta en menos de 72 horas hábiles.",
   },
   {
     question: "¿Se ofrecen sesiones en línea?",
@@ -51,8 +51,8 @@ export default function ServicesPage() {
   return (
     <div className="mx-auto max-w-5xl space-y-16 px-4 py-16 md:px-6">
       <header className="space-y-4 text-center md:text-left">
-        <h1 className="text-4xl font-semibold text-slate-900 dark:text-white">Servicios clínicos y formativos</h1>
-        <p className="mx-auto max-w-3xl text-base text-slate-700 dark:text-slate-300">
+        <h1 className="text-4xl font-semibold text-ink-primary dark:text-white">Servicios clínicos y formativos</h1>
+        <p className="mx-auto max-w-3xl text-base text-ink-teal dark:text-slate-300">
           Acompañamiento terapéutico adaptado a cada etapa vital, orientación profesional para familias y espacios formativos para comunidades y organizaciones.
         </p>
       </header>
@@ -61,31 +61,31 @@ export default function ServicesPage() {
         {services.map((service) => (
           <article
             key={service.title}
-            className="flex h-full flex-col justify-between rounded-2xl border border-slate-200 bg-white p-6 shadow-sm transition hover:-translate-y-1 hover:shadow-md dark:border-slate-800 dark:bg-slate-900"
+            className="flex h-full flex-col justify-between rounded-2xl border border-soft bg-surface p-6 shadow-soft transition hover:-translate-y-1 hover:shadow-md dark:border-slate-800 dark:bg-slate-900"
           >
             <div className="space-y-4">
-              <h2 className="text-2xl font-semibold text-slate-900 dark:text-white">{service.title}</h2>
-              <p className="text-sm font-medium uppercase tracking-wide text-emerald-600">{service.target}</p>
-              <p className="text-sm leading-relaxed text-slate-700 dark:text-slate-300">{service.methodology}</p>
+              <h2 className="text-2xl font-semibold text-ink-primary dark:text-white">{service.title}</h2>
+              <p className="text-sm font-medium uppercase tracking-wide text-ink-emerald">{service.target}</p>
+              <p className="text-sm leading-relaxed text-ink-teal dark:text-slate-300">{service.methodology}</p>
             </div>
-            <p className="mt-6 text-xs font-semibold uppercase tracking-wide text-slate-500">{service.duration}</p>
+            <p className="mt-6 text-xs font-semibold uppercase tracking-wide text-ink-magenta">{service.duration}</p>
           </article>
         ))}
       </section>
 
       <section className="space-y-6">
-        <h2 className="text-2xl font-semibold text-slate-900 dark:text-white">Preguntas frecuentes</h2>
+        <h2 className="text-2xl font-semibold text-ink-primary dark:text-white">Preguntas frecuentes</h2>
         <div className="space-y-3">
           {faqs.map((faq) => (
             <details
               key={faq.question}
-              className="group rounded-xl border border-slate-200 bg-white px-6 py-4 text-sm text-slate-700 shadow-sm transition focus-within:outline focus-within:outline-2 focus-within:outline-offset-2 focus-within:outline-emerald-500 dark:border-slate-800 dark:bg-slate-900 dark:text-slate-300"
+              className="group rounded-xl border border-soft bg-surface px-6 py-4 text-sm text-ink-teal shadow-soft transition focus-within:outline-none focus-within:ring-2 focus-within:ring-[color:var(--color-accent-yellow)] focus-within:ring-offset-2 focus-within:ring-offset-[color:var(--color-surface)] dark:border-slate-800 dark:bg-slate-900 dark:text-slate-300"
             >
-              <summary className="flex cursor-pointer items-center justify-between gap-4 text-base font-semibold text-slate-900 marker:hidden dark:text-white">
+              <summary className="flex cursor-pointer items-center justify-between gap-4 text-base font-semibold text-ink-primary marker:hidden dark:text-white">
                 {faq.question}
-                <span aria-hidden className="transition group-open:rotate-45">＋</span>
+                <span aria-hidden className="transition group-open:rotate-45">+</span>
               </summary>
-              <p className="mt-3 text-sm leading-relaxed text-slate-600 dark:text-slate-300">{faq.answer}</p>
+              <p className="mt-3 text-sm leading-relaxed text-ink-teal dark:text-slate-300">{faq.answer}</p>
             </details>
           ))}
         </div>
