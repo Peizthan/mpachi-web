@@ -33,7 +33,7 @@ export default async function SubscriptionPage() {
               <time dateTime={resource.publishedAt}>
                 Publicado el {new Date(resource.publishedAt).toLocaleDateString("es-CL")}
               </time>
-              <Link className="text-sm font-semibold text-ink-emerald hover:text-ink-plum" href={resource.url}>
+              <Link className="text-sm font-semibold text-ink-emerald hover:text-ink-plum focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[color:var(--color-sun-accent)] focus-visible:ring-offset-2 focus-visible:ring-offset-[color:var(--color-surface)]" href={resource.url}>
                 Ver recurso -&gt;
               </Link>
             </div>

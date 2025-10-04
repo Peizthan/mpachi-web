@@ -4,47 +4,47 @@
     target: "Niñas, niños y adolescentes entre 6 y 18 años",
     methodology:
       "Evaluación inicial con padres, sesiones individuales y trabajo colaborativo con familia y colegio. Se integran técnicas cognitivo-conductuales, juego terapéutico y psicoeducación.",
-    duration: "Sesiones de 50 minutos",
+    duration: "Sesiones de 50 minutos"
   },
   {
     title: "Psicoterapia para personas adultas",
     target: "Adultos que enfrentan ansiedad, cambios vitales, duelos o desafíos laborales",
     methodology:
       "Intervención basada en terapia cognitivo-conductual, mentalización y estrategias de regulación emocional. Se establecen objetivos terapéuticos y seguimiento de avances.",
-    duration: "Sesiones de 50 minutos",
+    duration: "Sesiones de 50 minutos"
   },
   {
     title: "Orientación a madres, padres y cuidadores",
     target: "Familias que requieren acompañamiento en crianza respetuosa y abordaje de conductas complejas",
     methodology:
       "Sesiones breves de intervención psicoeducativa, diseño de rutinas, acuerdos familiares y seguimiento del bienestar de niñas y niños.",
-    duration: "Sesiones de 45 minutos",
+    duration: "Sesiones de 45 minutos"
   },
   {
     title: "Talleres y workshops",
     target: "Organizaciones, equipos educativos y comunidades",
     methodology:
       "Programas diseñados a medida en regulación emocional, prevención de riesgos psicosociales y habilidades socioemocionales.",
-    duration: "Formato intensivo o ciclos modulares",
-  },
+    duration: "Formato intensivo o ciclos modulares"
+  }
 ];
 
 const faqs = [
   {
     question: "¿Cómo se reserva una sesión inicial?",
     answer:
-      "Completa el formulario en la sección de contacto indicando disponibilidad y el motivo de consulta. Recibirás una respuesta en menos de 72 horas hábiles.",
+      "Completa el formulario en la sección de contacto indicando disponibilidad y el motivo de consulta. Recibirás una respuesta en menos de 72 horas hábiles."
   },
   {
     question: "¿Se ofrecen sesiones en línea?",
     answer:
-      "Sí, las sesiones pueden realizarse de manera virtual mediante plataformas seguras. Indícalo en el formulario de registro.",
+      "Sí, las sesiones pueden realizarse de manera virtual mediante plataformas seguras. Indícalo en el formulario de registro."
   },
   {
     question: "¿Se coordina con equipos escolares u otros profesionales?",
     answer:
-      "Cuando es pertinente y con autorización escrita, se coordinan reuniones con colegios, médicos u otros especialistas para sostener un plan integral.",
-  },
+      "Cuando es pertinente y con autorización escrita, se coordinan reuniones con colegios, médicos u otros especialistas para sostener un plan integral."
+  }
 ];
 
 export default function ServicesPage() {
@@ -61,7 +61,7 @@ export default function ServicesPage() {
         {services.map((service) => (
           <article
             key={service.title}
-            className="flex h-full flex-col justify-between rounded-2xl border border-soft bg-surface p-6 shadow-soft transition hover:-translate-y-1 hover:shadow-md dark:border-slate-800 dark:bg-slate-900"
+            className="flex h-full flex-col justify-between rounded-2xl border border-soft bg-surface p-6 shadow-soft transition hover:-translate-y-1 hover:shadow-md focus-within:outline-none focus-within:ring-2 focus-within:ring-[color:var(--color-sun-accent)] focus-within:ring-offset-2 focus-within:ring-offset-[color:var(--color-surface)] dark:border-slate-800 dark:bg-slate-900"
           >
             <div className="space-y-4">
               <h2 className="text-2xl font-semibold text-ink-primary dark:text-white">{service.title}</h2>
@@ -79,7 +79,7 @@ export default function ServicesPage() {
           {faqs.map((faq) => (
             <details
               key={faq.question}
-              className="group rounded-xl border border-soft bg-surface px-6 py-4 text-sm text-ink-teal shadow-soft transition focus-within:outline-none focus-within:ring-2 focus-within:ring-[color:var(--color-accent-yellow)] focus-within:ring-offset-2 focus-within:ring-offset-[color:var(--color-surface)] dark:border-slate-800 dark:bg-slate-900 dark:text-slate-300"
+              className="group rounded-xl border border-soft bg-surface px-6 py-4 text-sm text-ink-teal shadow-soft transition focus-within:outline-none focus-within:ring-2 focus-within:ring-[color:var(--color-sun-accent)] focus-within:ring-offset-2 focus-within:ring-offset-[color:var(--color-surface)] dark:border-slate-800 dark:bg-slate-900 dark:text-slate-300"
             >
               <summary className="flex cursor-pointer items-center justify-between gap-4 text-base font-semibold text-ink-primary marker:hidden dark:text-white">
                 {faq.question}

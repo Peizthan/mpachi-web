@@ -15,7 +15,7 @@ export type EducationalResource = {
   url: string;
 };
 
-// TODO: replace stubs with direct calls to the selected CMS (e.g., Sanity).
+// TODO: reemplazar stubs con consultas reales al CMS elegido (e.g. Sanity).
 export async function getGalleryItems(): Promise<GalleryItem[]> {
   return [
     {
@@ -23,7 +23,7 @@ export async function getGalleryItems(): Promise<GalleryItem[]> {
       title: "Taller de regulación emocional",
       description: "Sesión grupal con familias en Santiago",
       imageUrl: "https://dummyimage.com/640x480/163c4d/ffffff&text=Taller+BEING",
-      alt: "Personas participando en un taller guiado por María Paz Jiménez",
+      alt: "Familias participando en un taller guiado por María Paz Jiménez",
     },
     {
       id: "being-charla-1",
@@ -46,7 +46,7 @@ export async function getEducationalResources(): Promise<EducationalResource[]> 
       url: "/recursos/ansiedad-adolescentes",
     },
     {
-      id: "respiracion-consiente",
+      id: "respiracion-consciente",
       title: "Serie de respiración consciente",
       summary: "Videos cortos para incorporar a la rutina diaria.",
       type: "video",

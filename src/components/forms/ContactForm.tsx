@@ -2,19 +2,27 @@
 
 import { FormEvent, useState } from "react";
 
-const initialState = {
+type FormState = {
+  name: string;
+  email: string;
+  reason: string;
+  acceptsTerms: boolean;
+};
+
+type FieldErrors = Partial<Record<keyof FormState, string>>;
+
+const initialState: FormState = {
   name: "",
   email: "",
   reason: "",
   acceptsTerms: false,
 };
 
-type FormState = typeof initialState;
-
 export function ContactForm() {
   const [formState, setFormState] = useState<FormState>(initialState);
   const [status, setStatus] = useState<"idle" | "submitting" | "success" | "error">("idle");
-  const [errorMessage, setErrorMessage] = useState<string | null>(null);
+  const [message, setMessage] = useState<string>("");
+  const [fieldErrors, setFieldErrors] = useState<FieldErrors>({});
 
   const handleChange = (field: keyof FormState) => (event: FormEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const target = event.target as HTMLInputElement | HTMLTextAreaElement;
@@ -24,18 +32,43 @@ export function ContactForm() {
       ...prev,
       [field]: value,
     }));
+
+    setFieldErrors((prev) => ({
+      ...prev,
+      [field]: "",
+    }));
   };
 
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
-    if (!formState.name || !formState.email || !formState.reason || !formState.acceptsTerms) {
-      setErrorMessage("Por favor, completa todos los campos y acepta los términos.");
+    const errors: FieldErrors = {};
+
+    if (!formState.name.trim()) {
+      errors.name = "Ingresa tu nombre completo";
+    }
+
+    if (!formState.email.trim()) {
+      errors.email = "Ingresa un correo electrónico válido";
+    }
+
+    if (!formState.reason.trim()) {
+      errors.reason = "Cuéntanos brevemente el motivo de consulta";
+    }
+
+    if (!formState.acceptsTerms) {
+      errors.acceptsTerms = "Debes aceptar los términos y condiciones";
+    }
+
+    if (Object.keys(errors).length > 0) {
+      setFieldErrors(errors);
+      setStatus("error");
+      setMessage("Revisa los campos resaltados para continuar");
       return;
     }
 
-    setErrorMessage(null);
     setStatus("submitting");
+    setMessage("");
 
     try {
       const response = await fetch("/api/contact", {
@@ -49,16 +82,26 @@ export function ContactForm() {
       }
 
       setStatus("success");
+      setMessage("Gracias por tu mensaje. Te contactaremos pronto.");
       setFormState(initialState);
+      setFieldErrors({});
     } catch (error) {
       console.error(error);
       setStatus("error");
-      setErrorMessage("Ocurrió un error. Intenta nuevamente más tarde.");
+      setMessage("Ocurrió un error. Intenta nuevamente más tarde.");
     }
   };
 
   return (
     <form onSubmit={handleSubmit} className="space-y-6 rounded-3xl border border-soft bg-surface p-8 shadow-soft dark:border-slate-800 dark:bg-slate-900">
+      <div role="alert" aria-live="assertive" className="min-h-[1.75rem] text-sm">
+        {message ? (
+          <p className={status === "success" ? "text-ink-emerald" : "text-[color:var(--color-coral-heart)]"}>
+            {message}
+          </p>
+        ) : null}
+      </div>
+
       <div className="space-y-1">
         <label htmlFor="name" className="text-sm font-semibold text-ink-primary dark:text-slate-100">
           Nombre completo
@@ -71,8 +114,15 @@ export function ContactForm() {
           required
           value={formState.name}
           onInput={handleChange("name")}
-          className="w-full rounded-lg border border-soft px-3 py-2 text-sm text-ink-teal shadow-sm transition focus:border-[color:var(--color-ink-emerald)] focus:outline-none focus:ring-2 focus:ring-[color:var(--color-accent-yellow)] dark:border-slate-700 dark:bg-slate-950 dark:text-white"
+          aria-invalid={Boolean(fieldErrors.name)}
+          aria-describedby={fieldErrors.name ? "name-error" : undefined}
+          className="w-full rounded-lg border border-soft px-3 py-2 text-sm text-ink-teal shadow-sm transition hover:border-[color:var(--color-mint-base)] focus:border-[color:var(--color-ink-emerald)] focus:outline-none focus:ring-2 focus:ring-[color:var(--color-sun-accent)] dark:border-slate-700 dark:bg-slate-950 dark:text-white"
         />
+        {fieldErrors.name ? (
+          <p id="name-error" className="text-xs text-[color:var(--color-coral-heart)]">
+            {fieldErrors.name}
+          </p>
+        ) : null}
       </div>
 
       <div className="space-y-1">
@@ -87,8 +137,15 @@ export function ContactForm() {
           required
           value={formState.email}
           onInput={handleChange("email")}
-          className="w-full rounded-lg border border-soft px-3 py-2 text-sm text-ink-teal shadow-sm transition focus:border-[color:var(--color-ink-emerald)] focus:outline-none focus:ring-2 focus:ring-[color:var(--color-accent-yellow)] dark:border-slate-700 dark:bg-slate-950 dark:text-white"
+          aria-invalid={Boolean(fieldErrors.email)}
+          aria-describedby={fieldErrors.email ? "email-error" : undefined}
+          className="w-full rounded-lg border border-soft px-3 py-2 text-sm text-ink-teal shadow-sm transition hover:border-[color:var(--color-mint-base)] focus:border-[color:var(--color-ink-emerald)] focus:outline-none focus:ring-2 focus:ring-[color:var(--color-sun-accent)] dark:border-slate-700 dark:bg-slate-950 dark:text-white"
         />
+        {fieldErrors.email ? (
+          <p id="email-error" className="text-xs text-[color:var(--color-coral-heart)]">
+            {fieldErrors.email}
+          </p>
+        ) : null}
       </div>
 
       <div className="space-y-1">
@@ -102,8 +159,15 @@ export function ContactForm() {
           required
           value={formState.reason}
           onInput={handleChange("reason")}
-          className="w-full rounded-lg border border-soft px-3 py-2 text-sm text-ink-teal shadow-sm transition focus:border-[color:var(--color-ink-emerald)] focus:outline-none focus:ring-2 focus:ring-[color:var(--color-accent-yellow)] dark:border-slate-700 dark:bg-slate-950 dark:text-white"
+          aria-invalid={Boolean(fieldErrors.reason)}
+          aria-describedby={fieldErrors.reason ? "reason-error" : undefined}
+          className="w-full rounded-lg border border-soft px-3 py-2 text-sm text-ink-teal shadow-sm transition hover:border-[color:var(--color-mint-base)] focus:border-[color:var(--color-ink-emerald)] focus:outline-none focus:ring-2 focus:ring-[color:var(--color-sun-accent)] dark:border-slate-700 dark:bg-slate-950 dark:text-white"
         />
+        {fieldErrors.reason ? (
+          <p id="reason-error" className="text-xs text-[color:var(--color-coral-heart)]">
+            {fieldErrors.reason}
+          </p>
+        ) : null}
       </div>
 
       <div className="flex items-start gap-2">
@@ -112,23 +176,25 @@ export function ContactForm() {
           name="terms"
           type="checkbox"
           checked={formState.acceptsTerms}
-          onChange={(event) =>
-            setFormState((prev) => ({ ...prev, acceptsTerms: event.target.checked }))
-          }
-          className="mt-1 h-4 w-4 rounded border-soft text-ink-primary focus:ring-[color:var(--color-accent-yellow)]"
+          onChange={handleChange("acceptsTerms")}
+          aria-invalid={Boolean(fieldErrors.acceptsTerms)}
+          aria-describedby={fieldErrors.acceptsTerms ? "terms-error" : undefined}
+          className="mt-1 h-4 w-4 rounded border-soft text-ink-primary focus:ring-[color:var(--color-sun-accent)] focus:ring-offset-1"
           required
         />
         <label htmlFor="terms" className="text-xs text-ink-teal dark:text-slate-300">
           Acepto los <a className="underline" href="/politica-de-privacidad">términos y condiciones</a> del servicio.
         </label>
       </div>
-
-      {errorMessage ? <p className="text-sm text-red-600">{errorMessage}</p> : null}
-      {status === "success" ? <p className="text-sm text-ink-emerald">Gracias por tu mensaje. Te contactaremos pronto.</p> : null}
+      {fieldErrors.acceptsTerms ? (
+        <p id="terms-error" className="text-xs text-[color:var(--color-coral-heart)]">
+          {fieldErrors.acceptsTerms}
+        </p>
+      ) : null}
 
       <button
         type="submit"
-        className="inline-flex w-full items-center justify-center rounded-full bg-accent-yellow px-6 py-3 text-sm font-semibold text-ink-primary transition hover:brightness-110 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-[color:var(--color-ink-primary)] focus-visible:ring-offset-[color:var(--color-surface)] disabled:cursor-not-allowed"
+        className="inline-flex w-full items-center justify-center rounded-full bg-accent-yellow px-6 py-3 text-sm font-semibold text-ink-primary transition hover:brightness-110 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[color:var(--color-ink-primary)] focus-visible:ring-offset-2 focus-visible:ring-offset-[color:var(--color-surface)] disabled:cursor-not-allowed"
         disabled={status === "submitting"}
       >
         {status === "submitting" ? "Enviando…" : "Enviar solicitud"}

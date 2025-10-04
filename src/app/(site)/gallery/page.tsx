@@ -23,10 +23,11 @@ export default async function GalleryPage() {
             <div className="relative aspect-[4/3] overflow-hidden rounded-xl bg-surface-alt">
               <Image
                 src={item.imageUrl}
-                alt={item.alt}
+                alt={item.alt || `Registro fotográfico: ${item.title}`}
                 fill
                 sizes="(min-width: 768px) 50vw, 100vw"
                 className="object-cover"
+                loading="lazy"
               />
             </div>
             <figcaption className="space-y-1 text-sm text-ink-teal dark:text-slate-300">
@@ -45,7 +46,7 @@ export default async function GalleryPage() {
           href={instagramUrl}
           target="_blank"
           rel="noreferrer"
-          className="mt-4 inline-flex items-center gap-2 text-sm font-semibold text-ink-magenta underline-offset-4 hover:underline"
+          className="mt-4 inline-flex items-center gap-2 text-sm font-semibold text-ink-magenta underline-offset-4 hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[color:var(--color-sun-accent)] focus-visible:ring-offset-2 focus-visible:ring-offset-[color:var(--color-surface)]"
         >
           Ir a Instagram
           <span aria-hidden>-&gt;</span>

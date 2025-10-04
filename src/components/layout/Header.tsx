@@ -49,7 +49,7 @@ export function Header() {
               <li key={item.href} className="list-none">
                 <Link
                   href={item.href}
-                  className="flex w-full items-center rounded px-3 py-2 transition hover:bg-surface-alt hover:text-ink-magenta focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-[color:var(--color-accent-yellow)] focus-visible:ring-offset-[color:var(--color-surface)] dark:hover:bg-slate-900 md:w-auto"
+                  className="flex w-full items-center rounded px-3 py-2 transition hover:bg-surface-alt hover:text-ink-magenta focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[color:var(--color-sun-accent)] focus-visible:ring-offset-2 focus-visible:ring-offset-[color:var(--color-surface)] dark:hover:bg-slate-900 md:w-auto"
                   onClick={() => setIsMenuOpen(false)}
                 >
                   {item.label}

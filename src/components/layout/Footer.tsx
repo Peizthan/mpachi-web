@@ -18,12 +18,18 @@ export function Footer() {
             <p className="text-sm font-semibold text-ink-primary">Contacto</p>
             <address className="not-italic space-y-1 text-ink-teal">
               <p>
-                <a className="hover:text-ink-magenta" href="mailto:mariapazj@gmail.com">
+                <a
+                  className="transition hover:text-ink-magenta focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[color:var(--color-sun-accent)] focus-visible:ring-offset-2 focus-visible:ring-offset-[color:var(--color-shell-peach)]"
+                  href="mailto:mariapazj@gmail.com"
+                >
                   mariapazj@gmail.com
                 </a>
               </p>
               <p>
-                <a className="hover:text-ink-magenta" href="tel:+595983448991">
+                <a
+                  className="transition hover:text-ink-magenta focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[color:var(--color-sun-accent)] focus-visible:ring-offset-2 focus-visible:ring-offset-[color:var(--color-shell-peach)]"
+                  href="tel:+595983448991"
+                >
                   +595 983 448991
                 </a>
               </p>
@@ -32,10 +38,11 @@ export function Footer() {
           <div className="space-y-3">
             <p className="text-sm font-semibold text-ink-primary">Redes sociales</p>
             <Link
-              className="inline-flex items-center gap-2 text-ink-teal hover:text-ink-magenta"
+              className="inline-flex items-center gap-2 text-ink-teal transition hover:text-ink-magenta focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[color:var(--color-sun-accent)] focus-visible:ring-offset-2 focus-visible:ring-offset-[color:var(--color-shell-peach)]"
               href={instagramUrl}
               target="_blank"
               rel="noreferrer"
+              aria-label="Abrir Instagram de María Paz Jiménez"
             >
               <svg
                 aria-hidden

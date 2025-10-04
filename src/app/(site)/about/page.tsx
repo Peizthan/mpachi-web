@@ -2,20 +2,20 @@
   "Psicóloga clínica, Pontificia Universidad Católica de Chile",
   "Diplomado en Psicoterapia Focal y Técnicas de Regulación Emocional, Universidad de Chile",
   "Certificación en intervención familiar basada en apego",
-  "Miembro del Colegio de Psicólogos de Chile",
+  "Miembro del Colegio de Psicólogos de Chile"
 ];
 
 const testimonials = [
   {
     quote:
       "El acompañamiento de María Paz nos permitió comprender mejor las necesidades emocionales de nuestra hija y crear acuerdos como familia.",
-    author: "Familia Rivas - Programa de orientación parental",
+    author: "Familia Rivas - Programa de orientación parental"
   },
   {
     quote:
       "Su estilo cercano y respetuoso me ayudó a desarrollar herramientas para manejar la ansiedad y los cambios laborales.",
-    author: "Paciente adulto, proceso individual",
-  },
+    author: "Paciente adulto, proceso individual"
+  }
 ];
 
 export default function AboutPage() {
