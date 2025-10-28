@@ -1,4 +1,4 @@
-﻿const services = [
+const services = [
   {
     title: "Psicoterapia para niñas, niños y adolescentes",
     target: "Niñas, niños y adolescentes entre 6 y 18 años",
@@ -52,7 +52,7 @@ export default function ServicesPage() {
     <div className="mx-auto max-w-5xl space-y-16 px-4 py-16 md:px-6">
       <header className="space-y-4 text-center md:text-left">
         <h1 className="text-4xl font-semibold text-ink-primary dark:text-white">Servicios clínicos y formativos</h1>
-        <p className="mx-auto max-w-3xl text-base text-ink-teal dark:text-slate-300">
+        <p className="mx-auto max-w-3xl text-base text-ink-indigo-950 dark:text-slate-300">
           Acompañamiento terapéutico adaptado a cada etapa vital, orientación profesional para familias y espacios formativos para comunidades y organizaciones.
         </p>
       </header>
@@ -66,7 +66,7 @@ export default function ServicesPage() {
             <div className="space-y-4">
               <h2 className="text-2xl font-semibold text-ink-primary dark:text-white">{service.title}</h2>
               <p className="text-sm font-medium uppercase tracking-wide text-ink-emerald">{service.target}</p>
-              <p className="text-sm leading-relaxed text-ink-teal dark:text-slate-300">{service.methodology}</p>
+              <p className="text-sm leading-relaxed text-ink-indigo-950 dark:text-slate-300">{service.methodology}</p>
             </div>
             <p className="mt-6 text-xs font-semibold uppercase tracking-wide text-ink-magenta">{service.duration}</p>
           </article>
@@ -79,13 +79,13 @@ export default function ServicesPage() {
           {faqs.map((faq) => (
             <details
               key={faq.question}
-              className="group rounded-xl border border-soft bg-surface px-6 py-4 text-sm text-ink-teal shadow-soft transition focus-within:outline-none focus-within:ring-2 focus-within:ring-[color:var(--color-sun-accent)] focus-within:ring-offset-2 focus-within:ring-offset-[color:var(--color-surface)] dark:border-slate-800 dark:bg-slate-900 dark:text-slate-300"
+              className="group rounded-xl border border-soft bg-surface px-6 py-4 text-sm text-ink-indigo-950 shadow-soft transition focus-within:outline-none focus-within:ring-2 focus-within:ring-[color:var(--color-sun-accent)] focus-within:ring-offset-2 focus-within:ring-offset-[color:var(--color-surface)] dark:border-slate-800 dark:bg-slate-900 dark:text-slate-300"
             >
               <summary className="flex cursor-pointer items-center justify-between gap-4 text-base font-semibold text-ink-primary marker:hidden dark:text-white">
                 {faq.question}
                 <span aria-hidden className="transition group-open:rotate-45">+</span>
               </summary>
-              <p className="mt-3 text-sm leading-relaxed text-ink-teal dark:text-slate-300">{faq.answer}</p>
+              <p className="mt-3 text-sm leading-relaxed text-ink-indigo-950 dark:text-slate-300">{faq.answer}</p>
             </details>
           ))}
         </div>

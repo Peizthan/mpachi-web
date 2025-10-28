@@ -1,4 +1,4 @@
-﻿import Image from "next/image";
+import Image from "next/image";
 import Link from "next/link";
 import { getGalleryItems } from "@/lib/cms";
 import { instagramUrl } from "@/config/navigation";
@@ -10,7 +10,7 @@ export default async function GalleryPage() {
     <div className="mx-auto max-w-5xl space-y-12 px-4 py-16 md:px-6">
       <div className="space-y-3 text-center md:text-left">
         <h1 className="text-4xl font-semibold text-ink-primary dark:text-white">Galería de proyectos</h1>
-        <p className="text-base text-ink-teal dark:text-slate-300">
+        <p className="text-base text-ink-indigo-950 dark:text-slate-300">
           Experiencias clínicas y formativas realizadas por María Paz Jiménez. Las imágenes se gestionan desde el CMS para mantener la galería actualizada.
         </p>
       </div>
@@ -30,16 +30,16 @@ export default async function GalleryPage() {
                 loading="lazy"
               />
             </div>
-            <figcaption className="space-y-1 text-sm text-ink-teal dark:text-slate-300">
+            <figcaption className="space-y-1 text-sm text-ink-indigo-950 dark:text-slate-300">
               <p className="font-semibold text-ink-primary dark:text-white">{item.title}</p>
               {item.description ? <p>{item.description}</p> : null}
             </figcaption>
           </figure>
         ))}
       </div>
-      <aside className="rounded-2xl border border-soft bg-surface-alt p-6 text-sm text-ink-teal">
+      <aside className="rounded-2xl border border-soft bg-surface-alt p-6 text-sm text-ink-indigo-950">
         <h2 className="text-base font-semibold text-ink-primary">Más historias en Instagram</h2>
-        <p className="mt-2 text-ink-teal">
+        <p className="mt-2 text-ink-indigo-950">
           Sigue a María Paz para ver registros de talleres, cápsulas educativas y testimonios.
         </p>
         <Link

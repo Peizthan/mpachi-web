@@ -1,4 +1,4 @@
-﻿import Link from "next/link";
+import Link from "next/link";
 import { instagramUrl } from "@/config/navigation";
 
 export function Footer() {
@@ -10,13 +10,13 @@ export function Footer() {
         <div className="mx-auto flex w-full max-w-6xl flex-col gap-6 px-4 py-10 md:flex-row md:items-start md:justify-between md:px-6">
           <div className="max-w-sm space-y-2">
             <p className="text-base font-semibold text-ink-primary">María Paz Jiménez</p>
-            <p className="text-ink-teal">
+            <p className="text-ink-indigo-950">
               Psicóloga clínica especializada en bienestar emocional para niñas, niños, adolescentes y adultos.
             </p>
           </div>
           <div className="space-y-3">
             <p className="text-sm font-semibold text-ink-primary">Contacto</p>
-            <address className="not-italic space-y-1 text-ink-teal">
+            <address className="not-italic space-y-1 text-ink-indigo-950">
               <p>
                 <a
                   className="transition hover:text-ink-magenta focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[color:var(--color-sun-accent)] focus-visible:ring-offset-2 focus-visible:ring-offset-[color:var(--color-shell-peach)]"
@@ -38,7 +38,7 @@ export function Footer() {
           <div className="space-y-3">
             <p className="text-sm font-semibold text-ink-primary">Redes sociales</p>
             <Link
-              className="inline-flex items-center gap-2 text-ink-teal transition hover:text-ink-magenta focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[color:var(--color-sun-accent)] focus-visible:ring-offset-2 focus-visible:ring-offset-[color:var(--color-shell-peach)]"
+              className="inline-flex items-center gap-2 text-ink-indigo-950 transition hover:text-ink-magenta focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[color:var(--color-sun-accent)] focus-visible:ring-offset-2 focus-visible:ring-offset-[color:var(--color-shell-peach)]"
               href={instagramUrl}
               target="_blank"
               rel="noreferrer"
@@ -62,7 +62,7 @@ export function Footer() {
           </div>
         </div>
       </div>
-      <div className="border-t border-soft bg-[color:var(--color-shell-peach)] px-4 py-4 text-center text-xs text-ink-teal md:px-6">
+      <div className="border-t border-soft bg-[color:var(--color-shell-peach)] px-4 py-4 text-center text-xs text-ink-indigo-950 md:px-6">
         {currentYear} María Paz Jiménez. Todos los derechos reservados.
       </div>
     </footer>

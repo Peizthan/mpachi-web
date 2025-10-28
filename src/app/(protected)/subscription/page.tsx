@@ -1,4 +1,4 @@
-﻿import Link from "next/link";
+import Link from "next/link";
 import { getEducationalResources } from "@/lib/cms";
 
 export const dynamic = "force-dynamic";
@@ -11,7 +11,7 @@ export default async function SubscriptionPage() {
       <header className="space-y-3 text-center md:text-left">
         <p className="text-sm font-semibold uppercase tracking-wide text-ink-emerald">Área educativa</p>
         <h1 className="text-4xl font-semibold text-ink-primary dark:text-white">Recursos para pacientes y suscriptores</h1>
-        <p className="text-base text-ink-teal dark:text-slate-300">
+        <p className="text-base text-ink-indigo-950 dark:text-slate-300">
           Accede a artículos, videos, guías descargables y ejercicios prácticos actualizados mensualmente. Esta sección estará protegida mediante autenticación cuando se integre el proveedor seleccionado (por ejemplo, NextAuth + Sanity).
         </p>
       </header>
@@ -27,7 +27,7 @@ export default async function SubscriptionPage() {
                 {resource.type}
               </span>
               <h2 className="text-2xl font-semibold text-ink-primary dark:text-white">{resource.title}</h2>
-              <p className="text-sm text-ink-teal dark:text-slate-300">{resource.summary}</p>
+              <p className="text-sm text-ink-indigo-950 dark:text-slate-300">{resource.summary}</p>
             </div>
             <div className="mt-6 flex items-center justify-between text-xs text-ink-magenta">
               <time dateTime={resource.publishedAt}>
@@ -41,9 +41,9 @@ export default async function SubscriptionPage() {
         ))}
       </div>
 
-      <section className="space-y-3 rounded-2xl border border-dashed border-soft bg-surface-alt p-6 text-sm text-ink-teal">
+      <section className="space-y-3 rounded-2xl border border-dashed border-soft bg-surface-alt p-6 text-sm text-ink-indigo-950">
         <h2 className="text-base font-semibold text-ink-primary">¿Cómo funcionará el acceso?</h2>
-        <ul className="list-disc space-y-2 pl-6 text-ink-teal">
+        <ul className="list-disc space-y-2 pl-6 text-ink-indigo-950">
           <li>Autenticación con NextAuth (email magic link y cuentas de pacientes).</li>
           <li>Contenido protegido en el CMS mediante roles y etiquetas.</li>
           <li>Verificación de suscripción antes de renderizar cada recurso.</li>

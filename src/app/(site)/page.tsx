@@ -1,4 +1,4 @@
-﻿import Link from "next/link";
+import Link from "next/link";
 import { instagramUrl } from "@/config/navigation";
 
 const callToActions = [
@@ -37,7 +37,7 @@ export default function HomePage() {
             <h1 className="text-4xl font-semibold tracking-tight text-ink-primary md:text-5xl">
               Acompañamiento terapéutico para cada etapa de la vida
             </h1>
-            <p className="text-lg text-ink-teal md:text-xl">
+            <p className="text-lg text-indigo-950 md:text-xl">
               María Paz Jiménez es psicóloga clínica con más de 10 años de experiencia en psicoterapia individual y familiar. La práctica integra enfoques basados en evidencia y un trato humano, cercano y respetuoso.
             </p>
             <div className="flex flex-col gap-3 sm:flex-row sm:flex-wrap">
@@ -51,7 +51,7 @@ export default function HomePage() {
                 </Link>
               ))}
             </div>
-            <aside className="flex items-center gap-2 rounded-2xl border border-soft bg-surface px-4 py-3 text-sm text-ink-teal">
+            <aside className="flex items-center gap-2 rounded-2xl border border-soft bg-surface px-4 py-3 text-sm text-ink-indigo-950 shadow-soft">
               <span className="font-medium">Conoce más en mis redes:</span>
               <Link
                 href={instagramUrl}
@@ -70,7 +70,7 @@ export default function HomePage() {
         <header className="space-y-2">
           <p className="text-sm font-semibold uppercase tracking-wide text-ink-primary">Servicios destacados</p>
           <h2 className="text-3xl font-semibold text-ink-primary">Herramientas clínicas para generar cambios sostenibles</h2>
-          <p className="text-base text-ink-teal">
+          <p className="text-base text-ink-indigo-950">
             Cada proceso se adapta a la historia personal, incorporando recursos terapéuticos, psicoeducación y un acompañamiento cercano a familias y organizaciones.
           </p>
         </header>
@@ -81,7 +81,7 @@ export default function HomePage() {
               className="space-y-3 rounded-xl border border-soft bg-surface p-6 shadow-soft transition hover:-translate-y-1 hover:shadow-lg focus-within:outline-none focus-within:ring-2 focus-within:ring-[color:var(--color-sun-accent)] focus-within:ring-offset-2 focus-within:ring-offset-[color:var(--color-surface)]"
             >
               <h3 className="text-xl font-semibold text-ink-primary">{service.title}</h3>
-              <p className="text-sm text-ink-teal">{service.description}</p>
+              <p className="text-sm text-ink-indigo-950">{service.description}</p>
               <Link
                 className="inline-flex items-center gap-2 text-sm font-semibold text-ink-magenta underline-offset-4 hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[color:var(--color-sun-accent)] focus-visible:ring-offset-2 focus-visible:ring-offset-[color:var(--color-surface)]"
                 href="/services"
@@ -98,10 +98,10 @@ export default function HomePage() {
         <div className="grid gap-6 rounded-3xl bg-surface p-10 shadow-soft md:grid-cols-[1.2fr_1fr]">
           <div className="space-y-4">
             <h2 className="text-3xl font-semibold text-ink-primary">Conoce a María Paz</h2>
-            <p className="text-base leading-relaxed text-ink-teal">
+            <p className="text-base leading-relaxed text-ink-indigo-950">
               Psicóloga clínica titulada de la Pontificia Universidad Católica de Chile, diplomada en psicoterapia focal, intervención familiar y regulaciones emocionales. Ha colaborado con instituciones educativas, equipos interdisciplinarios de salud mental y proyectos de prevención de riesgos psicosociales.
             </p>
-            <p className="text-base leading-relaxed text-ink-teal">
+            <p className="text-base leading-relaxed text-ink-indigo-950">
               Su enfoque integra la terapia cognitivo-conductual, mentalización y psicoterapia basada en apego, privilegiando un espacio seguro y una comunicación clara.
             </p>
             <div>
@@ -116,12 +116,12 @@ export default function HomePage() {
           </div>
           <div className="space-y-4 rounded-2xl border border-dashed border-soft bg-surface-alt p-6">
             <h3 className="text-lg font-semibold text-ink-primary">Próximos talleres</h3>
-            <ul className="space-y-2 text-sm text-ink-teal">
+            <ul className="space-y-2 text-sm text-ink-indigo-950">
               <li>Taller “Regulación emocional en niños” – Octubre</li>
               <li>Programa para equipos educativos – Noviembre</li>
               <li>Charlas para organizaciones – Bajo solicitud</li>
             </ul>
-            <p className="text-sm text-ink-teal">
+            <p className="text-sm text-ink-indigo-950">
               Suscríbete al área educativa para recibir invitaciones y material de apoyo exclusivo.
             </p>
             <Link

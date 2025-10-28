@@ -1,32 +1,39 @@
-﻿@import "tailwindcss";
+@import "tailwindcss";
 
-:root {
-  --color-mint-base: #789d80;
-  --color-teal-soft: #a6dce0;
-  --color-navy-deep: #0e2c4b;
-  --color-sun-accent: #f2c94c;
-  --color-terra-warm: #e38953;
-  --color-coral-heart: #d44b4e;
-  --color-lavender-soft: #7f66c9;
-  --color-slate-neutral: #7d7d97;
-  --color-mint-tint: #d4e4d0;
-  --color-navy-shadow: #0b243c;
-  --color-shell-peach: #ffe8db;
-
-  --font-display: "Quicksand", sans-serif;
-  --font-body: "Lexend Deca", sans-serif;
-  --font-script: "Caveat", cursive;
-
-  --shadow-soft: 0 16px 32px -24px rgba(14, 44, 75, 0.28);
+@font-face {
+  font-family: "Futura";
+  src: url("/fonts/Futura.woff2") format("woff2");
+  font-weight: 400 700;
+  font-style: normal;
+  font-display: swap;
 }
 
-@theme inline {
-  --color-background: var(--color-mint-tint);
-  --color-foreground: var(--color-navy-deep);
-  --color-primary: var(--color-sun-accent);
-  --font-sans: var(--font-body);
-  --font-display: var(--font-display);
-  --font-script: var(--font-script);
+@font-face {
+  font-family: "Znikomit";
+  src: url("/fonts/Znikomit.woff2") format("woff2");
+  font-weight: 400 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Modern Fantasy Demo Regular";
+  src: url("/fonts/ModernFantasyDemoRegular.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+:root {
+  --brand-yellow: #FED05D;
+  --brand-orange: #EC623A;
+  --brand-coral: #F28C4F;
+  --brand-sage: #6E9D7F;
+  --brand-teal: #00ABA9;
+  --brand-sky: #99D3DA;
+  --brand-navy: #1B4762;
+
+  --shadow-soft: 0 10px 25px rgba(0,0,0,0.08);
 }
 
 body {
@@ -112,7 +119,7 @@ select {
   color: var(--color-navy-deep);
 }
 
-.text-ink-teal {
+.text-ink-indigo-950 {
   color: var(--color-teal-soft);
 }
 

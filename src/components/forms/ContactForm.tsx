@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import { FormEvent, useState } from "react";
 
@@ -116,7 +116,7 @@ export function ContactForm() {
           onInput={handleChange("name")}
           aria-invalid={Boolean(fieldErrors.name)}
           aria-describedby={fieldErrors.name ? "name-error" : undefined}
-          className="w-full rounded-lg border border-soft px-3 py-2 text-sm text-ink-teal shadow-sm transition hover:border-[color:var(--color-mint-base)] focus:border-[color:var(--color-ink-emerald)] focus:outline-none focus:ring-2 focus:ring-[color:var(--color-sun-accent)] dark:border-slate-700 dark:bg-slate-950 dark:text-white"
+          className="w-full rounded-lg border border-soft px-3 py-2 text-sm text-ink-indigo-950 shadow-sm transition hover:border-[color:var(--color-mint-base)] focus:border-[color:var(--color-ink-emerald)] focus:outline-none focus:ring-2 focus:ring-[color:var(--color-sun-accent)] dark:border-slate-700 dark:bg-slate-950 dark:text-white"
         />
         {fieldErrors.name ? (
           <p id="name-error" className="text-xs text-[color:var(--color-coral-heart)]">
@@ -139,7 +139,7 @@ export function ContactForm() {
           onInput={handleChange("email")}
           aria-invalid={Boolean(fieldErrors.email)}
           aria-describedby={fieldErrors.email ? "email-error" : undefined}
-          className="w-full rounded-lg border border-soft px-3 py-2 text-sm text-ink-teal shadow-sm transition hover:border-[color:var(--color-mint-base)] focus:border-[color:var(--color-ink-emerald)] focus:outline-none focus:ring-2 focus:ring-[color:var(--color-sun-accent)] dark:border-slate-700 dark:bg-slate-950 dark:text-white"
+          className="w-full rounded-lg border border-soft px-3 py-2 text-sm text-ink-indigo-950 shadow-sm transition hover:border-[color:var(--color-mint-base)] focus:border-[color:var(--color-ink-emerald)] focus:outline-none focus:ring-2 focus:ring-[color:var(--color-sun-accent)] dark:border-slate-700 dark:bg-slate-950 dark:text-white"
         />
         {fieldErrors.email ? (
           <p id="email-error" className="text-xs text-[color:var(--color-coral-heart)]">
@@ -161,7 +161,7 @@ export function ContactForm() {
           onInput={handleChange("reason")}
           aria-invalid={Boolean(fieldErrors.reason)}
           aria-describedby={fieldErrors.reason ? "reason-error" : undefined}
-          className="w-full rounded-lg border border-soft px-3 py-2 text-sm text-ink-teal shadow-sm transition hover:border-[color:var(--color-mint-base)] focus:border-[color:var(--color-ink-emerald)] focus:outline-none focus:ring-2 focus:ring-[color:var(--color-sun-accent)] dark:border-slate-700 dark:bg-slate-950 dark:text-white"
+          className="w-full rounded-lg border border-soft px-3 py-2 text-sm text-ink-indigo-950 shadow-sm transition hover:border-[color:var(--color-mint-base)] focus:border-[color:var(--color-ink-emerald)] focus:outline-none focus:ring-2 focus:ring-[color:var(--color-sun-accent)] dark:border-slate-700 dark:bg-slate-950 dark:text-white"
         />
         {fieldErrors.reason ? (
           <p id="reason-error" className="text-xs text-[color:var(--color-coral-heart)]">
@@ -182,7 +182,7 @@ export function ContactForm() {
           className="mt-1 h-4 w-4 rounded border-soft text-ink-primary focus:ring-[color:var(--color-sun-accent)] focus:ring-offset-1"
           required
         />
-        <label htmlFor="terms" className="text-xs text-ink-teal dark:text-slate-300">
+        <label htmlFor="terms" className="text-xs text-ink-indigo-950 dark:text-slate-300">
           Acepto los <a className="underline" href="/politica-de-privacidad">términos y condiciones</a> del servicio.
         </label>
       </div>
