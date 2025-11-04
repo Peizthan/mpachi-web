@@ -13,18 +13,18 @@ const Footer = () => {
               <div className="flex items-center gap-2">
                 <Mail size={18} className="text-muted" />
                 <a href="mailto:contacto@mariapazjimenez.cl" className="hover:text-accent transition-colors">
-                  contacto@mariapazjimenez.cl
+                  mariapazj@gmail.com
                 </a>
               </div>
               <div className="flex items-center gap-2">
                 <Phone size={18} className="text-muted" />
                 <a href="tel:+56912345678" className="hover:text-accent transition-colors">
-                  +56 9 1234 5678
+                  +595 983 448991
                 </a>
               </div>
               <div className="flex items-center gap-2">
                 <MapPin size={18} className="text-muted" />
-                <span>Santiago, Chile</span>
+                <span>Asunción, Paraguay</span>
               </div>
             </div>
           </div>

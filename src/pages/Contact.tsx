@@ -56,20 +56,20 @@ const Contact = () => {
     {
       icon: Mail,
       title: "Email",
-      content: "contacto@mariapazjimenez.cl",
-      link: "mailto:contacto@mariapazjimenez.cl"
+      content: "mariapazj@gmail.com",
+      link: "mailto:mariapazj@gmail.com"
     },
     {
       icon: Phone,
       title: "Teléfono",
-      content: "+56 9 1234 5678",
-      link: "tel:+56912345678"
+      content: "+595 983 448991",
+      link: "tel:+595983448991"
     },
     {
       icon: MapPin,
       title: "Ubicación",
-      content: "Santiago, Chile",
-      link: null
+      content: "Asunción, Paraguay",
+      link: "https://www.google.com/maps?q=Asunción,+Paraguay"
     },
     {
       icon: Clock,

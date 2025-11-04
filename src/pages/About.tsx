@@ -87,7 +87,7 @@ const About = () => {
                 <ul className="font-body text-lg space-y-4 text-foreground/90">
                   <li className="flex items-start gap-3">
                     <span className="text-primary text-2xl">•</span>
-                    <span>Psicóloga, Universidad de Chile</span>
+                    <span>Psicóloga, Universidad Católica</span>
                   </li>
                   <li className="flex items-start gap-3">
                     <span className="text-primary text-2xl">•</span>
