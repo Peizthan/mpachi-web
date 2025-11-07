@@ -1,4 +1,5 @@
 import { Mail, Phone, MapPin, Heart } from "lucide-react";
+import { Instagram } from "lucide-react";
 import { Link } from "react-router-dom";
 
 const Footer = () => {
@@ -27,9 +28,9 @@ const Footer = () => {
                 <span>Asunción, Paraguay</span>
               </div>
               <div className="flex items-center gap-2">
-                <img src="/assets/instagram.svg" alt="Instagram" width={18} height={18} className="text-muted" />
-                <a href="https://instagram.com/mariapazjimenez.cl" className="hover:text-accent transition-colors" target="_blank" rel="noopener noreferrer">
-                  @mariapazjimenez.cl
+                <Instagram size={18} className="text-muted" />
+                <a href="https://www.instagram.com/psi.mariapazjimenez/" className="hover:text-accent transition-colors" target="_blank" rel="noopener noreferrer">
+                  @psi.mariapazjimenez
                 </a>
               </div>
             </div>
