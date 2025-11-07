@@ -18,11 +18,21 @@ const Navigation = () => {
   const isActive = (path: string) => location.pathname === path;
 
   return (
-    <nav className="fixed top-0 w-full bg-background/95 backdrop-blur-sm z-50 border-b border-border shadow-soft">
-      <div className="container mx-auto px-4">
+    <nav className="fixed top-0 w-full z-50 border-b border-border shadow-soft">
+      <div className="container mx-auto px-4 bg-white/95 backdrop-blur-sm">
+      {/* Rainbow bar with brand colors below header */}
+      <div className="flex w-full h-6">
+        <div className="flex-1 bg-[hsl(45,98%,68%)]" /> {/* Amarillo */}
+        <div className="flex-1 bg-[hsl(16,82%,58%)]" /> {/* Naranja */}
+        <div className="flex-1 bg-[hsl(25,86%,63%)]" /> {/* Coral */}
+        <div className="flex-1 bg-[hsl(143,21%,52%)]" /> {/* Verde suave */}
+        <div className="flex-1 bg-[hsl(179,100%,34%)]" /> {/* Teal */}
+        <div className="flex-1 bg-[hsl(189,52%,73%)]" /> {/* Azul verdoso */}
+        <div className="flex-1 bg-[hsl(203,56%,25%)]" /> {/* Azul oscuro */}
+      </div>
         <div className="flex items-center justify-between h-20">
           <Link to="/" className="flex items-center gap-2">
-            <span className="text-2xl font-decorative text-primary">María Paz</span>
+            <img src="/assets/brand-logo.png" alt="Brand Logo" width={40} height={40} className="drop-shadow-lg" />
           </Link>
 
           {/* Desktop Navigation */}
@@ -31,7 +41,7 @@ const Navigation = () => {
               <Link
                 key={item.path}
                 to={item.path}
-                className={`font-heading text-sm font-medium transition-colors hover:text-primary ${
+                className={`font-heading text-lg font-medium transition-colors hover:text-primary ${
                   isActive(item.path) ? "text-primary" : "text-foreground/80"
                 }`}
               >
@@ -62,7 +72,7 @@ const Navigation = () => {
                   key={item.path}
                   to={item.path}
                   onClick={() => setIsOpen(false)}
-                  className={`font-heading text-base font-medium py-2 transition-colors hover:text-primary ${
+                  className={`font-heading text-xl font-medium py-2 transition-colors hover:text-primary ${
                     isActive(item.path) ? "text-primary" : "text-foreground/80"
                   }`}
                 >

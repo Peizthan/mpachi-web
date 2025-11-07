@@ -14,7 +14,7 @@ export default {
     },
     extend: {
       fontFamily: {
-        'heading': ['Montserrat', 'sans-serif'],
+        'heading': ['BrandHeading', 'sans-serif'],
         'body': ['Crimson Text', 'serif'],
         'decorative': ['Pacifico', 'cursive'],
       },

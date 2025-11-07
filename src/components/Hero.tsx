@@ -1,16 +1,16 @@
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
-import { Leaf } from "lucide-react";
+
 
 const Hero = () => {
   return (
-    <section className="min-h-screen flex items-center justify-center bg-gradient-hero relative overflow-hidden">
-      {/* Floating leaf decoration */}
-      <div className="absolute top-20 right-10 animate-float opacity-20">
-        <Leaf size={80} className="text-soft-green" />
+  <section className="min-h-screen flex items-center justify-center bg-white relative overflow-hidden pt-32">
+      {/* Brand logo decoration */}
+      <div className="absolute top-40 right-10 animate-float opacity-80">
+        <img src="/assets/brand-logo.png" alt="Brand Logo" width={80} height={80} className="drop-shadow-lg" />
       </div>
-      <div className="absolute bottom-20 left-10 animate-float opacity-20" style={{ animationDelay: "1s" }}>
-        <Leaf size={60} className="text-soft-green" />
+      <div className="absolute bottom-20 left-10 animate-float opacity-80" style={{ animationDelay: "1s" }}>
+        <img src="/assets/brand-logo.png" alt="Brand Logo" width={60} height={60} className="drop-shadow-lg" />
       </div>
 
       <div className="container mx-auto px-4 py-20">
