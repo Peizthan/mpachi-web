@@ -7,6 +7,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Card } from "@/components/ui/card";
 import { useToast } from "@/hooks/use-toast";
 import { Mail, Phone, MapPin, Clock } from "lucide-react";
+import { Instagram } from "lucide-react";
 
 const Contact = () => {
   const { toast } = useToast();
@@ -205,7 +206,9 @@ const Contact = () => {
                       <Card key={index} className="p-6 hover:shadow-medium transition-all">
                         <div className="flex items-start gap-4">
                           <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0">
-                            <info.icon className="text-primary" size={24} />
+                            {info.icon === null
+                              ? <Instagram className="text-primary" size={24} />
+                              : info.icon && <info.icon className="text-primary" size={24} />}
                           </div>
                           <div>
                             <h3 className="font-heading text-lg font-bold mb-1 text-foreground">
@@ -215,6 +218,7 @@ const Contact = () => {
                               <a 
                                 href={info.link} 
                                 className="font-body text-base text-foreground/80 hover:text-primary transition-colors"
+                                target="_blank" rel="noopener noreferrer"
                               >
                                 {info.content}
                               </a>
