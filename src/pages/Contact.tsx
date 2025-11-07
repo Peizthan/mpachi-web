@@ -69,8 +69,8 @@ const Contact = () => {
     {
       icon: null,
       title: "Instagram",
-      content: "@mariapazjimenez.cl",
-      link: "https://instagram.com/mariapazjimenez.cl"
+      content: "@psi.mariapazjimenez",
+      link: "https://www.instagram.com/psi.mariapazjimenez/"
     },
     {
       icon: MapPin,
@@ -162,7 +162,7 @@ const Contact = () => {
                         type="tel"
                         value={formData.phone}
                         onChange={handleChange}
-                        placeholder="+56 9 1234 5678"
+                        placeholder="+595 0990 567 890"
                         className="font-body"
                       />
                     </div>
