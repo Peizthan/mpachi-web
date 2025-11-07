@@ -5,16 +5,17 @@ import { Link } from "react-router-dom";
 const Hero = () => {
   return (
   <section className="min-h-screen flex items-center justify-center bg-white relative overflow-hidden pt-32">
-      {/* Brand logo decoration */}
-      <div className="absolute top-40 right-10 animate-float opacity-80">
+      {/* Brand logo decoration - only show top right logo on desktop */}
+  <div className="hidden lg:block absolute top-40 right-10 animate-float opacity-80">
         <img src="/assets/brand-logo.png" alt="Brand Logo" width={80} height={80} className="drop-shadow-lg" />
       </div>
-      <div className="absolute bottom-20 left-10 animate-float opacity-80" style={{ animationDelay: "1s" }}>
+      {/* Centered logo below hero text on mobile and desktop */}
+      <div className="flex justify-center w-full absolute left-0 right-0" style={{ bottom: 15 }}>
         <img src="/assets/brand-logo.png" alt="Brand Logo" width={60} height={60} className="drop-shadow-lg" />
       </div>
 
       <div className="container mx-auto px-4 py-20">
-        <div className="max-w-4xl mx-auto text-center animate-fade-in">
+  <div className="max-w-4xl mx-auto text-center animate-fade-in relative z-10">
           <h1 className="font-heading text-5xl md:text-7xl font-bold mb-6 text-foreground uppercase tracking-wider">
             María Paz Jiménez
           </h1>
