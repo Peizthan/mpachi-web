@@ -12,19 +12,25 @@ const Footer = () => {
             <div className="space-y-3 font-body">
               <div className="flex items-center gap-2">
                 <Mail size={18} className="text-muted" />
-                <a href="mailto:contacto@mariapazjimenez.cl" className="hover:text-accent transition-colors">
+                <a href="mailto:mariapazj@gmail.com" className="hover:text-accent transition-colors">
                   mariapazj@gmail.com
                 </a>
               </div>
               <div className="flex items-center gap-2">
                 <Phone size={18} className="text-muted" />
-                <a href="tel:+56912345678" className="hover:text-accent transition-colors">
+                <a href="https://wa.me/595983448991" className="hover:text-accent transition-colors" target="_blank" rel="noopener noreferrer">
                   +595 983 448991
                 </a>
               </div>
               <div className="flex items-center gap-2">
                 <MapPin size={18} className="text-muted" />
                 <span>Asunción, Paraguay</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <img src="/assets/instagram.svg" alt="Instagram" width={18} height={18} className="text-muted" />
+                <a href="https://instagram.com/mariapazjimenez.cl" className="hover:text-accent transition-colors" target="_blank" rel="noopener noreferrer">
+                  @mariapazjimenez.cl
+                </a>
               </div>
             </div>
           </div>

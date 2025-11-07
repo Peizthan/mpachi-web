@@ -61,9 +61,15 @@ const Contact = () => {
     },
     {
       icon: Phone,
-      title: "Teléfono",
+      title: "WhatsApp",
       content: "+595 983 448991",
-      link: "tel:+595983448991"
+      link: "https://wa.me/595983448991"
+    },
+    {
+      icon: null,
+      title: "Instagram",
+      content: "@mariapazjimenez.cl",
+      link: "https://instagram.com/mariapazjimenez.cl"
     },
     {
       icon: MapPin,
