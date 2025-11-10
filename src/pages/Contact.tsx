@@ -125,7 +125,7 @@ const Contact = () => {
                       Nota Importante
                     </h3>
                     <p className="font-body text-sm text-foreground/80 leading-relaxed">
-                      Debido a la alta demanda, las respuestas pueden tomar entre 24-48 horas.
+                      Los turnos se agendan según el orden en que se completó el formulario y la disponibilidad de horarios. ¡Gracias por tu paciencia!
                     </p>
                   </Card>
                 </div>

@@ -14,7 +14,7 @@ const Footer = () => {
               <div className="flex items-center gap-2">
                 <Mail size={18} className="text-muted" />
                 <a href="mailto:mariapazj@gmail.com" className="hover:text-accent transition-colors">
-                  mariapazj@gmail.com
+                  mariapazjpsicologia@gmail.com
                 </a>
               </div>
               <div className="flex items-center gap-2">
