@@ -10,55 +10,14 @@ import { Mail, Phone, MapPin, Clock } from "lucide-react";
 import { Instagram } from "lucide-react";
 
 const Contact = () => {
-  const { toast } = useToast();
-  const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    phone: "",
-    message: ""
-  });
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    
-    // Basic validation
-    if (!formData.name || !formData.email || !formData.message) {
-      toast({
-        title: "Campos incompletos",
-        description: "Por favor completa todos los campos requeridos.",
-        variant: "destructive"
-      });
-      return;
-    }
-
-    // Show success message
-    toast({
-      title: "Mensaje enviado",
-      description: "Gracias por contactarme. Te responderé a la brevedad.",
-    });
-
-    // Reset form
-    setFormData({
-      name: "",
-      email: "",
-      phone: "",
-      message: ""
-    });
-  };
-
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value
-    });
-  };
 
   const contactInfo = [
     {
       icon: Mail,
       title: "Email",
-      content: "mariapazj@gmail.com",
-      link: "mailto:mariapazj@gmail.com"
+      content: "mariapazjpsicologia@gmail.com",
+      link: "mailto:mariapazjpsicologia@gmail.com"
     },
     {
       icon: Phone,
@@ -78,12 +37,6 @@ const Contact = () => {
       content: "Asunción, Paraguay",
       link: "https://www.google.com/maps?q=Asunción,+Paraguay"
     },
-    {
-      icon: Clock,
-      title: "Horario",
-      content: "Lunes a Viernes: 9:00 - 19:00",
-      link: null
-    }
   ];
 
   return (
@@ -110,89 +63,23 @@ const Contact = () => {
           <div className="container mx-auto px-4">
             <div className="max-w-6xl mx-auto">
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
-                {/* Contact Form */}
-                <div>
+                {/* Google Forms Button */}
+                <div className="flex flex-col items-start justify-center">
                   <h2 className="font-heading text-3xl font-bold mb-6 text-foreground">
                     Envíame un Mensaje
                   </h2>
                   <p className="font-body text-base text-foreground/80 mb-8 leading-relaxed">
-                    Completa el formulario y me pondré en contacto contigo lo antes posible. 
-                    Si prefieres, también puedes escribirme directamente al email o llamar por teléfono.
+                    Para contactarme, por favor utiliza el siguiente formulario:
                   </p>
-
-                  <form onSubmit={handleSubmit} className="space-y-6">
-                    <div>
-                      <label htmlFor="name" className="font-heading text-sm font-medium text-foreground mb-2 block">
-                        Nombre completo *
-                      </label>
-                      <Input
-                        id="name"
-                        name="name"
-                        value={formData.name}
-                        onChange={handleChange}
-                        placeholder="Tu nombre"
-                        required
-                        className="font-body"
-                      />
-                    </div>
-
-                    <div>
-                      <label htmlFor="email" className="font-heading text-sm font-medium text-foreground mb-2 block">
-                        Email *
-                      </label>
-                      <Input
-                        id="email"
-                        name="email"
-                        type="email"
-                        value={formData.email}
-                        onChange={handleChange}
-                        placeholder="tu@email.com"
-                        required
-                        className="font-body"
-                      />
-                    </div>
-
-                    <div>
-                      <label htmlFor="phone" className="font-heading text-sm font-medium text-foreground mb-2 block">
-                        Teléfono
-                      </label>
-                      <Input
-                        id="phone"
-                        name="phone"
-                        type="tel"
-                        value={formData.phone}
-                        onChange={handleChange}
-                        placeholder="+595 0990 567 890"
-                        className="font-body"
-                      />
-                    </div>
-
-                    <div>
-                      <label htmlFor="message" className="font-heading text-sm font-medium text-foreground mb-2 block">
-                        Mensaje *
-                      </label>
-                      <Textarea
-                        id="message"
-                        name="message"
-                        value={formData.message}
-                        onChange={handleChange}
-                        placeholder="Cuéntame brevemente qué te trae por aquí..."
-                        required
-                        rows={6}
-                        className="font-body resize-none"
-                      />
-                    </div>
-
-                    <Button type="submit" size="lg" className="w-full font-heading text-base shadow-medium hover:shadow-hover transition-all">
-                      Enviar Mensaje
+                  <a
+                    href="https://docs.google.com/forms/d/1ZZYMcfBn9vVCPbB9QMwTs5TrZ1A7sIdtVy350QO9huA/viewform?fbclid=PAZXh0bgNhZW0CMTEAc3J0YwZhcHBfaWQMMjU2MjgxMDQwNTU4AAGnWolZyeDgzg_LqwDYHdCm0to7SkX_OA3JvXSz-0d2I6sEjCzI-sWK-uSZsPA_aem_37avlEPYo9eWJNpjw9Huag&edit_requested=true"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <Button size="lg" className="font-heading text-base shadow-medium hover:shadow-hover transition-all">
+                      Ir al Formulario de Contacto
                     </Button>
-
-                    <p className="font-body text-xs text-foreground/60 leading-relaxed">
-                      * Al enviar este formulario aceptas que tus datos sean utilizados para responder 
-                      a tu consulta. Tus datos personales están protegidos según la Ley de Protección 
-                      de Datos Personales.
-                    </p>
-                  </form>
+                  </a>
                 </div>
 
                 {/* Contact Info */}
@@ -238,8 +125,7 @@ const Contact = () => {
                       Nota Importante
                     </h3>
                     <p className="font-body text-sm text-foreground/80 leading-relaxed">
-                      Debido a la alta demanda, las respuestas pueden tomar entre 24-48 horas. 
-                      Si tu situación requiere atención inmediata, por favor indica "urgente" en tu mensaje.
+                      Debido a la alta demanda, las respuestas pueden tomar entre 24-48 horas.
                     </p>
                   </Card>
                 </div>

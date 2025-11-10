@@ -65,11 +65,6 @@ const Footer = () => {
               Psicóloga clínica dedicada a acompañar procesos de crecimiento personal y bienestar emocional
               a través de la Terapia de Aceptación y Compromiso.
             </p>
-            <div className="flex items-center gap-2 font-body text-sm">
-              <span>Hecho con</span>
-              <Heart size={16} className="text-secondary-orange fill-current" />
-              <span>para el mundo amarillo</span>
-            </div>
           </div>
         </div>
 
