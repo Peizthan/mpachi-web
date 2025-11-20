@@ -40,7 +40,7 @@ const Contact = () => {
   ];
 
   return (
-    <div className="min-h-screen flex flex-col bg-background text-foreground transition-colors">
+  <div className="min-h-screen flex flex-col bg-background text-foreground transition-colors font-decorative">
       <Navigation />
       
       <main className="flex-grow pt-20">
