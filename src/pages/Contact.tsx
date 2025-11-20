@@ -51,7 +51,7 @@ const Contact = () => {
               <h1 className="font-heading text-5xl md:text-6xl font-bold mb-6 text-background uppercase tracking-wider">
                 Contacto
               </h1>
-              <p className="font-decorative text-xl text-background/90 leading-relaxed">
+              <p className="font-decorative text-base text-background/90 leading-relaxed">
                 Estoy aquí para acompañarte en tu proceso
               </p>
             </div>
