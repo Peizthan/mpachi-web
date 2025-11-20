@@ -145,8 +145,21 @@ All colors MUST be HSL.
     @apply border-border;
   }
 
-  body {
+  html {
     font-family: "Futura", "Futura PT", "Futura Std", "Futura Lt BT", "Futura Md BT", "Futura Book", "Crimson Text", serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
     @apply bg-background text-foreground font-body;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: "BrandHeading", "Futura", "Futura PT", "Futura Std", serif;
+  }
+
+  p, a, span, li, input, textarea, button, select {
+    font-family: "Futura", "Futura PT", "Futura Std", "Futura Lt BT", "Futura Md BT", "Futura Book", "Crimson Text", serif;
   }
 }
