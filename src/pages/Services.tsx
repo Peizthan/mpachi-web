@@ -135,7 +135,7 @@ const Services = () => {
         <section className="py-20 bg-muted/20">
           <div className="container mx-auto px-4">
             <div className="max-w-4xl mx-auto">
-              <h2 className="font-heading text-4xl font-bold mb-12 text-center text-foreground">
+              <h2 className="font-decorative text-4xl font-bold mb-12 text-center text-foreground">
                 ¿Cómo Funciona el Proceso Terapéutico?
               </h2>
               <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
@@ -143,7 +143,7 @@ const Services = () => {
                   <div className="w-16 h-16 rounded-full bg-primary/20 flex items-center justify-center mx-auto mb-4">
                     <MessageCircle className="text-primary" size={32} />
                   </div>
-                  <h3 className="font-heading text-xl font-bold mb-3 text-foreground">1. Primer Contacto</h3>
+                  <h3 className="font-decorative text-xl font-bold mb-3 text-foreground">1. Primer Contacto</h3>
                   <p className="font-sans text-base text-foreground/80">
                     Completa el formulario o contáctame directamente para agendar una primera conversación.
                   </p>
@@ -152,16 +152,16 @@ const Services = () => {
                   <div className="w-16 h-16 rounded-full bg-secondary/20 flex items-center justify-center mx-auto mb-4">
                     <Clock className="text-secondary" size={32} />
                   </div>
-                  <h3 className="font-heading text-xl font-bold mb-3 text-foreground">2. Primera Sesión</h3>
+                  <h3 className="font-decorative text-xl font-bold mb-3 text-foreground">2. Primera Sesión</h3>
                   <p className="font-sans text-base text-foreground/80">
                     Conoceremos tus necesidades, estableceremos objetivos y diseñaremos tu plan terapéutico.
                   </p>
                 </div>
                 <div className="text-center">
                   <div className="w-16 h-16 rounded-full bg-teal/20 flex items-center justify-center mx-auto mb-4">
-                    <DollarSign className="text-teal" size={32} />
+                    <img src="/assets/brand-logo.png" alt="Brand Logo" width={32} height={32} />
                   </div>
-                  <h3 className="font-heading text-xl font-bold mb-3 text-foreground">3. Acompañamiento</h3>
+                  <h3 className="font-decorative text-xl font-bold mb-3 text-foreground">3. Acompañamiento</h3>
                   <p className="font-sans text-base text-foreground/80">
                     Trabajaremos juntos en sesiones regulares hacia tus metas de bienestar y crecimiento.
                   </p>
