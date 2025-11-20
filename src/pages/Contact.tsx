@@ -51,7 +51,7 @@ const Contact = () => {
               <h1 className="font-heading text-5xl md:text-6xl font-bold mb-6 text-background uppercase tracking-wider">
                 Contacto
               </h1>
-              <p className="font-sans text-xl text-background/90 leading-relaxed">
+              <p className="font-decorative text-xl text-background/90 leading-relaxed">
                 Estoy aquí para acompañarte en tu proceso
               </p>
             </div>
@@ -68,7 +68,7 @@ const Contact = () => {
                   <h2 className="font-heading text-3xl font-bold mb-6 text-foreground">
                     Envíame un Mensaje
                   </h2>
-                  <p className="font-sans text-base text-foreground/80 mb-8 leading-relaxed">
+                  <p className="font-decorative text-base text-foreground/80 mb-8 leading-relaxed">
                     Para contactarme, por favor utiliza el siguiente formulario:
                   </p>
                   <a
@@ -104,13 +104,13 @@ const Contact = () => {
                             {info.link ? (
                               <a 
                                 href={info.link} 
-                                className="font-sans text-base text-foreground/80 hover:text-primary transition-colors"
+                                className="font-decorative text-base text-foreground/80 hover:text-primary transition-colors"
                                 target="_blank" rel="noopener noreferrer"
                               >
                                 {info.content}
                               </a>
                             ) : (
-                              <p className="font-sans text-base text-foreground/80">
+                              <p className="font-decorative text-base text-foreground/80">
                                 {info.content}
                               </p>
                             )}
@@ -124,7 +124,7 @@ const Contact = () => {
                     <h3 className="font-heading text-xl font-bold mb-3 text-foreground">
                       Nota Importante
                     </h3>
-                    <p className="font-sans text-sm text-foreground/80 leading-relaxed">
+                    <p className="font-decorative text-sm text-foreground/80 leading-relaxed">
                       Los turnos se agendan según el orden en que se completó el formulario y la disponibilidad de horarios. ¡Gracias por tu paciencia!
                     </p>
                   </Card>

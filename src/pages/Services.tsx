@@ -86,7 +86,7 @@ const Services = () => {
               <h1 className="font-heading text-5xl md:text-6xl font-bold mb-6 text-background uppercase tracking-wider">
                 Servicios
               </h1>
-              <p className="font-sans text-xl text-background/90 leading-relaxed">
+              <p className="font-decorative text-xl text-background/90 leading-relaxed">
                 Acompañamiento profesional adaptado a tus necesidades
               </p>
             </div>
@@ -107,7 +107,7 @@ const Services = () => {
                     <h3 className="font-heading text-2xl font-bold mb-4 text-foreground">
                       {service.title}
                     </h3>
-                    <p className="font-sans text-base text-foreground/80 mb-6 leading-relaxed">
+                    <p className="font-decorative text-base text-foreground/80 mb-6 leading-relaxed">
                       {service.description}
                     </p>
                     <ul className="space-y-3 mb-6">
@@ -184,7 +184,7 @@ const Services = () => {
                     <h3 className="font-heading text-lg font-bold mb-3 text-foreground">
                       {faq.question}
                     </h3>
-                    <p className="font-sans text-base text-foreground/80 leading-relaxed">
+                    <p className="font-decorative text-base text-foreground/80 leading-relaxed">
                       {faq.answer}
                     </p>
                   </Card>
