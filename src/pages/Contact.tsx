@@ -104,13 +104,13 @@ const Contact = () => {
                             {info.link ? (
                               <a 
                                 href={info.link} 
-                                className="font-decorative text-xl text-foreground/80 hover:text-primary transition-colors"
+                                className="font-decorative text-xl text-foreground/80 hover:text-primary transition-colors break-all whitespace-pre-line"
                                 target="_blank" rel="noopener noreferrer"
                               >
                                 {info.content}
                               </a>
                             ) : (
-                              <p className="font-decorative text-xl text-foreground/80">
+                              <p className="font-decorative text-xl text-foreground/80 break-all whitespace-pre-line">
                                 {info.content}
                               </p>
                             )}
