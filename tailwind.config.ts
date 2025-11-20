@@ -14,9 +14,9 @@ export default {
     },
     extend: {
       fontFamily: {
-        'heading': ['BrandHeading', 'sans-serif'],
-        'body': ['Crimson Text', 'serif'],
-        'decorative': ['Pacifico', 'cursive'],
+        heading: ["BrandHeading", "sans-serif"],
+        body: ["Futura", "Futura PT", "Futura Std", "Futura Lt BT", "Futura Md BT", "Futura Book", "Crimson Text", "serif"],
+        decorative: ["Znikomit", "BrandHeading", "serif"],
       },
       colors: {
         border: "hsl(var(--border))",

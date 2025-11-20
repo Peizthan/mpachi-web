@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 
 const Hero = () => {
   return (
-  <section className="min-h-screen flex items-center justify-center bg-white relative overflow-hidden pt-32">
+  <section className="min-h-screen flex items-center justify-center bg-background relative overflow-hidden pt-32 transition-colors">
       {/* Brand logo decoration - only show top right logo on desktop */}
   <div className="hidden lg:block absolute top-40 right-10 animate-float opacity-80">
         <img src="/assets/brand-logo.png" alt="Brand Logo" width={80} height={80} className="drop-shadow-lg" />
@@ -22,7 +22,7 @@ const Hero = () => {
           <p className="font-decorative text-3xl md:text-4xl mb-8 text-secondary-orange">
             Psicología Clínica
           </p>
-          <p className="font-body text-xl md:text-2xl mb-12 text-foreground/90 leading-relaxed max-w-3xl mx-auto">
+          <p className="font-sans text-xl md:text-2xl mb-12 text-foreground/90 leading-relaxed max-w-3xl mx-auto">
             Acompañamiento profesional en tu proceso de crecimiento personal. Especializada en{" "}
             <span className="font-semibold text-primary">Terapia de Aceptación y Compromiso (ACT)</span>{" "}
             y educación emocional, te invito a construir juntos un espacio de bienestar y transformación.
@@ -38,13 +38,13 @@ const Hero = () => {
           </div>
 
           <div className="mt-16 pt-8 border-t border-foreground/20">
-            <p className="font-body text-lg mb-4 text-foreground/80">
+            <p className="font-sans text-lg mb-4 text-foreground/80">
               Parte de la iniciativa
             </p>
             <h2 className="font-heading text-3xl font-bold text-teal tracking-wide">
               BEING Educación Emocional
             </h2>
-            <p className="font-body text-base mt-3 text-foreground/70 max-w-2xl mx-auto">
+            <p className="font-sans text-base mt-3 text-foreground/70 max-w-2xl mx-auto">
               Un proyecto dedicado a promover el bienestar emocional a través de talleres, charlas y recursos educativos.
             </p>
           </div>

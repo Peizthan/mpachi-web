@@ -1,8 +1,46 @@
-
+@font-face {
+  font-family: 'Znikomit';
+  src: local('Znikomit'), local('Znikomit Regular'),
+       url('https://fonts.cdnfonts.com/s/17797/ZnikomitNo24.otf') format('opentype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
 @font-face {
   font-family: 'BrandHeading';
   src: url('/assets/fonts/brand-heading.ttf') format('truetype');
   font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Futura webfont fallback to guarantee load even if not installed locally */
+@font-face {
+  font-family: 'Futura';
+  src:
+    local('Futura'),
+    local('Futura Std'),
+    local('Futura PT'),
+    local('Futura Lt BT'),
+    local('Futura Md BT'),
+    local('Futura Book'),
+    url('https://fonts.cdnfonts.com/s/16552/FuturaLT.woff2') format('woff2'),
+    url('https://fonts.cdnfonts.com/s/16552/FuturaLT.woff') format('woff');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Futura';
+  src:
+    local('Futura Bold'),
+    local('Futura Bold Condensed'),
+    local('Futura Std Bold'),
+    local('Futura Hv BT'),
+    url('https://fonts.cdnfonts.com/s/16552/FuturaLT-Bold.woff2') format('woff2'),
+    url('https://fonts.cdnfonts.com/s/16552/FuturaLT-Bold.woff') format('woff');
+  font-weight: 700;
   font-style: normal;
   font-display: swap;
 }
@@ -108,6 +146,7 @@ All colors MUST be HSL.
   }
 
   body {
-    @apply bg-background text-foreground;
+    font-family: "Futura", "Futura PT", "Futura Std", "Futura Lt BT", "Futura Md BT", "Futura Book", "Crimson Text", serif;
+    @apply bg-background text-foreground font-body;
   }
 }

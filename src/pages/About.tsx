@@ -32,7 +32,7 @@ const About = () => {
   ];
 
   return (
-    <div className="min-h-screen flex flex-col">
+    <div className="min-h-screen flex flex-col bg-background text-foreground transition-colors">
       <Navigation />
       
       <main className="flex-grow pt-20">
@@ -43,7 +43,7 @@ const About = () => {
               <h1 className="font-heading text-5xl md:text-6xl font-bold mb-6 text-background uppercase tracking-wider">
                 Sobre Mí
               </h1>
-              <p className="font-body text-xl text-background/90 leading-relaxed">
+              <p className="font-sans text-xl text-background/90 leading-relaxed">
                 Conoce mi trayectoria y enfoque terapéutico
               </p>
             </div>
@@ -58,7 +58,7 @@ const About = () => {
                 <h2 className="font-heading text-4xl font-bold mb-8 text-foreground">
                   Mi Historia
                 </h2>
-                <div className="font-body text-lg leading-relaxed space-y-6 text-foreground/90">
+                <div className="font-sans text-lg leading-relaxed space-y-6 text-foreground/90">
                   <p>
                     Soy <span className="font-semibold text-primary">María Paz Jiménez</span>, psicóloga clínica 
                     especializada en Terapia de Aceptación y Compromiso (ACT) y educación emocional. Mi camino 
@@ -84,7 +84,7 @@ const About = () => {
                 <h3 className="font-heading text-3xl font-bold mb-6 text-foreground">
                   Formación Profesional
                 </h3>
-                <ul className="font-body text-lg space-y-4 text-foreground/90">
+                <ul className="font-sans text-lg space-y-4 text-foreground/90">
                   <li className="flex items-start gap-3">
                     <span className="text-primary text-2xl">•</span>
                     <span>Psicóloga, Universidad Católica</span>
@@ -124,7 +124,7 @@ const About = () => {
                     <h3 className="font-heading text-2xl font-bold mb-3 text-foreground">
                       {value.title}
                     </h3>
-                    <p className="font-body text-base text-foreground/80 leading-relaxed">
+                    <p className="font-sans text-base text-foreground/80 leading-relaxed">
                       {value.description}
                     </p>
                   </Card>
@@ -141,12 +141,12 @@ const About = () => {
               <h2 className="font-heading text-4xl font-bold mb-6 text-foreground">
                 BEING Educación Emocional
               </h2>
-              <p className="font-body text-lg leading-relaxed text-foreground/90 mb-8">
+              <p className="font-sans text-lg leading-relaxed text-foreground/90 mb-8">
                 Fundé <span className="font-semibold text-teal">BEING</span> con la misión de llevar 
                 la educación emocional más allá del consultorio. A través de talleres, charlas y recursos 
                 educativos, buscamos promover el bienestar emocional en familias, escuelas y organizaciones.
               </p>
-              <p className="font-body text-lg leading-relaxed text-foreground/90">
+              <p className="font-sans text-lg leading-relaxed text-foreground/90">
                 Creo firmemente que cuando aprendemos a comprender y gestionar nuestras emociones, 
                 creamos un <span className="font-semibold text-accent-coral">mundo más empático, 
                 consciente y saludable</span>.

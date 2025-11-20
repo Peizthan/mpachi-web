@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import ThemeToggle from "@/components/ThemeToggle";
 
 const Navigation = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -18,8 +19,8 @@ const Navigation = () => {
   const isActive = (path: string) => location.pathname === path;
 
   return (
-    <nav className="fixed top-0 w-full z-50 border-b border-border shadow-soft">
-      <div className="container mx-auto px-4 bg-white/95 backdrop-blur-sm">
+    <nav className="fixed top-0 w-full z-50 border-b border-border shadow-soft bg-background/80 backdrop-blur-lg transition-colors">
+      <div className="container mx-auto px-4">
       {/* Rainbow bar with brand colors below header */}
       <div className="flex w-full h-6">
         <div className="flex-1 bg-[hsl(45,98%,68%)]" /> {/* Amarillo */}
@@ -48,9 +49,12 @@ const Navigation = () => {
                 {item.label}
               </Link>
             ))}
-            <Button size="sm" className="font-heading">
-              Registrarse
-            </Button>
+            <div className="flex items-center gap-3">
+              <ThemeToggle />
+              <Button size="sm" className="font-heading">
+                Registrarse
+              </Button>
+            </div>
           </div>
 
           {/* Mobile Menu Button */}
@@ -79,7 +83,10 @@ const Navigation = () => {
                   {item.label}
                 </Link>
               ))}
-              <Button className="font-heading mt-2">Registrarse</Button>
+              <div className="flex items-center justify-between gap-3">
+                <Button className="font-heading flex-1">Registrarse</Button>
+                <ThemeToggle />
+              </div>
             </div>
           </div>
         )}

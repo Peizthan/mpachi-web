@@ -75,7 +75,7 @@ const Services = () => {
   ];
 
   return (
-    <div className="min-h-screen flex flex-col">
+    <div className="min-h-screen flex flex-col bg-background text-foreground transition-colors">
       <Navigation />
       
       <main className="flex-grow pt-20">
@@ -86,7 +86,7 @@ const Services = () => {
               <h1 className="font-heading text-5xl md:text-6xl font-bold mb-6 text-background uppercase tracking-wider">
                 Servicios
               </h1>
-              <p className="font-body text-xl text-background/90 leading-relaxed">
+              <p className="font-sans text-xl text-background/90 leading-relaxed">
                 Acompañamiento profesional adaptado a tus necesidades
               </p>
             </div>
@@ -107,12 +107,12 @@ const Services = () => {
                     <h3 className="font-heading text-2xl font-bold mb-4 text-foreground">
                       {service.title}
                     </h3>
-                    <p className="font-body text-base text-foreground/80 mb-6 leading-relaxed">
+                    <p className="font-sans text-base text-foreground/80 mb-6 leading-relaxed">
                       {service.description}
                     </p>
                     <ul className="space-y-3 mb-6">
                       {service.features.map((feature, i) => (
-                        <li key={i} className="flex items-start gap-2 font-body text-sm text-foreground/70">
+                        <li key={i} className="flex items-start gap-2 font-sans text-sm text-foreground/70">
                           <span className={`${service.iconColor} mt-1`}>•</span>
                           <span>{feature}</span>
                         </li>
@@ -144,7 +144,7 @@ const Services = () => {
                     <MessageCircle className="text-primary" size={32} />
                   </div>
                   <h3 className="font-heading text-xl font-bold mb-3 text-foreground">1. Primer Contacto</h3>
-                  <p className="font-body text-sm text-foreground/80">
+                  <p className="font-sans text-sm text-foreground/80">
                     Completa el formulario o contáctame directamente para agendar una primera conversación.
                   </p>
                 </div>
@@ -153,7 +153,7 @@ const Services = () => {
                     <Clock className="text-secondary" size={32} />
                   </div>
                   <h3 className="font-heading text-xl font-bold mb-3 text-foreground">2. Primera Sesión</h3>
-                  <p className="font-body text-sm text-foreground/80">
+                  <p className="font-sans text-sm text-foreground/80">
                     Conoceremos tus necesidades, estableceremos objetivos y diseñaremos tu plan terapéutico.
                   </p>
                 </div>
@@ -162,7 +162,7 @@ const Services = () => {
                     <DollarSign className="text-teal" size={32} />
                   </div>
                   <h3 className="font-heading text-xl font-bold mb-3 text-foreground">3. Acompañamiento</h3>
-                  <p className="font-body text-sm text-foreground/80">
+                  <p className="font-sans text-sm text-foreground/80">
                     Trabajaremos juntos en sesiones regulares hacia tus metas de bienestar y crecimiento.
                   </p>
                 </div>
@@ -184,7 +184,7 @@ const Services = () => {
                     <h3 className="font-heading text-lg font-bold mb-3 text-foreground">
                       {faq.question}
                     </h3>
-                    <p className="font-body text-base text-foreground/80 leading-relaxed">
+                    <p className="font-sans text-base text-foreground/80 leading-relaxed">
                       {faq.answer}
                     </p>
                   </Card>
