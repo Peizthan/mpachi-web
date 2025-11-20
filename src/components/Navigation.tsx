@@ -42,7 +42,7 @@ const Navigation = () => {
               <Link
                 key={item.path}
                 to={item.path}
-                className={`font-heading text-lg font-medium transition-colors hover:text-primary ${
+                className={`font-heading text-base font-medium transition-colors hover:text-primary ${
                   isActive(item.path) ? "text-primary" : "text-foreground/80"
                 }`}
               >
@@ -51,7 +51,7 @@ const Navigation = () => {
             ))}
             <div className="flex items-center gap-3">
               <ThemeToggle />
-              <Button size="sm" className="font-heading">
+              <Button size="sm" className="font-heading text-base">
                 Registrarse
               </Button>
             </div>
@@ -76,7 +76,7 @@ const Navigation = () => {
                   key={item.path}
                   to={item.path}
                   onClick={() => setIsOpen(false)}
-                  className={`font-heading text-xl font-medium py-2 transition-colors hover:text-primary ${
+                  className={`font-heading text-base font-medium py-2 transition-colors hover:text-primary ${
                     isActive(item.path) ? "text-primary" : "text-foreground/80"
                   }`}
                 >
@@ -84,7 +84,7 @@ const Navigation = () => {
                 </Link>
               ))}
               <div className="flex items-center justify-between gap-3">
-                <Button className="font-heading flex-1">Registrarse</Button>
+                <Button className="font-heading text-base flex-1">Registrarse</Button>
                 <ThemeToggle />
               </div>
             </div>
