@@ -22,7 +22,7 @@ const Hero = () => {
           <p className="font-decorative text-3xl md:text-4xl mb-8 text-secondary-orange">
             Psicología Clínica
           </p>
-          <p className="font-sans text-xl md:text-2xl mb-12 text-foreground/90 leading-relaxed max-w-3xl mx-auto">
+          <p className="font-sans text-lg md:text-xl mb-12 text-foreground/90 leading-relaxed max-w-3xl mx-auto">
             Acompañamiento profesional en tu proceso de crecimiento personal. Especializada en{" "}
             <span className="font-semibold text-primary">Terapia de Aceptación y Compromiso (ACT)</span>{" "}
             y educación emocional, te invito a construir juntos un espacio de bienestar y transformación.
