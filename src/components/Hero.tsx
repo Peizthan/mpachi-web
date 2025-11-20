@@ -39,13 +39,19 @@ const Hero = () => {
 
           <div className="mt-16 pt-8 border-t border-foreground/20">
             <p className="font-decorative text-lg mb-4 text-foreground/80">
-              Parte de la iniciativa
+              Descubrí herramientas para aprender sobre bienestar emocional y crecimiento personal a través de 
             </p>
-            <h2 className="font-heading text-3xl font-bold text-teal tracking-wide">
-              BEING Educación Emocional
-            </h2>
+            <a
+              href="https://www.instagram.com/being.educacionemocional/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center justify-center rounded-full bg-white border border-teal px-6 py-3 shadow-soft hover:shadow-hover transition-all mb-2"
+              aria-label="Ir a Instagram BEING Educación Emocional"
+            >
+              <img src="/assets/being-logo.png" alt="BEING Educación Emocional" className="h-10 w-auto" />
+            </a>
             <p className="font-decorative text-base mt-3 text-foreground/70 max-w-2xl mx-auto">
-              Un proyecto dedicado a promover el bienestar emocional a través de talleres, charlas y recursos educativos.
+              con libros de juegos y recursos educativos para todas las edades.
             </p>
           </div>
         </div>
