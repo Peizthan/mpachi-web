@@ -155,11 +155,5 @@ All colors MUST be HSL.
     @apply bg-background text-foreground font-body;
   }
 
-  h1, h2, h3, h4, h5, h6 {
-    font-family: "BrandHeading", "Futura", "Futura PT", "Futura Std", serif;
-  }
-
-  p, a, span, li, input, textarea, button, select {
-    font-family: "Futura", "Futura PT", "Futura Std", "Futura Lt BT", "Futura Md BT", "Futura Book", "Crimson Text", serif;
-  }
+  /* Removed global font-family for headings and text elements to allow Tailwind font utilities to work */
 }
