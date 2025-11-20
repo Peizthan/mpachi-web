@@ -10,7 +10,7 @@ const Footer = () => {
           {/* Contact Info */}
           <div>
             <h3 className="font-heading text-xl font-bold mb-4 text-accent">Contacto</h3>
-            <div className="space-y-3 font-decorative">
+            <div className="space-y-3 font-sans">
               <div className="flex items-center gap-2">
                 <Mail size={18} className="text-muted" />
                 <a href="mailto:mariapazj@gmail.com" className="hover:text-accent transition-colors">
@@ -39,7 +39,7 @@ const Footer = () => {
           {/* Quick Links */}
           <div>
             <h3 className="font-heading text-xl font-bold mb-4 text-accent">Navegación</h3>
-            <nav className="space-y-2 font-decorative">
+            <nav className="space-y-2 font-sans">
               <Link to="/" className="block hover:text-accent transition-colors">
                 Inicio
               </Link>
@@ -61,14 +61,14 @@ const Footer = () => {
           {/* About */}
           <div>
             <h3 className="font-heading text-xl font-bold mb-4 text-accent">María Paz Jiménez</h3>
-            <p className="font-decorative text-base leading-relaxed mb-4">
+            <p className="font-sans text-sm leading-relaxed mb-4">
               Psicóloga clínica dedicada a acompañar procesos de crecimiento personal y bienestar emocional
               a través de la Terapia de Aceptación y Compromiso.
             </p>
           </div>
         </div>
 
-  <div className="border-t border-background/20 pt-6 text-center font-decorative text-base">
+  <div className="border-t border-background/20 pt-6 text-center font-sans text-sm">
           <p>© {new Date().getFullYear()} María Paz Jiménez. Todos los derechos reservados.</p>
           <p className="mt-2 text-xs text-background/60">
             Psicología Clínica • Educación Emocional • BEING

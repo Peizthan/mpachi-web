@@ -19,10 +19,10 @@ const Hero = () => {
           <h1 className="font-heading text-5xl font-bold mb-6 text-foreground uppercase tracking-wider">
             María Paz Jiménez
           </h1>
-          <p className="font-decorative text-base mb-8 text-secondary-orange">
+          <p className="font-decorative text-3xl md:text-4xl mb-8 text-secondary-orange">
             Psicología Clínica
           </p>
-          <p className="font-decorative text-base mb-12 text-foreground/90 leading-relaxed max-w-3xl mx-auto">
+          <p className="font-sans text-lg md:text-xl mb-12 text-foreground/90 leading-relaxed max-w-3xl mx-auto">
             Acompañamiento profesional en tu proceso de crecimiento personal. Especializada en{" "}
             <span className="font-semibold text-primary">Terapia de Aceptación y Compromiso (ACT)</span>{" "}
             y educación emocional, te invito a construir juntos un espacio de bienestar y transformación.
@@ -38,13 +38,13 @@ const Hero = () => {
           </div>
 
           <div className="mt-16 pt-8 border-t border-foreground/20">
-            <p className="font-decorative text-base mb-4 text-foreground/80">
+            <p className="font-sans text-lg mb-4 text-foreground/80">
               Parte de la iniciativa
             </p>
             <h2 className="font-heading text-3xl font-bold text-teal tracking-wide">
               BEING Educación Emocional
             </h2>
-            <p className="font-decorative text-base mt-3 text-foreground/70 max-w-2xl mx-auto">
+            <p className="font-sans text-base mt-3 text-foreground/70 max-w-2xl mx-auto">
               Un proyecto dedicado a promover el bienestar emocional a través de talleres, charlas y recursos educativos.
             </p>
           </div>

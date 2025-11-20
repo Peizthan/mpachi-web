@@ -49,7 +49,7 @@ const Gallery = () => {
               <h1 className="font-heading text-5xl font-bold mb-6 text-foreground uppercase tracking-wider">
                 Galería
               </h1>
-              <p className="font-decorative text-base text-foreground/90 leading-relaxed">
+              <p className="font-decorative text-xl text-foreground/90 leading-relaxed">
                 Momentos de talleres, charlas y encuentros
               </p>
             </div>
@@ -60,7 +60,7 @@ const Gallery = () => {
         <section className="py-20 bg-background">
           <div className="container mx-auto px-4">
             <div className="max-w-6xl mx-auto">
-              <p className="font-decorative text-base text-center text-foreground/70 mb-12 max-w-2xl mx-auto">
+              <p className="font-sans text-lg text-center text-foreground/70 mb-12 max-w-2xl mx-auto">
                 Aquí encontrarás imágenes de los talleres, charlas y actividades que realizamos 
                 como parte de BEING Educación Emocional y el trabajo terapéutico.
               </p>
@@ -74,7 +74,7 @@ const Gallery = () => {
                     {/* Placeholder image area */}
                     <div className="aspect-[4/3] bg-gradient-to-br from-accent/20 to-muted/20 relative overflow-hidden">
                       <div className="absolute inset-0 flex items-center justify-center">
-                        <span className="font-decorative text-base text-foreground/20">
+                        <span className="font-decorative text-4xl text-foreground/20">
                           {item.title.split(' ')[0]}
                         </span>
                       </div>
@@ -83,13 +83,13 @@ const Gallery = () => {
                     </div>
                     
                     <div className="p-6">
-                      <span className="font-heading text-base font-medium text-primary uppercase tracking-wider">
+                      <span className="font-heading text-xs font-medium text-primary uppercase tracking-wider">
                         {item.category}
                       </span>
                       <h3 className="font-heading text-xl font-bold mt-2 mb-2 text-foreground">
                         {item.title}
                       </h3>
-                      <p className="font-decorative text-base text-foreground/70">
+                      <p className="font-sans text-sm text-foreground/70">
                         {item.description}
                       </p>
                     </div>
@@ -99,7 +99,7 @@ const Gallery = () => {
 
               <div className="mt-16 text-center">
                 <Card className="p-8 bg-muted/30 border-border inline-block">
-                  <p className="font-decorative text-base text-foreground/80">
+                  <p className="font-decorative text-xl text-foreground/80">
                     ¿Te gustaría organizar un taller o charla?{" "}
                     <a href="/contacto" className="font-semibold text-primary hover:text-primary/80 transition-colors">
                       Contáctame
