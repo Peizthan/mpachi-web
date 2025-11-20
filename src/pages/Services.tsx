@@ -175,13 +175,13 @@ const Services = () => {
         <section className="py-20 bg-background">
           <div className="container mx-auto px-4">
             <div className="max-w-4xl mx-auto">
-              <h2 className="font-heading text-4xl font-bold mb-12 text-center text-foreground">
+              <h2 className="font-decorative text-4xl font-bold mb-12 text-center text-foreground">
                 Preguntas Frecuentes
               </h2>
               <div className="space-y-6">
                 {faqs.map((faq, index) => (
                   <Card key={index} className="p-6 hover:shadow-medium transition-all">
-                    <h3 className="font-heading text-lg font-bold mb-3 text-foreground">
+                    <h3 className="font-decorative text-lg font-bold mb-3 text-foreground">
                       {faq.question}
                     </h3>
                     <p className="font-sans text-base text-foreground/80 leading-relaxed">
