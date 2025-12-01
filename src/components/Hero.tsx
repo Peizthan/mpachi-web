@@ -23,9 +23,9 @@ const Hero = () => {
             Psicología Clínica
           </p>
           <p className="font-decorative text-lg md:text-xl mb-12 text-foreground/90 leading-relaxed max-w-3xl mx-auto">
-            Acompañamiento profesional en tu proceso de crecimiento personal. Especializada en{" "}
+            Acompañamiento psicológico basado en evidencia para niños, adolescentes y familias. Enfocado en: {" "}
             <span className="font-semibold text-primary">Terapia de Aceptación y Compromiso (ACT)</span>{" "}
-            y educación emocional, te invito a construir juntos un espacio de bienestar y transformación.
+            y recursos prácticos de educación emocional.
           </p>
 
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-12">
@@ -33,13 +33,13 @@ const Hero = () => {
               <Link to="/servicios">Conocer Servicios</Link>
             </Button>
             <Button asChild size="lg" variant="secondary" className="font-heading text-base min-w-[200px] shadow-medium hover:shadow-hover transition-all">
-              <Link to="/contacto">Agendar Consulta</Link>
+              <Link to="https://docs.google.com/forms/d/1ZZYMcfBn9vVCPbB9QMwTs5TrZ1A7sIdtVy350QO9huA/viewform?edit_requested=true">Agendar Consulta</Link>
             </Button>
           </div>
 
           <div className="mt-16 pt-8 border-t border-foreground/20">
             <p className="font-decorative text-lg mb-4 text-foreground/80">
-              Descubrí herramientas para aprender sobre bienestar emocional y crecimiento personal a través de 
+              Descubrí herramientas y recursos de educación emocional   
             </p>
             <a
               href="https://www.instagram.com/being.educacionemocional/"
@@ -51,7 +51,7 @@ const Hero = () => {
               <img src="/assets/being-logo.png" alt="BEING Educación Emocional" className="h-10 w-auto" />
             </a>
             <p className="font-decorative text-base mt-3 text-foreground/70 max-w-2xl mx-auto">
-              con libros de juegos y recursos educativos para todas las edades.
+              libros de juegos para familias con niños de 3 a 12 años..
             </p>
           </div>
         </div>

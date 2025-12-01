@@ -134,26 +134,7 @@ const About = () => {
           </div>
         </section>
 
-        {/* BEING Section */}
-        <section className="py-20 bg-background">
-          <div className="container mx-auto px-4">
-            <div className="max-w-4xl mx-auto text-center">
-              <h2 className="font-heading text-4xl font-bold mb-6 text-foreground">
-                BEING Educación Emocional
-              </h2>
-              <p className="font-decorative text-xl leading-relaxed text-foreground/90 mb-8">
-                Fundé <span className="font-semibold text-teal">BEING</span> con la misión de llevar 
-                la educación emocional más allá del consultorio. A través de talleres, charlas y recursos 
-                educativos, buscamos promover el bienestar emocional en familias, escuelas y organizaciones.
-              </p>
-              <p className="font-decorative text-xl leading-relaxed text-foreground/90">
-                Creo firmemente que cuando aprendemos a comprender y gestionar nuestras emociones, 
-                creamos un <span className="font-semibold text-accent-coral">mundo más empático, 
-                consciente y saludable</span>.
-              </p>
-            </div>
-          </div>
-        </section>
+       
       </main>
 
       <Footer />
