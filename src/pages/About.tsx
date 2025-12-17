@@ -39,13 +39,24 @@ const About = () => {
         {/* Hero Section */}
         <section className="bg-gradient-calm py-20">
           <div className="container mx-auto px-4">
-            <div className="max-w-4xl mx-auto text-center animate-fade-in">
-              <h1 className="font-heading text-5xl font-bold mb-6 text-background uppercase tracking-wider">
-                Sobre Mí
-              </h1>
-              <p className="font-decorative text-xl text-background/90 leading-relaxed">
-                Conoce mi trayectoria y enfoque terapéutico
-              </p>
+            <div className="max-w-6xl mx-auto">
+              <div className="flex flex-col md:flex-row items-center justify-between gap-8 animate-fade-in">
+                <div className="flex-1 text-center md:text-left">
+                  <h1 className="font-heading text-5xl font-bold mb-6 text-background uppercase tracking-wider">
+                    Sobre Mí
+                  </h1>
+                  <p className="font-decorative text-xl text-background/90 leading-relaxed">
+                    Conoce mi trayectoria y enfoque terapéutico
+                  </p>
+                </div>
+                <div className="flex-shrink-0">
+                  <img 
+                    src="/images/2.png" 
+                    alt="María Paz Jiménez" 
+                    className="w-64 h-64 md:w-80 md:h-80 object-cover rounded-full shadow-lg"
+                  />
+                </div>
+              </div>
             </div>
           </div>
         </section>

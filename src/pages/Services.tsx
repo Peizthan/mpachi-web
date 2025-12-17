@@ -82,13 +82,24 @@ const Services = () => {
         {/* Hero Section */}
         <section className="bg-gradient-warm py-20">
           <div className="container mx-auto px-4">
-            <div className="max-w-4xl mx-auto text-center animate-fade-in">
-              <h1 className="font-heading text-5xl font-bold mb-6 text-background uppercase tracking-wider">
-                Servicios
-              </h1>
-              <p className="font-decorative text-xl text-background/90 leading-relaxed">
-                Acompañamiento profesional adaptado a tus necesidades
-              </p>
+            <div className="max-w-6xl mx-auto">
+              <div className="flex flex-col md:flex-row items-center justify-between gap-8 animate-fade-in">
+                <div className="flex-shrink-0">
+                  <img 
+                    src="/images/5.png" 
+                    alt="María Paz Jiménez" 
+                    className="w-64 h-64 md:w-80 md:h-80 object-contain shadow-lg"
+                  />
+                </div>
+                <div className="flex-1 text-center md:text-right">
+                  <h1 className="font-heading text-5xl font-bold mb-6 text-background uppercase tracking-wider">
+                    Servicios
+                  </h1>
+                  <p className="font-decorative text-xl text-background/90 leading-relaxed">
+                    Acompañamiento profesional adaptado a tus necesidades
+                  </p>
+                </div>
+              </div>
             </div>
           </div>
         </section>
