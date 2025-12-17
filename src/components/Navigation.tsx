@@ -81,7 +81,6 @@ const Navigation = () => {
                 </Link>
               ))}
               <div className="flex items-center justify-between gap-3">
-                <Button className="font-heading text-base flex-1">Registrarse</Button>
                 <ThemeToggle />
               </div>
             </div>
