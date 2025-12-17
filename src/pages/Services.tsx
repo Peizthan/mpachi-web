@@ -88,7 +88,7 @@ const Services = () => {
                   <img 
                     src="/images/5.png" 
                     alt="María Paz Jiménez" 
-                    className="w-64 h-64 md:w-80 md:h-80 object-contain shadow-lg"
+                    className="w-64 h-64 md:w-80 md:h-80 object-contain"
                   />
                 </div>
                 <div className="flex-1 text-center md:text-right">

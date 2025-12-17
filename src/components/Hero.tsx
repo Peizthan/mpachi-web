@@ -25,7 +25,7 @@ const Hero = () => {
           <img 
             src="/images/1.png" 
             alt="María Paz Jiménez" 
-            className="w-64 h-64 md:w-80 md:h-80 object-contain shadow-lg mx-auto mb-6"
+            className="w-64 h-64 md:w-80 md:h-80 object-contain mx-auto mb-6"
           />
           <p className="font-decorative text-lg md:text-xl mb-12 text-foreground/90 leading-relaxed max-w-3xl mx-auto">
             Acompañamiento psicológico basado en evidencia para niños, adolescentes y familias. Enfocado en: {" "}

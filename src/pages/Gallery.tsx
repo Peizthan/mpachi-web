@@ -51,7 +51,7 @@ const Gallery = () => {
                   <img 
                     src="/images/7.png" 
                     alt="María Paz Jiménez" 
-                    className="w-64 h-64 md:w-80 md:h-80 object-contain shadow-lg"
+                    className="w-64 h-64 md:w-80 md:h-80 object-contain"
                     style={{ objectPosition: '35% 50%' }}
                   />
                 </div>
@@ -105,11 +105,11 @@ const Gallery = () => {
                   >
                     {/* Placeholder image area */}
                     <div className="aspect-[4/3] bg-gradient-to-br from-accent/20 to-muted/20 relative overflow-hidden">
-                      <img 
-                        src="/assets/brand-logo.png" 
-                        alt="Brand Logo" 
-                        className="absolute inset-0 w-full h-full object-contain opacity-30"
-                      />
+                      <div className="absolute inset-0 flex items-center justify-center">
+                        <span className="font-decorative text-4xl text-foreground/20">
+                          {item.title.split(' ')[0]}
+                        </span>
+                      </div>
                       {/* Hover overlay */}
                       <div className="absolute inset-0 bg-foreground/0 group-hover:bg-foreground/10 transition-colors duration-300" />
                     </div>

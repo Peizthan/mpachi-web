@@ -61,7 +61,7 @@ const Contact = () => {
                   <img 
                     src="/images/4.png" 
                     alt="María Paz Jiménez" 
-                    className="w-64 h-64 md:w-80 md:h-80 object-cover rounded-full shadow-lg"
+                    className="w-64 h-64 md:w-80 md:h-80 object-cover"
                   />
                 </div>
               </div>
