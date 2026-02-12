@@ -29,7 +29,7 @@ const Footer = () => {
                 </div>
                 <div>
                   <a
-                    href="https://www.linkedin.com/in/psi-maria-paz-jimenez/"
+                    href="https://www.linkedin.com/in/mar%C3%ADa-paz-jim%C3%A9nez-frontanilla-78747996/"
                     className="hover:text-accent transition-colors break-words leading-relaxed"
                     target="_blank"
                     rel="noopener noreferrer"
