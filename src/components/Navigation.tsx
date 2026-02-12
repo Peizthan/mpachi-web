@@ -1,21 +1,28 @@
 import { useState } from "react";
-import { Link, useLocation } from "react-router-dom";
 import { Menu, X } from "lucide-react";
 import ThemeToggle from "@/components/ThemeToggle";
 
 const Navigation = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const location = useLocation();
 
+  // Secciones de navegación con enlace a anchors para scroll suave
   const navItems = [
-    { path: "/", label: "Inicio" },
-    { path: "/sobre-mi", label: "Sobre Mí" },
-    { path: "/servicios", label: "Servicios" },
-    { path: "/galeria", label: "Galería" },
-    { path: "/contacto", label: "Contacto" },
+    { anchor: "#inicio", label: "Inicio" },
+    { anchor: "#productos", label: "Productos" },
+    { anchor: "#sobre-mi", label: "Sobre Mí" },
+    { anchor: "#consultas", label: "Consultas" },
+    { anchor: "#blog", label: "Blog" },
   ];
 
-  const isActive = (path: string) => location.pathname === path;
+  // Manejo de click en anchor para scroll suave
+  const handleAnchorClick = (e: React.MouseEvent<HTMLAnchorElement>, anchor: string) => {
+    e.preventDefault();
+    const element = document.querySelector(anchor);
+    if (element) {
+      element.scrollIntoView({ behavior: "smooth" });
+      setIsOpen(false);
+    }
+  };
 
   return (
     <nav className="fixed top-0 w-full z-50 border-b border-border shadow-soft bg-background/80 backdrop-blur-lg transition-colors">
@@ -31,22 +38,21 @@ const Navigation = () => {
         <div className="flex-1 bg-[hsl(203,56%,25%)]" /> {/* Azul oscuro */}
       </div>
         <div className="flex items-center justify-between h-20">
-          <Link to="/" className="flex items-center gap-2">
+          <a href="#inicio" onClick={(e) => handleAnchorClick(e, "#inicio")} className="flex items-center gap-2 cursor-pointer">
             <img src="/assets/brand-logo.png" alt="Brand Logo" width={40} height={40} className="drop-shadow-lg" />
-          </Link>
+          </a>
 
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center gap-8">
             {navItems.map((item) => (
-              <Link
-                key={item.path}
-                to={item.path}
-                className={`font-heading text-base font-medium transition-colors hover:text-primary ${
-                  isActive(item.path) ? "text-primary" : "text-foreground/80"
-                }`}
+              <a
+                key={item.anchor}
+                href={item.anchor}
+                onClick={(e) => handleAnchorClick(e, item.anchor)}
+                className="font-heading text-base font-medium transition-colors hover:text-primary text-foreground/80 hover:text-primary"
               >
                 {item.label}
-              </Link>
+              </a>
             ))}
             <div className="flex items-center gap-3">
               <ThemeToggle />
@@ -68,16 +74,14 @@ const Navigation = () => {
           <div className="md:hidden pb-6 animate-fade-in">
             <div className="flex flex-col gap-4">
               {navItems.map((item) => (
-                <Link
-                  key={item.path}
-                  to={item.path}
-                  onClick={() => setIsOpen(false)}
-                  className={`font-heading text-base font-medium py-2 transition-colors hover:text-primary ${
-                    isActive(item.path) ? "text-primary" : "text-foreground/80"
-                  }`}
+                <a
+                  key={item.anchor}
+                  href={item.anchor}
+                  onClick={(e) => handleAnchorClick(e, item.anchor)}
+                  className="font-heading text-base font-medium py-2 transition-colors hover:text-primary text-foreground/80"
                 >
                   {item.label}
-                </Link>
+                </a>
               ))}
               <div className="flex items-center justify-between gap-3">
                 <ThemeToggle />

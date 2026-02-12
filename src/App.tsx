@@ -5,10 +5,6 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import ScrollToTop from "@/components/ScrollToTop";
 import Index from "./pages/Index";
-import About from "./pages/About";
-import Services from "./pages/Services";
-import Gallery from "./pages/Gallery";
-import Contact from "./pages/Contact";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -21,12 +17,16 @@ const App = () => (
       <BrowserRouter>
         <ScrollToTop />
         <Routes>
+          {/* SPA - Única página principal con todas las secciones */}
           <Route path="/" element={<Index />} />
-          <Route path="/sobre-mi" element={<About />} />
-          <Route path="/servicios" element={<Services />} />
-          <Route path="/galeria" element={<Gallery />} />
-          <Route path="/contacto" element={<Contact />} />
-          {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
+          
+          {/* TODO: Rutas futuras para:
+              - /admin - Panel de administración (requiere autenticación con NextAuth)
+              - /blog/:slug - Artículos individuales del blog
+              - Integración con Stripe/Hotmart para pagos
+          */}
+          
+          {/* Ruta catch-all para páginas no encontradas */}
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>

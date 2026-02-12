@@ -143,7 +143,20 @@ All colors MUST be HSL.
   }
 
   body {
-    @apply bg-background text-foreground font-body;
+    @apply text-foreground font-body;
+    background-color: hsla(49, 95%, 91%, 0.4);
+  }
+
+  /* Make Znikomit decorative font bolder for better readability */
+  .font-decorative {
+    font-weight: 600;
+    letter-spacing: 0.02em;
+  }
+
+  /* Cream background for footer in dark mode */
+  .dark footer {
+    background-color: hsla(49, 95%, 91%, 0.4) !important;
+    color: hsl(203, 56%, 25%) !important;
   }
 
   /* Removed global font-family for headings and text elements to allow Tailwind font utilities to work */
