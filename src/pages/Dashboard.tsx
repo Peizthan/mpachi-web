@@ -1,7 +1,7 @@
 import { useAuthContext } from '@/context/AuthContext';
 import { Button } from '@/components/ui/button';
 import { useNavigate } from 'react-router-dom';
-import { LogOut } from 'lucide-react';
+import { ArrowLeft, LogOut } from 'lucide-react';
 import { ProfileForm } from '@/components/ProfileForm';
 import { OrdersList } from '@/components/OrdersList';
 import { GuidesList } from '@/components/GuidesList';
@@ -39,6 +39,10 @@ const Dashboard = () => {
 
         {/* Acciones */}
         <div className="flex gap-4">
+          <Button onClick={() => navigate('/')} variant="outline" className="flex items-center gap-2">
+            <ArrowLeft size={18} />
+            Volver al inicio
+          </Button>
           <Button onClick={handleSignOut} variant="destructive" className="flex items-center gap-2">
             <LogOut size={18} />
             Cerrar Sesión
