@@ -66,9 +66,9 @@ export const AuthForm = () => {
     } finally {
       setIsLoading(false);
     }
-  };authL
+  };
 
-  if (loading) {
+  if (authLoading) {
     return <div className="text-center py-8">Cargando...</div>;
   }
 

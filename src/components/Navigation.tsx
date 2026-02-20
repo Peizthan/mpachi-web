@@ -56,7 +56,7 @@ const Navigation = () => {
                 key={item.anchor}
                 href={item.anchor}
                 onClick={(e) => handleAnchorClick(e, item.anchor)}
-                className="font-heading text-base font-medium transition-colors hover:text-primary text-foreground/80 hover:text-primary"
+                className="font-heading text-base font-medium transition-colors text-foreground/80"
               >
                 {item.label}
               </a>
