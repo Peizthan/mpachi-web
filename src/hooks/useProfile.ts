@@ -35,7 +35,6 @@ export const useProfile = () => {
         setLoading(true);
         setError(null);
 
-        // Intentar obtener el perfil existente
         const { data, error: fetchError } = await supabase
           .from('profiles')
           .select('*')
@@ -43,29 +42,12 @@ export const useProfile = () => {
           .single();
 
         if (fetchError) {
-          // Si no existe, crear uno nuevo
-          if (fetchError.code === 'PGRST116') {
-            const { data: newProfile, error: createError } = await supabase
-              .from('profiles')
-              .insert({
-                id: user.id,
-                email: user.email,
-                full_name: user.user_metadata?.full_name || null,
-                role: 'user',
-              })
-              .select()
-              .single();
-
-            if (createError) throw createError;
-            setProfile(newProfile);
-          } else {
-            throw fetchError;
-          }
-        } else {
-          setProfile(data);
+          throw fetchError;
         }
+
+        setProfile(data);
       } catch (err) {
-        setError(err instanceof Error ? err.message : 'Error al cargar el perfil');
+        setError('No se pudo cargar el perfil. Verifica que el trigger de creacion automatica este activo.');
         console.error('Error fetching profile:', err);
       } finally {
         setLoading(false);
@@ -98,5 +80,36 @@ export const useProfile = () => {
     }
   };
 
-  return { profile, loading, error, updateProfile };
+  const uploadAvatar = async (file: File) => {
+    if (!user) return { error: new Error('No user logged in'), data: null as string | null };
+
+    try {
+      setError(null);
+
+      const ext = file.name.split('.').pop() || 'jpg';
+      const filePath = `${user.id}/${Date.now()}.${ext}`;
+
+      const { error: uploadError } = await supabase.storage
+        .from('avatars')
+        .upload(filePath, file, { upsert: true });
+
+      if (uploadError) throw uploadError;
+
+      const { data: publicData } = supabase.storage
+        .from('avatars')
+        .getPublicUrl(filePath);
+
+      const avatarUrl = publicData.publicUrl;
+      const { error: updateError } = await updateProfile({ avatar_url: avatarUrl });
+      if (updateError) throw updateError;
+
+      return { data: avatarUrl, error: null };
+    } catch (err) {
+      const errorMsg = err instanceof Error ? err.message : 'Error al subir avatar';
+      setError(errorMsg);
+      return { error: err, data: null };
+    }
+  };
+
+  return { profile, loading, error, updateProfile, uploadAvatar };
 };

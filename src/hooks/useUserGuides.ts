@@ -34,7 +34,20 @@ export const useUserGuides = () => {
         setLoading(true);
         setError(null);
 
-        // Obtener guías que el usuario ha comprado (a través de order_items)
+        const { data: userOrders, error: ordersError } = await supabase
+          .from('orders')
+          .select('id')
+          .eq('user_id', user.id);
+
+        if (ordersError) throw ordersError;
+
+        const orderIds = (userOrders || []).map((order) => order.id);
+        if (orderIds.length === 0) {
+          setGuides([]);
+          return;
+        }
+
+        // Obtener guias compradas a traves de order_items -> guides
         const { data, error: fetchError } = await supabase
           .from('order_items')
           .select(`
@@ -50,26 +63,16 @@ export const useUserGuides = () => {
               updated_at
             )
           `)
-          .eq('orders.user_id', user.id);
+          .in('order_id', orderIds);
 
-        if (fetchError) {
-          // Si la consulta anterior falla, obtener solo guías publicadas del autor
-          const { data: authorGuides, error: authorError } = await supabase
-            .from('guides')
-            .select('*')
-            .eq('author_id', user.id)
-            .order('created_at', { ascending: false });
+        if (fetchError) throw fetchError;
 
-          if (authorError) throw authorError;
-          setGuides(authorGuides || []);
-        } else {
-          // Filtrar y mapear guías únicas
-          const uniqueGuides = ((data || []) as GuideQueryRow[])
-            .map((item) => item.guides)
-            .filter((guide): guide is UserGuide => guide !== null)
-            .filter((guide, index, self) => self.findIndex((currentGuide) => currentGuide.id === guide.id) === index);
-          setGuides(uniqueGuides);
-        }
+        const uniqueGuides = ((data || []) as GuideQueryRow[])
+          .map((item) => item.guides)
+          .filter((guide): guide is UserGuide => guide !== null)
+          .filter((guide, index, self) => self.findIndex((currentGuide) => currentGuide.id === guide.id) === index);
+
+        setGuides(uniqueGuides);
       } catch (err) {
         setError(err instanceof Error ? err.message : 'Error al cargar guías');
         console.error('Error fetching guides:', err);

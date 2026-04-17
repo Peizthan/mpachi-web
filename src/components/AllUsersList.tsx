@@ -1,6 +1,7 @@
 import { useAllProfiles } from '@/hooks/useAllProfiles';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
+import { Button } from '@/components/ui/button';
 import {
   Table,
   TableBody,
@@ -12,7 +13,12 @@ import {
 import { Users } from 'lucide-react';
 
 export const AllUsersList = () => {
-  const { profiles, loading, error } = useAllProfiles();
+  const { profiles, loading, error, updatingRoleId, updateUserRole } = useAllProfiles();
+
+  const handleRoleToggle = async (userId: string, currentRole: 'user' | 'admin') => {
+    const nextRole = currentRole === 'admin' ? 'user' : 'admin';
+    await updateUserRole(userId, nextRole);
+  };
 
   if (loading) {
     return (
@@ -80,6 +86,7 @@ export const AllUsersList = () => {
                 <TableHead>Nombre</TableHead>
                 <TableHead>Rol</TableHead>
                 <TableHead>Registrado</TableHead>
+                <TableHead className="text-right">Acciones</TableHead>
               </TableRow>
             </TableHeader>
             <TableBody>
@@ -94,6 +101,20 @@ export const AllUsersList = () => {
                   </TableCell>
                   <TableCell>
                     {new Date(profile.created_at).toLocaleDateString('es-ES')}
+                  </TableCell>
+                  <TableCell className="text-right">
+                    <Button
+                      size="sm"
+                      variant={profile.role === 'admin' ? 'outline' : 'default'}
+                      disabled={updatingRoleId === profile.id}
+                      onClick={() => handleRoleToggle(profile.id, profile.role)}
+                    >
+                      {updatingRoleId === profile.id
+                        ? 'Guardando...'
+                        : profile.role === 'admin'
+                          ? 'Quitar admin'
+                          : 'Hacer admin'}
+                    </Button>
                   </TableCell>
                 </TableRow>
               ))}

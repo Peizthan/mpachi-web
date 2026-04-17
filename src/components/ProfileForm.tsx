@@ -11,9 +11,10 @@ interface ProfileFormProps {
 }
 
 export const ProfileForm = ({ onSuccess }: ProfileFormProps) => {
-  const { profile, loading, error: profileError, updateProfile } = useProfile();
+  const { profile, loading, error: profileError, updateProfile, uploadAvatar } = useProfile();
   const [isEditing, setIsEditing] = useState(false);
   const [isSaving, setIsSaving] = useState(false);
+  const [isUploadingAvatar, setIsUploadingAvatar] = useState(false);
   const [submitError, setSubmitError] = useState<string | null>(null);
   const [submitSuccess, setSubmitSuccess] = useState(false);
   const [formData, setFormData] = useState<Partial<Profile>>({});
@@ -59,6 +60,25 @@ export const ProfileForm = ({ onSuccess }: ProfileFormProps) => {
     }
   };
 
+  const handleAvatarUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+
+    setIsUploadingAvatar(true);
+    setSubmitError(null);
+
+    const { error } = await uploadAvatar(file);
+    setIsUploadingAvatar(false);
+
+    if (error) {
+      setSubmitError(error instanceof Error ? error.message : 'No se pudo subir el avatar');
+    } else {
+      setSubmitSuccess(true);
+      setTimeout(() => setSubmitSuccess(false), 3000);
+      onSuccess?.();
+    }
+  };
+
   if (loading) {
     return <div className="text-center py-8">Cargando perfil...</div>;
   }
@@ -97,6 +117,25 @@ export const ProfileForm = ({ onSuccess }: ProfileFormProps) => {
 
         {!isEditing ? (
           <div className="space-y-4">
+            <div className="flex items-center gap-4 pb-2 border-b">
+              <img
+                src={profile.avatar_url || '/assets/brand-logo.png'}
+                alt="Avatar"
+                className="h-16 w-16 rounded-full object-cover border"
+              />
+              <div className="space-y-2">
+                <label className="text-sm font-medium text-gray-600 dark:text-gray-400">Avatar</label>
+                <Input
+                  type="file"
+                  accept="image/*"
+                  onChange={handleAvatarUpload}
+                  disabled={isUploadingAvatar}
+                />
+                <p className="text-xs text-gray-500">
+                  {isUploadingAvatar ? 'Subiendo avatar...' : 'Opcional: sube una imagen de perfil'}
+                </p>
+              </div>
+            </div>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div>
                 <label className="text-sm font-medium text-gray-600 dark:text-gray-400">Nombre Completo</label>

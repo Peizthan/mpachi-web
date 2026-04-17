@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Menu, X, LogIn, LayoutDashboard, Shield } from "lucide-react";
+import { Menu, X, LogIn, LayoutDashboard, Shield, ShoppingBag } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import ThemeToggle from "@/components/ThemeToggle";
 import { Button } from "@/components/ui/button";
@@ -78,6 +78,15 @@ const Navigation = () => {
                     </Button>
                   )}
                   <Button
+                    onClick={() => navigate('/store')}
+                    variant="outline"
+                    size="sm"
+                    className="flex items-center gap-2"
+                  >
+                    <ShoppingBag size={18} />
+                    <span className="hidden lg:inline">Tienda</span>
+                  </Button>
+                  <Button
                     onClick={() => navigate('/dashboard')}
                     variant="default"
                     size="sm"
@@ -142,6 +151,18 @@ const Navigation = () => {
                         Panel Admin
                       </Button>
                     )}
+                    <Button
+                      onClick={() => {
+                        navigate('/store');
+                        setIsOpen(false);
+                      }}
+                      variant="outline"
+                      size="sm"
+                      className="w-full flex items-center justify-center gap-2"
+                    >
+                      <ShoppingBag size={18} />
+                      Tienda
+                    </Button>
                     <Button
                       onClick={() => {
                         navigate('/dashboard');

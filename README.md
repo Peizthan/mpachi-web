@@ -56,6 +56,9 @@ Key files:
 
 - [supabase/config.toml](supabase/config.toml)
 - [supabase/migrations/20260417000100_init_app_schema.sql](supabase/migrations/20260417000100_init_app_schema.sql)
+- [supabase/migrations/20260417000200_admin_profile_update_policy.sql](supabase/migrations/20260417000200_admin_profile_update_policy.sql)
+- [supabase/migrations/20260417000300_avatars_storage.sql](supabase/migrations/20260417000300_avatars_storage.sql)
+- [supabase/migrations/20260417000400_direct_sales_and_payments.sql](supabase/migrations/20260417000400_direct_sales_and_payments.sql)
 - [supabase/seed.sql](supabase/seed.sql)
 
 Common commands:
@@ -71,6 +74,51 @@ If CLI role auth fails, use the database password route:
 $env:SUPABASE_DB_PASSWORD="YOUR_DB_PASSWORD"
 npx supabase db push
 ```
+
+The avatars storage bucket and policies are managed in migrations, so no manual bucket creation is required after a successful `db push`.
+
+## Phase 2: Direct sales and payments
+
+Status:
+
+- Protected store route implemented: [src/pages/Store.tsx](src/pages/Store.tsx)
+- Checkout session creation function deployed: `create-checkout-session`
+- Verified Stripe webhook function deployed: `stripe-webhook`
+- Payment and catalog schema fields added in migration `20260417000400_direct_sales_and_payments.sql`
+
+Security model:
+
+- Client never grants access directly after redirect.
+- Access is granted only after a verified Stripe webhook event.
+- Webhook creates `orders` + `order_items` server-side using service role.
+- User dashboard entitlement comes from `order_items` and is automatic after webhook insert.
+
+Required Supabase function secrets:
+
+- `STRIPE_SECRET_KEY`
+- `STRIPE_WEBHOOK_SECRET`
+- `SITE_URL` (for success/cancel redirects, example `https://your-domain.com`)
+
+Set secrets with:
+
+```sh
+npx supabase secrets set STRIPE_SECRET_KEY=... STRIPE_WEBHOOK_SECRET=... SITE_URL=https://your-domain.com
+```
+
+Deploy/update functions:
+
+```sh
+npx supabase functions deploy create-checkout-session
+npx supabase functions deploy stripe-webhook
+```
+
+Webhook endpoint to register in Stripe:
+
+- `https://<project-ref>.supabase.co/functions/v1/stripe-webhook`
+
+Subscribe at minimum to:
+
+- `checkout.session.completed`
 
 ## Deployment
 

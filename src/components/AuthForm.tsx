@@ -1,10 +1,37 @@
 import { useState } from 'react';
 import { useAuthContext } from '@/context/AuthContext';
 import { useNavigate } from 'react-router-dom';
+import { supabase } from '@/supabaseClient';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Alert, AlertDescription } from '@/components/ui/alert';
+
+const translateAuthError = (message: string) => {
+  const normalized = message.toLowerCase();
+
+  if (normalized.includes('invalid login credentials')) {
+    return 'Email o contrasena incorrectos. Verifica tus datos e intenta nuevamente.';
+  }
+
+  if (normalized.includes('email not confirmed')) {
+    return 'Debes confirmar tu email antes de iniciar sesion.';
+  }
+
+  if (normalized.includes('user already registered')) {
+    return 'Este email ya esta registrado. Inicia sesion o recupera tu contrasena.';
+  }
+
+  if (normalized.includes('password should be at least')) {
+    return 'La contrasena es demasiado corta. Usa al menos 6 caracteres.';
+  }
+
+  if (normalized.includes('rate limit')) {
+    return 'Demasiados intentos. Espera unos minutos antes de volver a intentar.';
+  }
+
+  return 'No se pudo completar la operacion. Intenta nuevamente.';
+};
 
 export const AuthForm = () => {
   const { signUp, signIn, signOut, user, loading: authLoading } = useAuthContext();
@@ -15,6 +42,8 @@ export const AuthForm = () => {
   const [message, setMessage] = useState('');
   const [error, setError] = useState('');
   const [isSignUp, setIsSignUp] = useState(false);
+  const [awaitingEmailConfirmation, setAwaitingEmailConfirmation] = useState(false);
+  const [lastSignupEmail, setLastSignupEmail] = useState('');
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -24,11 +53,21 @@ export const AuthForm = () => {
 
     try {
       if (isSignUp) {
-        const { error: signUpError } = await signUp(email, password);
+        const { data, error: signUpError } = await signUp(email, password);
         if (signUpError) {
-          setError(signUpError.message);
+          setError(translateAuthError(signUpError.message));
         } else {
-          setMessage('¡Registro exitoso! Por favor, verifica tu email para confirmar.');
+          const emailNeedsConfirmation = !data.session;
+
+          if (emailNeedsConfirmation) {
+            setAwaitingEmailConfirmation(true);
+            setLastSignupEmail(email);
+            setMessage('Te enviamos un email de confirmacion. Revisa tu bandeja para activar tu cuenta.');
+          } else {
+            setMessage('Cuenta creada correctamente. Ya puedes continuar.');
+            setTimeout(() => navigate('/dashboard'), 500);
+          }
+
           setEmail('');
           setPassword('');
           setIsSignUp(false);
@@ -36,7 +75,7 @@ export const AuthForm = () => {
       } else {
         const { error: signInError } = await signIn(email, password);
         if (signInError) {
-          setError(signInError.message);
+          setError(translateAuthError(signInError.message));
         } else {
           setMessage('¡Inicio de sesión exitoso!');
           setEmail('');
@@ -48,6 +87,58 @@ export const AuthForm = () => {
     } catch (err) {
       setError('Ocurrió un error inesperado');
       console.error(err);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  const handleResendConfirmation = async () => {
+    const targetEmail = email || lastSignupEmail;
+    if (!targetEmail) {
+      setError('Ingresa el email que registraste para reenviar la confirmacion.');
+      return;
+    }
+
+    setError('');
+    setMessage('');
+    setIsLoading(true);
+
+    try {
+      const { error: resendError } = await supabase.auth.resend({
+        type: 'signup',
+        email: targetEmail,
+      });
+
+      if (resendError) {
+        setError(translateAuthError(resendError.message));
+      } else {
+        setMessage('Email de confirmacion reenviado correctamente.');
+      }
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  const handlePasswordReset = async () => {
+    if (!email) {
+      setError('Ingresa tu email para recuperar la contrasena.');
+      return;
+    }
+
+    setError('');
+    setMessage('');
+    setIsLoading(true);
+
+    try {
+      const { error: resetError } = await supabase.auth.resetPasswordForEmail(email, {
+        redirectTo: `${window.location.origin}/auth`,
+      });
+
+      if (resetError) {
+        setError(translateAuthError(resetError.message));
+      } else {
+        setMessage('Te enviamos un email para restablecer tu contrasena.');
+      }
     } finally {
       setIsLoading(false);
     }
@@ -111,6 +202,15 @@ export const AuthForm = () => {
             <AlertDescription className="text-green-700">{message}</AlertDescription>
           </Alert>
         )}
+
+        {awaitingEmailConfirmation && (
+          <Alert>
+            <AlertDescription>
+              Tu cuenta necesita confirmacion por email. Si no recibiste el correo, puedes reenviarlo.
+            </AlertDescription>
+          </Alert>
+        )}
+
         <form onSubmit={handleSubmit} className="space-y-4">
           <div className="space-y-2">
             <label htmlFor="email" className="text-sm font-medium">
@@ -149,6 +249,30 @@ export const AuthForm = () => {
                 ? 'Registrarse'
                 : 'Iniciar Sesión'}
           </Button>
+
+          {!isSignUp && (
+            <Button
+              type="button"
+              variant="outline"
+              className="w-full"
+              disabled={isLoading}
+              onClick={handlePasswordReset}
+            >
+              Olvide mi contrasena
+            </Button>
+          )}
+
+          {awaitingEmailConfirmation && (
+            <Button
+              type="button"
+              variant="secondary"
+              className="w-full"
+              disabled={isLoading}
+              onClick={handleResendConfirmation}
+            >
+              Reenviar email de confirmacion
+            </Button>
+          )}
         </form>
         <div className="pt-4 border-t">
           <button
@@ -156,6 +280,9 @@ export const AuthForm = () => {
               setIsSignUp(!isSignUp);
               setError('');
               setMessage('');
+              if (!isSignUp) {
+                setAwaitingEmailConfirmation(false);
+              }
             }}
             className="text-sm text-blue-600 hover:underline w-full text-center"
             disabled={isLoading}

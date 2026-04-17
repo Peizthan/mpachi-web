@@ -1,6 +1,7 @@
 import { useAllOrders } from '@/hooks/useAllOrders';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
+import { Order } from '@/hooks/useOrders';
 import {
   Table,
   TableBody,
@@ -20,7 +21,11 @@ const statusLabel: Record<string, string> = {
 };
 
 export const AllOrdersList = () => {
-  const { orders, loading, error } = useAllOrders();
+  const { orders, loading, error, updatingOrderId, updateOrderStatus } = useAllOrders();
+
+  const handleStatusChange = async (orderId: string, value: string) => {
+    await updateOrderStatus(orderId, value as Order['status']);
+  };
 
   if (loading) {
     return (
@@ -92,6 +97,7 @@ export const AllOrdersList = () => {
                 <TableHead>Estado</TableHead>
                 <TableHead>Monto</TableHead>
                 <TableHead>Fecha</TableHead>
+                <TableHead className="text-right">Actualizar</TableHead>
               </TableRow>
             </TableHeader>
             <TableBody>
@@ -116,6 +122,20 @@ export const AllOrdersList = () => {
                   </TableCell>
                   <TableCell>
                     {new Date(order.created_at).toLocaleDateString('es-ES')}
+                  </TableCell>
+                  <TableCell className="text-right">
+                    <select
+                      className="border rounded px-2 py-1 text-sm bg-background"
+                      value={order.status}
+                      disabled={updatingOrderId === order.id}
+                      onChange={(event) => handleStatusChange(order.id, event.target.value)}
+                    >
+                      <option value="pending">Pendiente</option>
+                      <option value="confirmed">Confirmado</option>
+                      <option value="shipped">Enviado</option>
+                      <option value="delivered">Entregado</option>
+                      <option value="cancelled">Cancelado</option>
+                    </select>
                   </TableCell>
                 </TableRow>
               ))}

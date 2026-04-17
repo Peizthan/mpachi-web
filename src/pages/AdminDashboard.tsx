@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { LogOut, BarChart3 } from 'lucide-react';
 import { AllUsersList } from '@/components/AllUsersList';
 import { AllOrdersList } from '@/components/AllOrdersList';
+import { AccessLogsList } from '@/components/AccessLogsList';
 
 const AdminDashboard = () => {
   const { signOut } = useAuthContext();
@@ -46,6 +47,10 @@ const AdminDashboard = () => {
             <div>
               <AllOrdersList />
             </div>
+          </div>
+
+          <div>
+            <AccessLogsList />
           </div>
 
           {/* Información adicional */}
