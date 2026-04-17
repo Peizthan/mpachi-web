@@ -8,7 +8,7 @@ const Auth = () => {
   const navigate = useNavigate();
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-slate-900 to-slate-800 px-4">
+    <div className="min-h-screen flex items-start md:items-center justify-center bg-gradient-to-br from-slate-900 to-slate-800 px-4 pt-32 pb-8">
       <Navigation />
       <div className="w-full max-w-md">
         <Button
