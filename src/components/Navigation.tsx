@@ -36,7 +36,7 @@ const Navigation = () => {
   };
 
   return (
-    <nav className="fixed top-0 w-full z-50 border-b border-border shadow-xl bg-background transition-colors">
+    <nav className="fixed top-0 w-full z-[1000] border-b border-border shadow-xl bg-background transition-colors">
       <div className="container mx-auto px-4">
       {/* Rainbow bar with brand colors below header */}
       <div className="flex w-full h-6">
