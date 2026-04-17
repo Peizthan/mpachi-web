@@ -240,6 +240,18 @@ export const AuthForm = () => {
               disabled={isLoading}
             />
           </div>
+
+          {!isSignUp && (
+            <button
+              type="button"
+              className="w-full text-left text-sm text-blue-600 hover:underline"
+              disabled={isLoading}
+              onClick={handlePasswordReset}
+            >
+              ¿Olvidaste tu contraseña?
+            </button>
+          )}
+
           <Button type="submit" disabled={isLoading} className="w-full">
             {isLoading
               ? isSignUp
@@ -249,18 +261,6 @@ export const AuthForm = () => {
                 ? 'Registrarse'
                 : 'Iniciar Sesión'}
           </Button>
-
-          {!isSignUp && (
-            <Button
-              type="button"
-              variant="outline"
-              className="w-full"
-              disabled={isLoading}
-              onClick={handlePasswordReset}
-            >
-              Olvidé mi contraseña
-            </Button>
-          )}
 
           {awaitingEmailConfirmation && (
             <Button
