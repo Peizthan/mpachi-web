@@ -159,6 +159,32 @@ export const AuthForm = () => {
     }
   };
 
+  const handlePasswordResetForCurrentUser = async () => {
+    const targetEmail = user?.email;
+    if (!targetEmail) {
+      setError('No se encontro un email de sesion activa para recuperar la contrasena.');
+      return;
+    }
+
+    setError('');
+    setMessage('');
+    setIsLoading(true);
+
+    try {
+      const { error: resetError } = await supabase.auth.resetPasswordForEmail(targetEmail, {
+        redirectTo: `${window.location.origin}/auth`,
+      });
+
+      if (resetError) {
+        setError(translateAuthError(resetError.message));
+      } else {
+        setMessage('Te enviamos un email para restablecer tu contraseña.');
+      }
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
   if (authLoading) {
     return <div className="text-center py-8">Cargando...</div>;
   }
@@ -168,13 +194,22 @@ export const AuthForm = () => {
       <Card className="w-full max-w-md">
         <CardHeader>
           <CardTitle>Bienvenido</CardTitle>
-          <CardDescription>Sesión activa</CardDescription>
+          <CardDescription>Sesión activa. También puedes recuperar tu contraseña desde aquí.</CardDescription>
         </CardHeader>
         <CardContent className="space-y-4">
           <div className="space-y-2">
             <p className="text-sm text-gray-600">Email:</p>
             <p className="font-medium">{user.email}</p>
           </div>
+          <Button
+            type="button"
+            variant="outline"
+            onClick={handlePasswordResetForCurrentUser}
+            disabled={isLoading}
+            className="w-full"
+          >
+            Recuperar contraseña
+          </Button>
           <Button onClick={handleSignOut} disabled={isLoading} className="w-full">
             {isLoading ? 'Cerrando sesión...' : 'Cerrar Sesión'}
           </Button>
