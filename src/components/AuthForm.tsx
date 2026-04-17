@@ -11,7 +11,7 @@ const translateAuthError = (message: string) => {
   const normalized = message.toLowerCase();
 
   if (normalized.includes('invalid login credentials')) {
-    return 'Email o contrasena incorrectos. Verifica tus datos e intenta nuevamente.';
+    return 'Email o contraseña incorrectos. Verifica tus datos e intenta nuevamente.';
   }
 
   if (normalized.includes('email not confirmed')) {
@@ -19,11 +19,11 @@ const translateAuthError = (message: string) => {
   }
 
   if (normalized.includes('user already registered')) {
-    return 'Este email ya esta registrado. Inicia sesion o recupera tu contrasena.';
+    return 'Este email ya está registrado. Inicia sesión o recupera tu contraseña.';
   }
 
   if (normalized.includes('password should be at least')) {
-    return 'La contrasena es demasiado corta. Usa al menos 6 caracteres.';
+    return 'La contraseña es demasiado corta. Usa al menos 6 caracteres.';
   }
 
   if (normalized.includes('rate limit')) {
@@ -62,7 +62,7 @@ export const AuthForm = () => {
           if (emailNeedsConfirmation) {
             setAwaitingEmailConfirmation(true);
             setLastSignupEmail(email);
-            setMessage('Te enviamos un email de confirmacion. Revisa tu bandeja para activar tu cuenta.');
+            setMessage('Te enviamos un email de confirmación. Revisa tu bandeja para activar tu cuenta.');
           } else {
             setMessage('Cuenta creada correctamente. Ya puedes continuar.');
             setTimeout(() => navigate('/dashboard'), 500);
@@ -95,7 +95,7 @@ export const AuthForm = () => {
   const handleResendConfirmation = async () => {
     const targetEmail = email || lastSignupEmail;
     if (!targetEmail) {
-      setError('Ingresa el email que registraste para reenviar la confirmacion.');
+      setError('Ingresa el email que registraste para reenviar la confirmación.');
       return;
     }
 
@@ -112,7 +112,7 @@ export const AuthForm = () => {
       if (resendError) {
         setError(translateAuthError(resendError.message));
       } else {
-        setMessage('Email de confirmacion reenviado correctamente.');
+        setMessage('Email de confirmación reenviado correctamente.');
       }
     } finally {
       setIsLoading(false);
@@ -121,7 +121,7 @@ export const AuthForm = () => {
 
   const handlePasswordReset = async () => {
     if (!email) {
-      setError('Ingresa tu email para recuperar la contrasena.');
+      setError('Ingresa tu email para recuperar la contraseña.');
       return;
     }
 
@@ -137,7 +137,7 @@ export const AuthForm = () => {
       if (resetError) {
         setError(translateAuthError(resetError.message));
       } else {
-        setMessage('Te enviamos un email para restablecer tu contrasena.');
+        setMessage('Te enviamos un email para restablecer tu contraseña.');
       }
     } finally {
       setIsLoading(false);
@@ -206,7 +206,7 @@ export const AuthForm = () => {
         {awaitingEmailConfirmation && (
           <Alert>
             <AlertDescription>
-              Tu cuenta necesita confirmacion por email. Si no recibiste el correo, puedes reenviarlo.
+              Tu cuenta necesita confirmación por email. Si no recibiste el correo, puedes reenviarlo.
             </AlertDescription>
           </Alert>
         )}
@@ -258,7 +258,7 @@ export const AuthForm = () => {
               disabled={isLoading}
               onClick={handlePasswordReset}
             >
-              Olvide mi contrasena
+              Olvidé mi contraseña
             </Button>
           )}
 
@@ -270,7 +270,7 @@ export const AuthForm = () => {
               disabled={isLoading}
               onClick={handleResendConfirmation}
             >
-              Reenviar email de confirmacion
+              Reenviar email de confirmación
             </Button>
           )}
         </form>

@@ -1,6 +1,21 @@
 import { Instagram, Linkedin, Facebook } from "lucide-react";
+import { useNavigate, useLocation } from "react-router-dom";
 
 const Footer = () => {
+  const navigate = useNavigate();
+  const location = useLocation();
+  const isHome = location.pathname === '/';
+
+  const handleAnchorClick = (e: React.MouseEvent<HTMLAnchorElement>, anchor: string) => {
+    e.preventDefault();
+    if (isHome) {
+      const element = document.querySelector(anchor);
+      if (element) element.scrollIntoView({ behavior: "smooth" });
+    } else {
+      navigate('/' + anchor);
+    }
+  };
+
   return (
     <footer className="bg-foreground text-background py-6">
       <div className="container mx-auto px-4">
@@ -59,19 +74,19 @@ const Footer = () => {
           <div className="space-y-4 pt-6 border-t border-background/20">
             <h3 className="font-heading text-xl font-bold text-accent text-center">¡Conocé más sobre mí!</h3>
             <nav className="flex flex-wrap justify-center items-center gap-y-3 font-decorative divide-x divide-background/20">
-              <a href="#inicio" className="hover:text-accent transition-colors px-2 text-sm md:text-base">
+              <a href="/#inicio" onClick={(e) => handleAnchorClick(e, "#inicio")} className="hover:text-accent transition-colors px-2 text-sm md:text-base">
                 Inicio
               </a>
-              <a href="#productos" className="hover:text-accent transition-colors px-2 text-sm md:text-base">
+              <a href="/#productos" onClick={(e) => handleAnchorClick(e, "#productos")} className="hover:text-accent transition-colors px-2 text-sm md:text-base">
                 Productos
               </a>
-              <a href="#sobre-mi" className="hover:text-accent transition-colors px-2 text-sm md:text-base">
+              <a href="/#sobre-mi" onClick={(e) => handleAnchorClick(e, "#sobre-mi")} className="hover:text-accent transition-colors px-2 text-sm md:text-base">
                 Sobre Mí
               </a>
-              <a href="#consultas" className="hover:text-accent transition-colors px-2 text-sm md:text-base">
+              <a href="/#consultas" onClick={(e) => handleAnchorClick(e, "#consultas")} className="hover:text-accent transition-colors px-2 text-sm md:text-base">
                 Consultas
               </a>
-              <a href="#blog" className="hover:text-accent transition-colors px-2 text-sm md:text-base">
+              <a href="/#blog" onClick={(e) => handleAnchorClick(e, "#blog")} className="hover:text-accent transition-colors px-2 text-sm md:text-base">
                 Blog
               </a>
             </nav>

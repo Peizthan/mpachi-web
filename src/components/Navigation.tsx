@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Menu, X, LogIn, LayoutDashboard, Shield, ShoppingBag } from "lucide-react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import ThemeToggle from "@/components/ThemeToggle";
 import { Button } from "@/components/ui/button";
 import { useAuthContext } from "@/context/AuthContext";
@@ -9,8 +9,10 @@ import { useProfile } from "@/hooks/useProfile";
 const Navigation = () => {
   const [isOpen, setIsOpen] = useState(false);
   const navigate = useNavigate();
+  const location = useLocation();
   const { user } = useAuthContext();
   const { profile } = useProfile();
+  const isHome = location.pathname === '/';
 
   // Secciones de navegación con enlace a anchors para scroll suave
   const navItems = [
@@ -24,10 +26,12 @@ const Navigation = () => {
   // Manejo de click en anchor para scroll suave
   const handleAnchorClick = (e: React.MouseEvent<HTMLAnchorElement>, anchor: string) => {
     e.preventDefault();
-    const element = document.querySelector(anchor);
-    if (element) {
-      element.scrollIntoView({ behavior: "smooth" });
-      setIsOpen(false);
+    setIsOpen(false);
+    if (isHome) {
+      const element = document.querySelector(anchor);
+      if (element) element.scrollIntoView({ behavior: "smooth" });
+    } else {
+      navigate('/' + anchor);
     }
   };
 
@@ -45,7 +49,7 @@ const Navigation = () => {
         <div className="flex-1 bg-[hsl(203,56%,25%)]" /> {/* Azul oscuro */}
       </div>
         <div className="flex items-center justify-between h-20">
-          <a href="#inicio" onClick={(e) => handleAnchorClick(e, "#inicio")} className="flex items-center gap-2 cursor-pointer">
+          <a href="/#inicio" onClick={(e) => handleAnchorClick(e, "#inicio")} className="flex items-center gap-2 cursor-pointer">
             <img src="/assets/brand-logo.png" alt="Brand Logo" width={40} height={40} className="drop-shadow-lg" />
           </a>
 
