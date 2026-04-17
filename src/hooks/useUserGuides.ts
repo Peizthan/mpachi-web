@@ -13,6 +13,10 @@ export interface UserGuide {
   updated_at: string;
 }
 
+interface GuideQueryRow {
+  guides: UserGuide | null;
+}
+
 export const useUserGuides = () => {
   const { user } = useAuthContext();
   const [guides, setGuides] = useState<UserGuide[]>([]);
@@ -60,11 +64,10 @@ export const useUserGuides = () => {
           setGuides(authorGuides || []);
         } else {
           // Filtrar y mapear guías únicas
-          const uniqueGuides = (data || [])
-            .map((item: any) => item.guides)
-            .filter((guide: any, index: number, self: any[]) =>
-              guide && self.findIndex((g) => g.id === guide.id) === index
-            );
+          const uniqueGuides = ((data || []) as GuideQueryRow[])
+            .map((item) => item.guides)
+            .filter((guide): guide is UserGuide => guide !== null)
+            .filter((guide, index, self) => self.findIndex((currentGuide) => currentGuide.id === guide.id) === index);
           setGuides(uniqueGuides);
         }
       } catch (err) {
