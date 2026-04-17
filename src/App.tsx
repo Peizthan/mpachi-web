@@ -5,7 +5,6 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route, useLocation, useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 import ScrollToTop from "@/components/ScrollToTop";
-import Navigation from "@/components/Navigation";
 import { AuthProvider } from "@/context/AuthContext";
 import { ProtectedRoute } from "@/components/ProtectedRoute";
 import { AdminRoute } from "@/components/AdminRoute";
@@ -45,7 +44,6 @@ const App = () => (
         <BrowserRouter>
           <ScrollToTop />
           <QueryRedirect />
-          <Navigation />
           <Routes>
             {/* SPA - Única página principal con todas las secciones */}
             <Route path="/" element={<Index />} />

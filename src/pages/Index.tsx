@@ -1,3 +1,4 @@
+import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
 import { BookOpen } from "lucide-react";
@@ -13,6 +14,7 @@ const Index = () => {
 
   return (
     <div className="min-h-screen bg-background text-foreground transition-colors">
+      <Navigation />
 
       {/* ============================================================
           SECCIÓN HERO - id="inicio"

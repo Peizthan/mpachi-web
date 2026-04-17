@@ -5,6 +5,7 @@ import { ArrowLeft, LogOut, ShoppingBag } from 'lucide-react';
 import { ProfileForm } from '@/components/ProfileForm';
 import { OrdersList } from '@/components/OrdersList';
 import { GuidesList } from '@/components/GuidesList';
+import Navigation from '@/components/Navigation';
 
 const Dashboard = () => {
   const { user, signOut } = useAuthContext();
@@ -19,6 +20,7 @@ const Dashboard = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 to-slate-100 dark:from-slate-900 dark:to-slate-800 pt-32 pb-16 px-4">
+      <Navigation />
       <div className="container mx-auto max-w-4xl">
         {/* Header */}
         <div className="mb-8">

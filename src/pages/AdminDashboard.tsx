@@ -5,6 +5,7 @@ import { LogOut, BarChart3 } from 'lucide-react';
 import { AllUsersList } from '@/components/AllUsersList';
 import { AllOrdersList } from '@/components/AllOrdersList';
 import { AccessLogsList } from '@/components/AccessLogsList';
+import Navigation from '@/components/Navigation';
 
 const AdminDashboard = () => {
   const { signOut } = useAuthContext();
@@ -19,6 +20,7 @@ const AdminDashboard = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 to-slate-100 dark:from-slate-900 dark:to-slate-800 pt-32 pb-16 px-4">
+      <Navigation />
       <div className="container mx-auto max-w-6xl">
         {/* Header */}
         <div className="mb-8 flex items-center justify-between">

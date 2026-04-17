@@ -5,6 +5,7 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Alert, AlertDescription } from '@/components/ui/alert';
+import Navigation from '@/components/Navigation';
 import { useStoreGuides } from '@/hooks/useStoreGuides';
 import { supabase } from '@/supabaseClient';
 
@@ -45,6 +46,7 @@ const Store = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 to-slate-100 dark:from-slate-900 dark:to-slate-800 pt-32 pb-16 px-4">
+      <Navigation />
       <div className="container mx-auto max-w-6xl">
         <div className="mb-8 flex items-center justify-between gap-4">
           <div>
