@@ -45,6 +45,9 @@ serve(async (req) => {
 
     const service = createClient(supabaseUrl, supabaseServiceKey);
 
+    // ---------------------------------------------------------------
+    // checkout.session.completed → create order + order_items
+    // ---------------------------------------------------------------
     if (event.type === 'checkout.session.completed') {
       const session = event.data.object as Stripe.Checkout.Session;
 
@@ -129,6 +132,100 @@ serve(async (req) => {
         status_code: 200,
         error_message: null,
       });
+    }
+
+    // ---------------------------------------------------------------
+    // checkout.session.expired → mark pending orders as cancelled
+    // ---------------------------------------------------------------
+    if (event.type === 'checkout.session.expired') {
+      const session = event.data.object as Stripe.Checkout.Session;
+      const sessionId = session.id;
+
+      const { data: order } = await service
+        .from('orders')
+        .select('id,user_id')
+        .eq('payment_provider_session_id', sessionId)
+        .maybeSingle();
+
+      if (order) {
+        await service
+          .from('orders')
+          .update({ payment_status: 'failed', status: 'cancelled' })
+          .eq('id', order.id);
+
+        await service.from('access_logs').insert({
+          user_id: order.user_id,
+          action: 'stripe_checkout_expired',
+          resource_type: 'order',
+          resource_id: order.id,
+          status_code: 200,
+          error_message: null,
+        });
+      }
+    }
+
+    // ---------------------------------------------------------------
+    // payment_intent.payment_failed → mark order payment as failed
+    // ---------------------------------------------------------------
+    if (event.type === 'payment_intent.payment_failed') {
+      const intent = event.data.object as Stripe.PaymentIntent;
+      const paymentIntentId = intent.id;
+      const failureMessage = intent.last_payment_error?.message ?? null;
+
+      const { data: order } = await service
+        .from('orders')
+        .select('id,user_id')
+        .eq('payment_provider_payment_intent', paymentIntentId)
+        .maybeSingle();
+
+      if (order) {
+        await service
+          .from('orders')
+          .update({ payment_status: 'failed', status: 'cancelled' })
+          .eq('id', order.id);
+
+        await service.from('access_logs').insert({
+          user_id: order.user_id,
+          action: 'stripe_payment_failed',
+          resource_type: 'order',
+          resource_id: order.id,
+          status_code: 200,
+          error_message: failureMessage,
+        });
+      }
+    }
+
+    // ---------------------------------------------------------------
+    // charge.refunded → mark order payment as refunded
+    // ---------------------------------------------------------------
+    if (event.type === 'charge.refunded') {
+      const charge = event.data.object as Stripe.Charge;
+      const paymentIntentId =
+        typeof charge.payment_intent === 'string' ? charge.payment_intent : null;
+
+      if (paymentIntentId) {
+        const { data: order } = await service
+          .from('orders')
+          .select('id,user_id')
+          .eq('payment_provider_payment_intent', paymentIntentId)
+          .maybeSingle();
+
+        if (order) {
+          await service
+            .from('orders')
+            .update({ payment_status: 'refunded', status: 'cancelled' })
+            .eq('id', order.id);
+
+          await service.from('access_logs').insert({
+            user_id: order.user_id,
+            action: 'stripe_charge_refunded',
+            resource_type: 'order',
+            resource_id: order.id,
+            status_code: 200,
+            error_message: null,
+          });
+        }
+      }
     }
 
     return json({ received: true });

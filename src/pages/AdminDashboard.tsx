@@ -2,13 +2,15 @@ import { useAuthContext } from '@/context/AuthContext';
 import { Button } from '@/components/ui/button';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { useNavigate } from 'react-router-dom';
-import { LogOut, BarChart3, Users, ShoppingCart, BookOpen, TrendingUp, Settings, Shield } from 'lucide-react';
+import { LogOut, BarChart3, Users, ShoppingCart, BookOpen, TrendingUp, Settings, Shield, AlertTriangle, Rocket } from 'lucide-react';
 import { AllUsersList } from '@/components/AllUsersList';
 import { AllOrdersList } from '@/components/AllOrdersList';
 import { AccessLogsList } from '@/components/AccessLogsList';
 import { AdminGuidesManager } from '@/components/AdminGuidesManager';
 import { AdminSalesReport } from '@/components/AdminSalesReport';
 import { AdminSiteSettings } from '@/components/AdminSiteSettings';
+import { AdminPaymentReconciliation } from '@/components/AdminPaymentReconciliation';
+import { AdminGoLiveChecklist } from '@/components/AdminGoLiveChecklist';
 import Navigation from '@/components/Navigation';
 
 const AdminDashboard = () => {
@@ -66,9 +68,17 @@ const AdminDashboard = () => {
               <Shield size={16} />
               Registros
             </TabsTrigger>
+            <TabsTrigger value="reconciliation" className="flex items-center gap-2">
+              <AlertTriangle size={16} />
+              Conciliación
+            </TabsTrigger>
             <TabsTrigger value="settings" className="flex items-center gap-2">
               <Settings size={16} />
               Ajustes
+            </TabsTrigger>
+            <TabsTrigger value="golive" className="flex items-center gap-2">
+              <Rocket size={16} />
+              Lanzamiento
             </TabsTrigger>
           </TabsList>
 
@@ -92,8 +102,16 @@ const AdminDashboard = () => {
             <AccessLogsList />
           </TabsContent>
 
+          <TabsContent value="reconciliation">
+            <AdminPaymentReconciliation />
+          </TabsContent>
+
           <TabsContent value="settings">
             <AdminSiteSettings />
+          </TabsContent>
+
+          <TabsContent value="golive">
+            <AdminGoLiveChecklist />
           </TabsContent>
         </Tabs>
       </div>
