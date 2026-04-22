@@ -1,11 +1,14 @@
 import { useAuthContext } from '@/context/AuthContext';
 import { Button } from '@/components/ui/button';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { useNavigate } from 'react-router-dom';
-import { LogOut, BarChart3 } from 'lucide-react';
+import { LogOut, BarChart3, Users, ShoppingCart, BookOpen, TrendingUp, Settings, Shield } from 'lucide-react';
 import { AllUsersList } from '@/components/AllUsersList';
 import { AllOrdersList } from '@/components/AllOrdersList';
 import { AccessLogsList } from '@/components/AccessLogsList';
 import { AdminGuidesManager } from '@/components/AdminGuidesManager';
+import { AdminSalesReport } from '@/components/AdminSalesReport';
+import { AdminSiteSettings } from '@/components/AdminSiteSettings';
 import Navigation from '@/components/Navigation';
 
 const AdminDashboard = () => {
@@ -31,7 +34,7 @@ const AdminDashboard = () => {
               Panel Administrativo
             </h1>
             <p className="text-gray-600 dark:text-gray-400">
-              Gestión completa de usuarios, pedidos y más
+              Gestión completa de usuarios, pedidos, tienda y configuración
             </p>
           </div>
           <Button onClick={handleSignOut} variant="destructive" className="flex items-center gap-2">
@@ -40,38 +43,59 @@ const AdminDashboard = () => {
           </Button>
         </div>
 
-        {/* Secciones */}
-        <div className="space-y-8">
-          {/* Usuario y Pedidos */}
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-            <div>
-              <AllUsersList />
-            </div>
-            <div>
-              <AllOrdersList />
-            </div>
-          </div>
+        {/* Tabbed sections */}
+        <Tabs defaultValue="store" className="space-y-6">
+          <TabsList className="flex flex-wrap h-auto gap-1">
+            <TabsTrigger value="store" className="flex items-center gap-2">
+              <BookOpen size={16} />
+              Tienda / Catálogo
+            </TabsTrigger>
+            <TabsTrigger value="orders" className="flex items-center gap-2">
+              <ShoppingCart size={16} />
+              Pedidos
+            </TabsTrigger>
+            <TabsTrigger value="sales" className="flex items-center gap-2">
+              <TrendingUp size={16} />
+              Ventas
+            </TabsTrigger>
+            <TabsTrigger value="users" className="flex items-center gap-2">
+              <Users size={16} />
+              Usuarios
+            </TabsTrigger>
+            <TabsTrigger value="logs" className="flex items-center gap-2">
+              <Shield size={16} />
+              Registros
+            </TabsTrigger>
+            <TabsTrigger value="settings" className="flex items-center gap-2">
+              <Settings size={16} />
+              Ajustes
+            </TabsTrigger>
+          </TabsList>
 
-          <div>
-            <AccessLogsList />
-          </div>
-
-          <div>
+          <TabsContent value="store">
             <AdminGuidesManager />
-          </div>
+          </TabsContent>
 
-          {/* Información adicional */}
-          <div className="bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-lg p-6">
-            <h3 className="font-semibold text-lg mb-2">ℹ️ Información del Panel</h3>
-            <ul className="text-sm text-gray-700 dark:text-gray-300 space-y-1">
-              <li>✅ Solo los usuarios con rol "admin" pueden acceder a este panel</li>
-              <li>✅ Puedes ver todos los usuarios registrados en la plataforma</li>
-              <li>✅ Visualiza todos los pedidos realizados y sus estados</li>
-              <li>✅ Los datos se cargan desde Supabase con seguridad RLS</li>
-              <li>💡 Si no eres admin, serás redireccionado automáticamente</li>
-            </ul>
-          </div>
-        </div>
+          <TabsContent value="orders">
+            <AllOrdersList />
+          </TabsContent>
+
+          <TabsContent value="sales">
+            <AdminSalesReport />
+          </TabsContent>
+
+          <TabsContent value="users">
+            <AllUsersList />
+          </TabsContent>
+
+          <TabsContent value="logs">
+            <AccessLogsList />
+          </TabsContent>
+
+          <TabsContent value="settings">
+            <AdminSiteSettings />
+          </TabsContent>
+        </Tabs>
       </div>
     </div>
   );
