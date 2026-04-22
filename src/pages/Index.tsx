@@ -1,9 +1,12 @@
+import { useNavigate } from "react-router-dom";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
 import { BookOpen } from "lucide-react";
 
 const Index = () => {
+  const navigate = useNavigate();
+
   // Función para scroll suave a una sección
   const scrollToSection = (sectionId: string) => {
     const element = document.querySelector(sectionId);
@@ -86,10 +89,7 @@ const Index = () => {
                   size="sm" 
                   variant="outline"
                   className="w-full"
-                  onClick={() => {
-                    // TODO: Implementar modal o página de compra
-                    alert("Próximamente: Modal de compra para Guía 0-1 años");
-                  }}
+                  onClick={() => navigate('/store')}
                 >
                   Ver Guía
                 </Button>
@@ -107,10 +107,7 @@ const Index = () => {
                   size="sm" 
                   variant="outline"
                   className="w-full"
-                  onClick={() => {
-                    // TODO: Implementar modal o página de compra
-                    alert("Próximamente: Modal de compra para Guía 1-3 años");
-                  }}
+                  onClick={() => navigate('/store')}
                 >
                   Ver Guía
                 </Button>
@@ -128,10 +125,7 @@ const Index = () => {
                   size="sm" 
                   variant="outline"
                   className="w-full"
-                  onClick={() => {
-                    // TODO: Implementar modal o página de compra
-                    alert("Próximamente: Modal de compra para Guía 3-5 años");
-                  }}
+                  onClick={() => navigate('/store')}
                 >
                   Ver Guía
                 </Button>
@@ -148,10 +142,7 @@ const Index = () => {
                 <Button 
                   size="sm" 
                   className="w-full"
-                  onClick={() => {
-                    // TODO: Implementar modal o página de compra (integración con Stripe/Hotmart)
-                    alert("Próximamente: Modal de compra para Pack Completo");
-                  }}
+                  onClick={() => navigate('/store')}
                 >
                   Comprar Pack
                 </Button>
@@ -301,76 +292,61 @@ const Index = () => {
             {/* Grid de 3 artículos */}
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
               {/* Artículo 1 */}
-              <a 
-                href="#" 
-                className="bg-background border border-border rounded-lg shadow-soft hover:shadow-hover transition-all overflow-hidden group cursor-pointer"
-                onClick={(e) => {
-                  e.preventDefault();
-                  // TODO: Navegar a la entrada de blog completa
-                  alert("Próximamente: Artículo completo");
-                }}
+              <div
+                className="bg-background border border-border rounded-lg shadow-soft transition-all overflow-hidden group"
               >
                 <div className="aspect-video bg-gradient-to-br from-primary/20 to-secondary-orange/20 flex items-center justify-center">
                   {/* Ícono favicon en color primary */}
                   <BookOpen size={64} className="text-primary" strokeWidth={1.5} />
                 </div>
                 <div className="p-6">
-                  <h3 className="font-heading text-xl font-bold mb-2 text-foreground group-hover:text-primary transition-colors">
+                  <h3 className="font-heading text-xl font-bold mb-2 text-foreground transition-colors">
                     Entendiendo los berrinches
                   </h3>
                   <p className="font-decorative text-sm text-foreground/80">
                     Qué son realmente y por qué tu hijo/a los necesita para crecer emocionalmente.
                   </p>
+                  <p className="font-decorative text-xs text-muted-foreground mt-3">Próximamente</p>
                 </div>
-              </a>
+              </div>
 
               {/* Artículo 2 */}
-              <a 
-                href="#" 
-                className="bg-background border border-border rounded-lg shadow-soft hover:shadow-hover transition-all overflow-hidden group cursor-pointer"
-                onClick={(e) => {
-                  e.preventDefault();
-                  // TODO: Navegar a la entrada de blog completa
-                  alert("Próximamente: Artículo completo");
-                }}
+              <div
+                className="bg-background border border-border rounded-lg shadow-soft transition-all overflow-hidden group"
               >
                 <div className="aspect-video bg-gradient-to-br from-secondary-orange/20 to-accent-coral/20 flex items-center justify-center">
                   {/* Ícono favicon en color secondary-orange */}
                   <BookOpen size={64} className="text-secondary-orange" strokeWidth={1.5} />
                 </div>
                 <div className="p-6">
-                  <h3 className="font-heading text-xl font-bold mb-2 text-foreground group-hover:text-primary transition-colors">
+                  <h3 className="font-heading text-xl font-bold mb-2 text-foreground transition-colors">
                     La validación emocional
                   </h3>
                   <p className="font-decorative text-sm text-foreground/80">
                     Una herramienta poderosa para conectar con tu hijo sin necesidad de controlar sus emociones.
                   </p>
+                  <p className="font-decorative text-xs text-muted-foreground mt-3">Próximamente</p>
                 </div>
-              </a>
+              </div>
 
               {/* Artículo 3 */}
-              <a 
-                href="#" 
-                className="bg-background border border-border rounded-lg shadow-soft hover:shadow-hover transition-all overflow-hidden group cursor-pointer"
-                onClick={(e) => {
-                  e.preventDefault();
-                  // TODO: Navegar a la entrada de blog completa
-                  alert("Próximamente: Artículo completo");
-                }}
+              <div
+                className="bg-background border border-border rounded-lg shadow-soft transition-all overflow-hidden group"
               >
                 <div className="aspect-video bg-gradient-to-br from-teal/20 to-muted-blue-green/20 flex items-center justify-center">
                   {/* Ícono favicon en color accent */}
                   <BookOpen size={64} className="text-accent" strokeWidth={1.5} />
                 </div>
                 <div className="p-6">
-                  <h3 className="font-heading text-xl font-bold mb-2 text-foreground group-hover:text-primary transition-colors">
+                  <h3 className="font-heading text-xl font-bold mb-2 text-foreground transition-colors">
                     Autocuidado para padres
                   </h3>
                   <p className="font-decorative text-sm text-foreground/80">
                     Por qué cuidar tu bienestar emocional es esencial para acompañar a tus hijos.
                   </p>
+                  <p className="font-decorative text-xs text-muted-foreground mt-3">Próximamente</p>
                 </div>
-              </a>
+              </div>
             </div>
           </div>
         </div>

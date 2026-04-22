@@ -6,6 +6,7 @@ export interface UserGuide {
   id: string;
   title: string;
   description: string | null;
+  content: string | null;
   image_url: string | null;
   category: string | null;
   author_id: string;
@@ -56,6 +57,7 @@ export const useUserGuides = () => {
               id,
               title,
               description,
+              content,
               image_url,
               category,
               author_id,

@@ -1,10 +1,10 @@
-import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { ArrowLeft, ShoppingBag, Loader2 } from 'lucide-react';
+import { useEffect, useState } from 'react';
+import { useNavigate, useSearchParams } from 'react-router-dom';
+import { ArrowLeft, ShoppingBag, Loader2, XCircle } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
-import { Alert, AlertDescription } from '@/components/ui/alert';
+import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
 import Navigation from '@/components/Navigation';
 import { useStoreGuides } from '@/hooks/useStoreGuides';
 import { supabase } from '@/supabaseClient';
@@ -18,9 +18,24 @@ const formatPrice = (priceCents: number, currency: string) => {
 
 const Store = () => {
   const navigate = useNavigate();
+  const [searchParams, setSearchParams] = useSearchParams();
   const { guides, loading, error } = useStoreGuides();
   const [checkoutGuideId, setCheckoutGuideId] = useState<string | null>(null);
   const [checkoutError, setCheckoutError] = useState<string | null>(null);
+  const checkoutStatus = searchParams.get('checkout');
+
+  useEffect(() => {
+    if (checkoutStatus) {
+      const timer = setTimeout(() => {
+        setSearchParams((prev) => {
+          const next = new URLSearchParams(prev);
+          next.delete('checkout');
+          return next;
+        });
+      }, 8000);
+      return () => clearTimeout(timer);
+    }
+  }, [checkoutStatus, setSearchParams]);
 
   const startCheckout = async (guideId: string) => {
     try {
@@ -61,6 +76,16 @@ const Store = () => {
             Volver al dashboard
           </Button>
         </div>
+
+        {checkoutStatus === 'cancelled' && (
+          <Alert className="mb-6 border-yellow-300 bg-yellow-50 dark:bg-yellow-900/20 dark:border-yellow-700">
+            <XCircle className="h-5 w-5 text-yellow-600" />
+            <AlertTitle className="text-yellow-800 dark:text-yellow-300">Pago cancelado</AlertTitle>
+            <AlertDescription className="text-yellow-700 dark:text-yellow-400">
+              Cancelaste el proceso de pago. Puedes intentarlo nuevamente cuando quieras.
+            </AlertDescription>
+          </Alert>
+        )}
 
         {checkoutError && (
           <Alert variant="destructive" className="mb-6">
