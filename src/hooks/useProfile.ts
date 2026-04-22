@@ -26,6 +26,7 @@ export const useProfile = () => {
   // Obtener perfil del usuario
   useEffect(() => {
     if (!user) {
+      setProfile(null);
       setLoading(false);
       return;
     }
@@ -39,15 +40,35 @@ export const useProfile = () => {
           .from('profiles')
           .select('*')
           .eq('id', user.id)
-          .single();
+          .maybeSingle();
 
         if (fetchError) {
           throw fetchError;
         }
 
-        setProfile(data);
+        if (data) {
+          setProfile(data);
+          return;
+        }
+
+        // If the profile row doesn't exist (e.g. trigger missing for old users), create it on demand.
+        const { data: inserted, error: insertError } = await supabase
+          .from('profiles')
+          .insert({
+            id: user.id,
+            email: user.email ?? `${user.id}@local.invalid`,
+            role: 'user',
+          })
+          .select('*')
+          .single();
+
+        if (insertError) {
+          throw insertError;
+        }
+
+        setProfile(inserted);
       } catch (err) {
-        setError('No se pudo cargar el perfil. Verifica que el trigger de creacion automatica este activo.');
+        setError('No se pudo cargar el perfil. Intenta cerrar sesión e iniciar nuevamente.');
         console.error('Error fetching profile:', err);
       } finally {
         setLoading(false);

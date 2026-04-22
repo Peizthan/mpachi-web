@@ -15,6 +15,13 @@ const Dashboard = () => {
   const [searchParams, setSearchParams] = useSearchParams();
   const checkoutStatus = searchParams.get('checkout');
 
+  const scrollToSection = (id: string) => {
+    const section = document.getElementById(id);
+    if (section) {
+      section.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  };
+
   // Clear the query param from URL after reading it
   useEffect(() => {
     if (checkoutStatus) {
@@ -46,6 +53,24 @@ const Dashboard = () => {
           <p className="text-gray-600 dark:text-gray-400">Bienvenido a tu panel de control</p>
         </div>
 
+        <div className="mb-6 rounded-xl border bg-card p-4">
+          <p className="text-sm font-medium text-muted-foreground mb-3">Menú rápido</p>
+          <div className="flex flex-wrap gap-2">
+            <Button variant="outline" size="sm" onClick={() => scrollToSection('perfil-section')}>
+              Mi perfil
+            </Button>
+            <Button variant="outline" size="sm" onClick={() => scrollToSection('pedidos-section')}>
+              Mis pedidos
+            </Button>
+            <Button variant="outline" size="sm" onClick={() => scrollToSection('guias-section')}>
+              Mis guías
+            </Button>
+            <Button variant="outline" size="sm" onClick={() => scrollToSection('acciones-section')}>
+              Acciones
+            </Button>
+          </div>
+        </div>
+
         {/* Checkout result banners */}
         {checkoutStatus === 'success' && (
           <Alert className="mb-6 border-green-300 bg-green-50 dark:bg-green-900/20 dark:border-green-700">
@@ -67,18 +92,22 @@ const Dashboard = () => {
         )}
 
         {/* Perfil Editable */}
-        <div className="mb-8">
+        <div id="perfil-section" className="mb-8 scroll-mt-36">
           <ProfileForm />
         </div>
 
         {/* Próximas Secciones */}
         <div className="grid grid-cols-1 gap-8 mb-8">
-          <OrdersList />
-          <GuidesList />
+          <div id="pedidos-section" className="scroll-mt-36">
+            <OrdersList />
+          </div>
+          <div id="guias-section" className="scroll-mt-36">
+            <GuidesList />
+          </div>
         </div>
 
         {/* Acciones */}
-        <div className="flex gap-4">
+        <div id="acciones-section" className="flex gap-4 scroll-mt-36">
           <Button onClick={() => navigate('/store')} variant="default" className="flex items-center gap-2">
             <ShoppingBag size={18} />
             Ir a la tienda
