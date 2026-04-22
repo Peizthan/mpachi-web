@@ -20,6 +20,13 @@ const statusLabel: Record<string, string> = {
   cancelled: 'Cancelado',
 };
 
+const paymentStatusLabel: Record<string, string> = {
+  pending: 'Pago pendiente',
+  paid: 'Pagado',
+  failed: 'Fallido',
+  refunded: 'Reembolsado',
+};
+
 export const AllOrdersList = () => {
   const { orders, loading, error, updatingOrderId, updateOrderStatus } = useAllOrders();
 
@@ -95,6 +102,7 @@ export const AllOrdersList = () => {
               <TableRow>
                 <TableHead>Número de Pedido</TableHead>
                 <TableHead>Estado</TableHead>
+                <TableHead>Pago</TableHead>
                 <TableHead>Monto</TableHead>
                 <TableHead>Fecha</TableHead>
                 <TableHead className="text-right">Actualizar</TableHead>
@@ -116,6 +124,22 @@ export const AllOrdersList = () => {
                     >
                       {statusLabel[order.status]}
                     </Badge>
+                  </TableCell>
+                  <TableCell>
+                    <div className="flex flex-col gap-1">
+                      <Badge
+                        variant={
+                          order.payment_status === 'failed' || order.payment_status === 'refunded'
+                            ? 'destructive'
+                            : order.payment_status === 'paid'
+                              ? 'default'
+                              : 'secondary'
+                        }
+                      >
+                        {paymentStatusLabel[order.payment_status || 'pending']}
+                      </Badge>
+                      <span className="text-xs text-muted-foreground">{order.payment_provider || '-'}</span>
+                    </div>
                   </TableCell>
                   <TableCell className="font-semibold">
                     ${order.total_amount.toFixed(2)}

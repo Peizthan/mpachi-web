@@ -1,8 +1,10 @@
 import { useState, useEffect } from 'react';
 import { supabase } from '@/supabaseClient';
 import { Order } from '@/hooks/useOrders';
+import { useAuthContext } from '@/context/AuthContext';
 
 export const useAllOrders = () => {
+  const { user } = useAuthContext();
   const [orders, setOrders] = useState<Order[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -45,6 +47,15 @@ export const useAllOrders = () => {
         .single();
 
       if (updateError) throw updateError;
+
+      await supabase.from('access_logs').insert({
+        user_id: user?.id || null,
+        action: 'admin_update_order_status',
+        resource_type: 'order',
+        resource_id: orderId,
+        status_code: 200,
+        error_message: null,
+      });
 
       setOrders((prev) => prev.map((order) => (order.id === orderId ? data : order)));
       return { error: null };

@@ -11,8 +11,10 @@ import {
   TableRow,
 } from '@/components/ui/table';
 import { Users } from 'lucide-react';
+import { useAuthContext } from '@/context/AuthContext';
 
 export const AllUsersList = () => {
+  const { user } = useAuthContext();
   const { profiles, loading, error, updatingRoleId, updateUserRole } = useAllProfiles();
 
   const handleRoleToggle = async (userId: string, currentRole: 'user' | 'admin') => {
@@ -106,11 +108,13 @@ export const AllUsersList = () => {
                     <Button
                       size="sm"
                       variant={profile.role === 'admin' ? 'outline' : 'default'}
-                      disabled={updatingRoleId === profile.id}
+                      disabled={updatingRoleId === profile.id || user?.id === profile.id}
                       onClick={() => handleRoleToggle(profile.id, profile.role)}
                     >
                       {updatingRoleId === profile.id
                         ? 'Guardando...'
+                        : user?.id === profile.id
+                          ? 'Tu rol actual'
                         : profile.role === 'admin'
                           ? 'Quitar admin'
                           : 'Hacer admin'}

@@ -1,8 +1,10 @@
 import { useState, useEffect } from 'react';
 import { supabase } from '@/supabaseClient';
 import { Profile } from '@/hooks/useProfile';
+import { useAuthContext } from '@/context/AuthContext';
 
 export const useAllProfiles = () => {
+  const { user } = useAuthContext();
   const [profiles, setProfiles] = useState<Profile[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -45,6 +47,15 @@ export const useAllProfiles = () => {
         .single();
 
       if (updateError) throw updateError;
+
+      await supabase.from('access_logs').insert({
+        user_id: user?.id || null,
+        action: 'admin_update_user_role',
+        resource_type: 'profile',
+        resource_id: userId,
+        status_code: 200,
+        error_message: null,
+      });
 
       setProfiles((prev) => prev.map((profile) => (profile.id === userId ? data : profile)));
       return { error: null };

@@ -5,6 +5,7 @@ import { LogOut, BarChart3 } from 'lucide-react';
 import { AllUsersList } from '@/components/AllUsersList';
 import { AllOrdersList } from '@/components/AllOrdersList';
 import { AccessLogsList } from '@/components/AccessLogsList';
+import { AdminGuidesManager } from '@/components/AdminGuidesManager';
 import Navigation from '@/components/Navigation';
 
 const AdminDashboard = () => {
@@ -53,6 +54,10 @@ const AdminDashboard = () => {
 
           <div>
             <AccessLogsList />
+          </div>
+
+          <div>
+            <AdminGuidesManager />
           </div>
 
           {/* Información adicional */}

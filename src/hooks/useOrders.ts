@@ -7,6 +7,10 @@ export interface Order {
   user_id: string;
   order_number: string;
   status: 'pending' | 'confirmed' | 'shipped' | 'delivered' | 'cancelled';
+  payment_status?: 'pending' | 'paid' | 'failed' | 'refunded' | null;
+  payment_provider?: string | null;
+  payment_provider_session_id?: string | null;
+  payment_provider_payment_intent?: string | null;
   total_amount: number;
   shipping_address: string | null;
   shipping_city: string | null;
