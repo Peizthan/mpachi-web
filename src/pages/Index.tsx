@@ -1,4 +1,5 @@
 import { useNavigate } from "react-router-dom";
+import { usePageContent } from "@/hooks/usePageContent";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
@@ -6,6 +7,7 @@ import { BookOpen } from "lucide-react";
 
 const Index = () => {
   const navigate = useNavigate();
+  const { content: pc } = usePageContent();
 
   // Función para scroll suave a una sección
   const scrollToSection = (sectionId: string) => {
@@ -40,13 +42,13 @@ const Index = () => {
         <div className="container mx-auto px-4 py-20">
           <div className="max-w-4xl mx-auto text-center animate-fade-in relative z-10">
             <h1 className="font-heading text-5xl font-bold mb-6 text-foreground uppercase tracking-wider">
-              Qué hacer cuando mi hijo/a explota
+                {pc.hero_title}
             </h1>
             <p className="font-decorative text-2xl md:text-3xl mb-8 text-secondary-orange tracking-wide">
-              Guías prácticas para manejar crisis emocionales en la primera infancia
+                {pc.hero_subtitle}
             </p>
             <p className="font-decorative text-lg md:text-xl mb-12 text-foreground/90 leading-relaxed max-w-3xl mx-auto">
-              Organizadas por edad, diseñadas para padres que quieren entender y apoyar mejor a sus hijos
+                {pc.hero_description}
             </p>
 
             {/* Botón CTA que desplaza a la sección de productos */}
@@ -160,7 +162,7 @@ const Index = () => {
         <div className="container mx-auto px-4">
           <div className="max-w-6xl mx-auto">
             <h2 className="font-heading text-4xl font-bold text-center mb-12 text-foreground">
-              Sobre Mí
+                {pc.about_title}
             </h2>
 
             {/* Grid de dos columnas: biografía + imagen */}
@@ -168,20 +170,13 @@ const Index = () => {
               {/* Columna izquierda: Texto biográfico */}
               <div className="space-y-6">
                 <p className="font-decorative text-lg text-foreground/90 leading-relaxed">
-                  Soy María Paz Jiménez, psicóloga clínica especializada en trabajar con niños, 
-                  adolescentes y familias desde un enfoque basado en evidencia. Mi práctica se 
-                  centra en la <span className="font-semibold text-primary">Terapia de Aceptación y 
-                  Compromiso (ACT)</span> y en recursos prácticos de educación emocional.
+                  {pc.about_bio_1}
                 </p>
                 <p className="font-decorative text-lg text-foreground/90 leading-relaxed">
-                  Con más de 8 años de experiencia, he trabajado en contextos variados: clínica privada, 
-                  instituciones educativas y espacios comunitarios. Mi pasión es acompañar a familias a 
-                  entender las emociones de sus hijos y desarrollar herramientas concretas para la vida.
+                  {pc.about_bio_2}
                 </p>
                 <p className="font-decorative text-lg text-foreground/90 leading-relaxed">
-                  Creo que la educación emocional es fundamental. Por eso, además de mi trabajo en 
-                  consultoría, co-fundé <span className="font-semibold">BEING: Educación Emocional</span>, 
-                  un proyecto que lleva recursos lúdicos y prácticos a familias con niños de 3 a 12 años.
+                  {pc.about_bio_3}
                 </p>
               </div>
 
@@ -206,10 +201,10 @@ const Index = () => {
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto text-center">
             <h2 className="font-heading text-4xl font-bold mb-4 text-foreground">
-              Consultas 
+                {pc.consultations_title}
             </h2>
             <p className="font-decorative text-lg text-foreground/80 mb-12">
-              Acompañamiento personalizado para tu familia
+                {pc.consultations_subtitle}
             </p>
 
             {/* Card de información */}
@@ -224,7 +219,7 @@ const Index = () => {
                     ✓
                   </div>
                   <p className="font-decorative text-lg text-foreground/90">
-                    <span className="font-semibold">45 minutos</span> de sesión personalizada
+                      {pc.consultations_duration}
                   </p>
                 </div>
 
@@ -233,7 +228,7 @@ const Index = () => {
                     💰
                   </div>
                   <p className="font-decorative text-lg text-foreground/90">
-                    <span className="font-semibold">Precio: 80 U$S (dólares americanos)</span>
+                      {pc.consultations_price}
                   </p>
                 </div>
 
@@ -242,7 +237,7 @@ const Index = () => {
                     ⏰
                   </div>
                   <p className="font-decorative text-lg text-foreground/90">
-                    <span className="font-semibold">Pago anticipado</span> requerido para confirmar
+                      Pago anticipado requerido para confirmar
                   </p>
                 </div>
 
@@ -251,7 +246,7 @@ const Index = () => {
                     📅
                   </div>
                   <p className="font-decorative text-lg text-foreground/90">
-                    <span className="font-semibold">Turnos limitados los viernes</span> (sujeto a disponibilidad)
+                      {pc.consultations_schedule}
                   </p>
                 </div>
               </div>
@@ -261,8 +256,7 @@ const Index = () => {
                 size="lg"
                 className="font-heading text-base"
                 onClick={() => {
-                  // TODO: Integrar con sistema de reservas (NextAuth + base de datos)
-                  window.open("https://wa.me/595983448991", "_blank");
+                  window.open(pc.consultations_whatsapp, "_blank");
                 }}
               >
                 Reservar Consulta
@@ -283,10 +277,10 @@ const Index = () => {
         <div className="container mx-auto px-4">
           <div className="max-w-6xl mx-auto">
             <h2 className="font-heading text-4xl font-bold text-center mb-4 text-foreground">
-              Blog
+                {pc.blog_title}
             </h2>
             <p className="font-decorative text-lg text-center text-foreground/80 mb-12">
-              Artículos y recursos para el bienestar emocional de tu familia
+                {pc.blog_subtitle}
             </p>
 
             {/* Grid de 3 artículos */}
@@ -301,10 +295,10 @@ const Index = () => {
                 </div>
                 <div className="p-6">
                   <h3 className="font-heading text-xl font-bold mb-2 text-foreground transition-colors">
-                    Entendiendo los berrinches
+                      {pc.blog_post_1_title}
                   </h3>
                   <p className="font-decorative text-sm text-foreground/80">
-                    Qué son realmente y por qué tu hijo/a los necesita para crecer emocionalmente.
+                      {pc.blog_post_1_body}
                   </p>
                   <p className="font-decorative text-xs text-muted-foreground mt-3">Próximamente</p>
                 </div>
@@ -320,10 +314,10 @@ const Index = () => {
                 </div>
                 <div className="p-6">
                   <h3 className="font-heading text-xl font-bold mb-2 text-foreground transition-colors">
-                    La validación emocional
+                      {pc.blog_post_2_title}
                   </h3>
                   <p className="font-decorative text-sm text-foreground/80">
-                    Una herramienta poderosa para conectar con tu hijo sin necesidad de controlar sus emociones.
+                      {pc.blog_post_2_body}
                   </p>
                   <p className="font-decorative text-xs text-muted-foreground mt-3">Próximamente</p>
                 </div>
@@ -339,10 +333,10 @@ const Index = () => {
                 </div>
                 <div className="p-6">
                   <h3 className="font-heading text-xl font-bold mb-2 text-foreground transition-colors">
-                    Autocuidado para padres
+                      {pc.blog_post_3_title}
                   </h3>
                   <p className="font-decorative text-sm text-foreground/80">
-                    Por qué cuidar tu bienestar emocional es esencial para acompañar a tus hijos.
+                      {pc.blog_post_3_body}
                   </p>
                   <p className="font-decorative text-xs text-muted-foreground mt-3">Próximamente</p>
                 </div>

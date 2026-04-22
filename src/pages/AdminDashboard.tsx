@@ -2,7 +2,7 @@ import { useAuthContext } from '@/context/AuthContext';
 import { Button } from '@/components/ui/button';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { useNavigate } from 'react-router-dom';
-import { LogOut, BarChart3, Users, ShoppingCart, BookOpen, TrendingUp, Settings, Shield, AlertTriangle, Rocket } from 'lucide-react';
+import { LogOut, BarChart3, Users, ShoppingCart, BookOpen, TrendingUp, Settings, Shield, AlertTriangle, Rocket, FileText, Tag, CreditCard } from 'lucide-react';
 import { AllUsersList } from '@/components/AllUsersList';
 import { AllOrdersList } from '@/components/AllOrdersList';
 import { AccessLogsList } from '@/components/AccessLogsList';
@@ -11,6 +11,9 @@ import { AdminSalesReport } from '@/components/AdminSalesReport';
 import { AdminSiteSettings } from '@/components/AdminSiteSettings';
 import { AdminPaymentReconciliation } from '@/components/AdminPaymentReconciliation';
 import { AdminGoLiveChecklist } from '@/components/AdminGoLiveChecklist';
+import { AdminPageContent } from '@/components/AdminPageContent';
+import { AdminDiscountCodes } from '@/components/AdminDiscountCodes';
+import { AdminMonetization } from '@/components/AdminMonetization';
 import Navigation from '@/components/Navigation';
 
 const AdminDashboard = () => {
@@ -80,6 +83,18 @@ const AdminDashboard = () => {
               <Rocket size={16} />
               Lanzamiento
             </TabsTrigger>
+              <TabsTrigger value="content" className="flex items-center gap-2">
+                <FileText size={16} />
+                Contenido
+              </TabsTrigger>
+              <TabsTrigger value="discounts" className="flex items-center gap-2">
+                <Tag size={16} />
+                Descuentos
+              </TabsTrigger>
+              <TabsTrigger value="monetization" className="flex items-center gap-2">
+                <CreditCard size={16} />
+                Monetización
+              </TabsTrigger>
           </TabsList>
 
           <TabsContent value="store">
@@ -113,6 +128,18 @@ const AdminDashboard = () => {
           <TabsContent value="golive">
             <AdminGoLiveChecklist />
           </TabsContent>
+
+            <TabsContent value="content">
+              <AdminPageContent />
+            </TabsContent>
+
+            <TabsContent value="discounts">
+              <AdminDiscountCodes />
+            </TabsContent>
+
+            <TabsContent value="monetization">
+              <AdminMonetization />
+            </TabsContent>
         </Tabs>
       </div>
     </div>
