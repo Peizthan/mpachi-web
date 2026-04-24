@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { User } from '@supabase/supabase-js';
 import { useAuthContext } from '@/context/AuthContext';
 import { supabase } from '@/supabaseClient';
@@ -17,26 +17,6 @@ export interface Profile {
   created_at: string;
   updated_at: string;
 }
-
-let inflightProfileRepair: Promise<Profile | null> | null = null;
-
-const ensureProfile = async () => {
-  if (!inflightProfileRepair) {
-    inflightProfileRepair = (async () => {
-      const { data, error } = await supabase.functions.invoke('ensure-profile');
-
-      if (error) {
-        throw error;
-      }
-
-      return (data?.profile ?? null) as Profile | null;
-    })().finally(() => {
-      inflightProfileRepair = null;
-    });
-  }
-
-  return inflightProfileRepair;
-};
 
 const ensureProfileClientSide = async (user: User) => {
   const primaryEmail = user.email ?? `${user.id}@local.invalid`;
@@ -96,102 +76,64 @@ export const useProfile = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
-  // Obtener perfil del usuario
-  useEffect(() => {
+  const fetchProfile = useCallback(async () => {
     if (!user) {
       setProfile(null);
       setLoading(false);
       return;
     }
 
-    let isMounted = true;
+    try {
+      setLoading(true);
+      setError(null);
 
-    const fetchProfile = async () => {
-      try {
-        setLoading(true);
-        setError(null);
+      const { data, error: fetchError } = await supabase
+        .from('profiles')
+        .select('*')
+        .eq('id', user.id)
+        .maybeSingle();
 
-        const { data, error: fetchError } = await supabase
-          .from('profiles')
-          .select('*')
-          .eq('id', user.id)
-          .maybeSingle();
-
-        if (fetchError) {
-          throw fetchError;
-        }
-
-        if (data) {
-          if (isMounted) {
-            setProfile(data);
-          }
-          return;
-        }
-
-        let inserted: Profile | null = null;
-
-        try {
-          inserted = await ensureProfileClientSide(user);
-        } catch {
-          inserted = await ensureProfile();
-        }
-
-        if (!inserted) {
-          throw new Error('No profile returned from ensure-profile');
-        }
-
-        if (isMounted) {
-          setProfile(inserted);
-        }
-      } catch (err) {
-        if (isMounted) {
-          setError('No se pudo cargar ni reparar el perfil. Intenta cerrar sesión e iniciar nuevamente.');
-        }
-        console.error('Error fetching profile:', err);
-      } finally {
-        if (isMounted) {
-          setLoading(false);
-        }
+      if (fetchError) {
+        throw fetchError;
       }
-    };
 
-    void fetchProfile();
-
-    const profileChannel = supabase
-      .channel(`profile-updates-${user.id}`)
-      .on(
-        'postgres_changes',
-        {
-          event: '*',
-          schema: 'public',
-          table: 'profiles',
-          filter: `id=eq.${user.id}`,
-        },
-        (payload) => {
-          const updated = payload.new as Profile | null;
-          if (updated) {
-            setProfile(updated);
-          } else {
-            void fetchProfile();
-          }
-        }
-      )
-      .subscribe();
-
-    const handleVisibilityChange = () => {
-      if (document.visibilityState === 'visible') {
-        void fetchProfile();
+      if (data) {
+        setProfile(data);
+        return;
       }
-    };
 
-    document.addEventListener('visibilitychange', handleVisibilityChange);
+      await ensureProfileClientSide(user);
 
-    return () => {
-      isMounted = false;
-      document.removeEventListener('visibilitychange', handleVisibilityChange);
-      void supabase.removeChannel(profileChannel);
-    };
+      const { data: repairedProfile, error: repairedError } = await supabase
+        .from('profiles')
+        .select('*')
+        .eq('id', user.id)
+        .maybeSingle();
+
+      if (repairedError) {
+        throw repairedError;
+      }
+
+      if (!repairedProfile) {
+        throw new Error('Profile row is still missing after repair attempt');
+      }
+
+      setProfile(repairedProfile);
+    } catch (err) {
+      const code = (err as { code?: string } | null)?.code;
+      const message = err instanceof Error ? err.message : 'Unknown error';
+      const diagnostic = code ? `[${code}] ${message}` : message;
+      setError(`No se pudo cargar/reparar el perfil: ${diagnostic}`);
+      setProfile(null);
+      console.error('Error fetching profile:', err);
+    } finally {
+      setLoading(false);
+    }
   }, [user]);
+
+  useEffect(() => {
+    void fetchProfile();
+  }, [fetchProfile]);
 
   // Actualizar perfil
   const updateProfile = async (updates: Partial<Profile>) => {
@@ -247,5 +189,5 @@ export const useProfile = () => {
     }
   };
 
-  return { profile, loading, error, updateProfile, uploadAvatar, refetchProfile: ensureProfile };
+  return { profile, loading, error, updateProfile, uploadAvatar, refetchProfile: fetchProfile };
 };
