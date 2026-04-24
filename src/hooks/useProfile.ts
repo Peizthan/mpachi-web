@@ -31,6 +31,8 @@ export const useProfile = () => {
       return;
     }
 
+    let isMounted = true;
+
     const fetchProfile = async () => {
       try {
         setLoading(true);
@@ -47,7 +49,9 @@ export const useProfile = () => {
         }
 
         if (data) {
-          setProfile(data);
+          if (isMounted) {
+            setProfile(data);
+          }
           return;
         }
 
@@ -66,16 +70,57 @@ export const useProfile = () => {
           throw insertError;
         }
 
-        setProfile(inserted);
+        if (isMounted) {
+          setProfile(inserted);
+        }
       } catch (err) {
-        setError('No se pudo cargar el perfil. Intenta cerrar sesión e iniciar nuevamente.');
+        if (isMounted) {
+          setError('No se pudo cargar el perfil. Intenta cerrar sesión e iniciar nuevamente.');
+        }
         console.error('Error fetching profile:', err);
       } finally {
-        setLoading(false);
+        if (isMounted) {
+          setLoading(false);
+        }
       }
     };
 
-    fetchProfile();
+    void fetchProfile();
+
+    const profileChannel = supabase
+      .channel(`profile-updates-${user.id}`)
+      .on(
+        'postgres_changes',
+        {
+          event: '*',
+          schema: 'public',
+          table: 'profiles',
+          filter: `id=eq.${user.id}`,
+        },
+        (payload) => {
+          const updated = payload.new as Profile | null;
+          if (updated) {
+            setProfile(updated);
+          } else {
+            void fetchProfile();
+          }
+        }
+      )
+      .subscribe();
+
+    const handleVisibilityChange = () => {
+      if (document.visibilityState === 'visible') {
+        void fetchProfile();
+      }
+    };
+
+    document.addEventListener('visibilitychange', handleVisibilityChange);
+
+    return () => {
+      isMounted = false;
+      document.removeEventListener('visibilitychange', handleVisibilityChange);
+      void supabase.removeChannel(profileChannel);
+    };
   }, [user]);
 
   // Actualizar perfil
