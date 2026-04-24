@@ -17,6 +17,26 @@ export interface Profile {
   updated_at: string;
 }
 
+let inflightProfileRepair: Promise<Profile | null> | null = null;
+
+const ensureProfile = async () => {
+  if (!inflightProfileRepair) {
+    inflightProfileRepair = (async () => {
+      const { data, error } = await supabase.functions.invoke('ensure-profile');
+
+      if (error) {
+        throw error;
+      }
+
+      return (data?.profile ?? null) as Profile | null;
+    })().finally(() => {
+      inflightProfileRepair = null;
+    });
+  }
+
+  return inflightProfileRepair;
+};
+
 export const useProfile = () => {
   const { user } = useAuthContext();
   const [profile, setProfile] = useState<Profile | null>(null);
@@ -55,19 +75,10 @@ export const useProfile = () => {
           return;
         }
 
-        // If the profile row doesn't exist (e.g. trigger missing for old users), create it on demand.
-        const { data: inserted, error: insertError } = await supabase
-          .from('profiles')
-          .insert({
-            id: user.id,
-            email: user.email ?? `${user.id}@local.invalid`,
-            role: 'user',
-          })
-          .select('*')
-          .single();
+        const inserted = await ensureProfile();
 
-        if (insertError) {
-          throw insertError;
+        if (!inserted) {
+          throw new Error('No profile returned from ensure-profile');
         }
 
         if (isMounted) {
@@ -75,7 +86,7 @@ export const useProfile = () => {
         }
       } catch (err) {
         if (isMounted) {
-          setError('No se pudo cargar el perfil. Intenta cerrar sesión e iniciar nuevamente.');
+          setError('No se pudo cargar ni reparar el perfil. Intenta cerrar sesión e iniciar nuevamente.');
         }
         console.error('Error fetching profile:', err);
       } finally {
@@ -177,5 +188,5 @@ export const useProfile = () => {
     }
   };
 
-  return { profile, loading, error, updateProfile, uploadAvatar };
+  return { profile, loading, error, updateProfile, uploadAvatar, refetchProfile: ensureProfile };
 };
