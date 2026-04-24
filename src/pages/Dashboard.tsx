@@ -2,18 +2,28 @@ import { useEffect } from 'react';
 import { useAuthContext } from '@/context/AuthContext';
 import { Button } from '@/components/ui/button';
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
+import { Badge } from '@/components/ui/badge';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import { ArrowLeft, LogOut, ShoppingBag, CheckCircle2, XCircle } from 'lucide-react';
 import { ProfileForm } from '@/components/ProfileForm';
 import { OrdersList } from '@/components/OrdersList';
 import { GuidesList } from '@/components/GuidesList';
+import { useProfile } from '@/hooks/useProfile';
 import Navigation from '@/components/Navigation';
 
 const Dashboard = () => {
   const { user, signOut } = useAuthContext();
+  const { profile, loading: profileLoading, error: profileError } = useProfile();
   const navigate = useNavigate();
   const [searchParams, setSearchParams] = useSearchParams();
   const checkoutStatus = searchParams.get('checkout');
+  const supabaseHost = (() => {
+    try {
+      return new URL(import.meta.env.VITE_SUPABASE_URL).host;
+    } catch {
+      return 'invalid_url';
+    }
+  })();
 
   const scrollToSection = (id: string) => {
     const section = document.getElementById(id);
@@ -67,6 +77,45 @@ const Dashboard = () => {
             </Button>
             <Button variant="outline" size="sm" onClick={() => scrollToSection('acciones-section')}>
               Acciones
+            </Button>
+          </div>
+        </div>
+
+        <div className="mb-6 rounded-xl border bg-card p-4">
+          <div className="mb-3 flex items-center justify-between gap-3">
+            <p className="text-sm font-semibold">Diagnóstico de permisos</p>
+            <Badge variant={profile?.role === 'admin' ? 'default' : 'secondary'}>
+              {profile?.role === 'admin' ? 'Admin detectado' : 'Usuario estándar'}
+            </Badge>
+          </div>
+          <div className="grid gap-2 text-sm text-muted-foreground">
+            <p>
+              Supabase host: <span className="font-mono text-foreground">{supabaseHost}</span>
+            </p>
+            <p>
+              Auth user id: <span className="font-mono text-foreground">{user?.id ?? 'sin sesión'}</span>
+            </p>
+            <p>
+              Auth email: <span className="font-mono text-foreground">{user?.email ?? 'sin sesión'}</span>
+            </p>
+            <p>
+              Profile id: <span className="font-mono text-foreground">{profile?.id ?? (profileLoading ? 'cargando...' : 'sin perfil')}</span>
+            </p>
+            <p>
+              Profile role: <span className="font-mono text-foreground">{profile?.role ?? (profileLoading ? 'cargando...' : 'sin rol')}</span>
+            </p>
+          </div>
+          {profileError && (
+            <Alert variant="destructive" className="mt-3">
+              <AlertDescription>{profileError}</AlertDescription>
+            </Alert>
+          )}
+          <div className="mt-3 flex flex-wrap gap-2">
+            <Button variant="outline" size="sm" onClick={() => navigate('/admin')}>
+              Probar acceso Admin
+            </Button>
+            <Button variant="outline" size="sm" onClick={() => window.location.reload()}>
+              Recargar sesión
             </Button>
           </div>
         </div>
