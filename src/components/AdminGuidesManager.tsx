@@ -1,5 +1,5 @@
 import { useMemo, useState } from 'react';
-import { Pencil, Plus, RefreshCcw } from 'lucide-react';
+import { Pencil, Plus, RefreshCcw, Store, Eye } from 'lucide-react';
 import { useAdminGuides, type AdminGuide, type GuideFormInput } from '@/hooks/useAdminGuides';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
@@ -76,12 +76,31 @@ export const AdminGuidesManager = () => {
   const [editingGuide, setEditingGuide] = useState<AdminGuide | null>(null);
   const [formData, setFormData] = useState<GuideFormInput>(getDefaultForm());
   const [formError, setFormError] = useState<string | null>(null);
+  const [viewFilter, setViewFilter] = useState<'all' | 'draft' | 'published' | 'live'>('all');
 
   const stats = useMemo(() => {
     const publishedCount = guides.filter((guide) => guide.is_published).length;
     const activeCount = guides.filter((guide) => guide.is_active).length;
-    return { publishedCount, activeCount };
+    const liveCount = guides.filter((guide) => guide.is_published && guide.is_active).length;
+    const draftCount = guides.length - liveCount;
+    return { publishedCount, activeCount, liveCount, draftCount };
   }, [guides]);
+
+  const filteredGuides = useMemo(() => {
+    if (viewFilter === 'draft') {
+      return guides.filter((guide) => !guide.is_published || !guide.is_active);
+    }
+
+    if (viewFilter === 'published') {
+      return guides.filter((guide) => guide.is_published);
+    }
+
+    if (viewFilter === 'live') {
+      return guides.filter((guide) => guide.is_published && guide.is_active);
+    }
+
+    return guides;
+  }, [guides, viewFilter]);
 
   const openCreateDialog = () => {
     setEditingGuide(null);
@@ -211,6 +230,35 @@ export const AdminGuidesManager = () => {
     });
   };
 
+  const handlePublishAndActivate = async (guide: AdminGuide) => {
+    const result = await updateGuide(guide.id, {
+      title: guide.title,
+      description: guide.description || '',
+      content: guide.content || '',
+      image_url: guide.image_url || '',
+      category: guide.category || '',
+      slug: guide.slug || '',
+      price_cents: guide.price_cents,
+      currency: guide.currency,
+      is_published: true,
+      is_active: true,
+    });
+
+    if (result.error) {
+      toast({
+        title: 'No se pudo publicar',
+        description: result.error instanceof Error ? result.error.message : 'Error inesperado',
+        variant: 'destructive',
+      });
+      return;
+    }
+
+    toast({
+      title: 'Item publicado en tienda',
+      description: 'Ahora esta visible y disponible para compra.',
+    });
+  };
+
   if (loading) {
     return (
       <Card>
@@ -226,12 +274,16 @@ export const AdminGuidesManager = () => {
     <Card>
       <CardHeader className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
         <div>
-          <CardTitle>Catalogo de Guias</CardTitle>
+          <CardTitle>Gestor de Items de Tienda</CardTitle>
           <CardDescription>
-            Total: {guides.length} | Publicadas: {stats.publishedCount} | Activas: {stats.activeCount}
+            Total: {guides.length} | Publicadas: {stats.publishedCount} | Activas: {stats.activeCount} | En tienda: {stats.liveCount}
           </CardDescription>
         </div>
         <div className="flex items-center gap-2">
+          <Button variant="outline" onClick={() => window.open('/store', '_blank')} className="flex items-center gap-2">
+            <Eye size={16} />
+            Ver tienda
+          </Button>
           <Button variant="outline" onClick={refetch} className="flex items-center gap-2">
             <RefreshCcw size={16} />
             Recargar
@@ -243,15 +295,57 @@ export const AdminGuidesManager = () => {
         </div>
       </CardHeader>
       <CardContent>
+        <div className="mb-6 rounded-xl border bg-muted/30 p-4">
+          <div className="mb-3 flex items-center gap-2">
+            <Store size={18} />
+            <p className="font-semibold">Flujo recomendado para crear items</p>
+          </div>
+          <div className="grid gap-3 md:grid-cols-3">
+            <div className="rounded-lg border bg-background p-3">
+              <p className="text-xs text-muted-foreground">Paso 1</p>
+              <p className="font-medium">Crear borrador</p>
+              <p className="text-sm text-muted-foreground">Define titulo, precio, contenido e imagen.</p>
+            </div>
+            <div className="rounded-lg border bg-background p-3">
+              <p className="text-xs text-muted-foreground">Paso 2</p>
+              <p className="font-medium">Publicar</p>
+              <p className="text-sm text-muted-foreground">Marca el item como publicado cuando este listo.</p>
+            </div>
+            <div className="rounded-lg border bg-background p-3">
+              <p className="text-xs text-muted-foreground">Paso 3</p>
+              <p className="font-medium">Activar para venta</p>
+              <p className="text-sm text-muted-foreground">Activa el item para que aparezca en la tienda.</p>
+            </div>
+          </div>
+          <div className="mt-3 text-sm text-muted-foreground">
+            Borradores: {stats.draftCount} | Items visibles en tienda: {stats.liveCount}
+          </div>
+        </div>
+
         {error && (
           <Alert variant="destructive" className="mb-4">
             <AlertDescription>{error}</AlertDescription>
           </Alert>
         )}
 
+        <div className="mb-4 flex flex-wrap gap-2">
+          <Button variant={viewFilter === 'all' ? 'default' : 'outline'} size="sm" onClick={() => setViewFilter('all')}>
+            Todos ({guides.length})
+          </Button>
+          <Button variant={viewFilter === 'draft' ? 'default' : 'outline'} size="sm" onClick={() => setViewFilter('draft')}>
+            Borradores ({stats.draftCount})
+          </Button>
+          <Button variant={viewFilter === 'published' ? 'default' : 'outline'} size="sm" onClick={() => setViewFilter('published')}>
+            Publicados ({stats.publishedCount})
+          </Button>
+          <Button variant={viewFilter === 'live' ? 'default' : 'outline'} size="sm" onClick={() => setViewFilter('live')}>
+            En tienda ({stats.liveCount})
+          </Button>
+        </div>
+
         {guides.length === 0 ? (
           <div className="rounded-lg border border-dashed p-8 text-center text-muted-foreground">
-            No hay guias creadas aun.
+            Aun no hay items en la tienda. Crea el primero con "Nueva guia".
           </div>
         ) : (
           <div className="overflow-x-auto">
@@ -267,7 +361,7 @@ export const AdminGuidesManager = () => {
                 </TableRow>
               </TableHeader>
               <TableBody>
-                {guides.map((guide) => (
+                {filteredGuides.map((guide) => (
                   <TableRow key={guide.id}>
                     <TableCell className="font-medium">
                       <div>{guide.title}</div>
@@ -292,6 +386,16 @@ export const AdminGuidesManager = () => {
                           <Pencil size={14} className="mr-1" />
                           Editar
                         </Button>
+                        {(!guide.is_published || !guide.is_active) && (
+                          <Button
+                            size="sm"
+                            variant="default"
+                            disabled={savingGuideId === guide.id}
+                            onClick={() => handlePublishAndActivate(guide)}
+                          >
+                            Publicar y activar
+                          </Button>
+                        )}
                         <Button
                           size="sm"
                           variant="outline"
@@ -320,6 +424,13 @@ export const AdminGuidesManager = () => {
                     </TableCell>
                   </TableRow>
                 ))}
+                {filteredGuides.length === 0 && (
+                  <TableRow>
+                    <TableCell colSpan={6} className="py-8 text-center text-muted-foreground">
+                      No hay items para el filtro seleccionado.
+                    </TableCell>
+                  </TableRow>
+                )}
               </TableBody>
             </Table>
           </div>
