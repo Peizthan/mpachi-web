@@ -120,10 +120,7 @@ export const useProfile = () => {
 
       setProfile(repairedProfile);
     } catch (err) {
-      const code = (err as { code?: string } | null)?.code;
-      const message = err instanceof Error ? err.message : 'Unknown error';
-      const diagnostic = code ? `[${code}] ${message}` : message;
-      setError(`No se pudo cargar/reparar el perfil: ${diagnostic}`);
+      setError('No se pudo cargar/reparar el perfil. Intenta cerrar sesión e iniciar nuevamente.');
       setProfile(null);
       console.error('Error fetching profile:', err);
     } finally {

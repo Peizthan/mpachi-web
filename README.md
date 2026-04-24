@@ -59,6 +59,8 @@ Key files:
 - [supabase/migrations/20260417000200_admin_profile_update_policy.sql](supabase/migrations/20260417000200_admin_profile_update_policy.sql)
 - [supabase/migrations/20260417000300_avatars_storage.sql](supabase/migrations/20260417000300_avatars_storage.sql)
 - [supabase/migrations/20260417000400_direct_sales_and_payments.sql](supabase/migrations/20260417000400_direct_sales_and_payments.sql)
+- [supabase/migrations/20260424000100_backfill_missing_profiles.sql](supabase/migrations/20260424000100_backfill_missing_profiles.sql)
+- [supabase/migrations/20260424000200_fix_profiles_rls_recursion.sql](supabase/migrations/20260424000200_fix_profiles_rls_recursion.sql)
 - [supabase/seed.sql](supabase/seed.sql)
 
 Common commands:
@@ -111,6 +113,45 @@ Deploy/update functions:
 npx supabase functions deploy create-checkout-session
 npx supabase functions deploy stripe-webhook
 ```
+
+## Admin role and profile health check
+
+If admin access is missing, run this quick SQL check in Supabase SQL Editor:
+
+```sql
+select
+	au.id as auth_user_id,
+	au.email as auth_email,
+	p.id as profile_id,
+	p.email as profile_email,
+	p.role as profile_role
+from auth.users au
+left join public.profiles p on p.id = au.id
+where lower(au.email) = lower('your-email@example.com');
+```
+
+Expected result: `auth_user_id = profile_id` and `profile_role = 'admin'` for admin accounts.
+
+If profile row is missing for a known user:
+
+```sql
+insert into public.profiles (id, email, role)
+select au.id, au.email, 'user'
+from auth.users au
+where lower(au.email) = lower('your-email@example.com')
+on conflict (id) do update
+set email = excluded.email;
+```
+
+If role needs admin:
+
+```sql
+update public.profiles
+set role = 'admin'
+where id = 'USER_UUID_HERE'::uuid;
+```
+
+The migration `20260424000200_fix_profiles_rls_recursion.sql` prevents profile-policy recursion errors (`42P17`) and should be applied in all environments.
 
 Webhook endpoint to register in Stripe:
 
