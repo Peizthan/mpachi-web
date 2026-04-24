@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { User } from '@supabase/supabase-js';
 import { useAuthContext } from '@/context/AuthContext';
 import { supabase } from '@/supabaseClient';
 
@@ -35,6 +36,58 @@ const ensureProfile = async () => {
   }
 
   return inflightProfileRepair;
+};
+
+const ensureProfileClientSide = async (user: User) => {
+  const primaryEmail = user.email ?? `${user.id}@local.invalid`;
+
+  const insertProfile = async (email: string) => {
+    return supabase
+      .from('profiles')
+      .insert({
+        id: user.id,
+        email,
+        role: 'user',
+      })
+      .select('*')
+      .single();
+  };
+
+  const { data: inserted, error: insertError } = await insertProfile(primaryEmail);
+  if (!insertError && inserted) {
+    return inserted as Profile;
+  }
+
+  // If profile was inserted in another tab/request, use it.
+  const { data: existingById, error: existingByIdError } = await supabase
+    .from('profiles')
+    .select('*')
+    .eq('id', user.id)
+    .maybeSingle();
+
+  if (!existingByIdError && existingById) {
+    return existingById as Profile;
+  }
+
+  // Handle duplicate email constraints by using a deterministic fallback email.
+  const errCode = (insertError as { code?: string } | null)?.code;
+  const errMessage = (insertError as { message?: string } | null)?.message ?? '';
+  const emailConflict =
+    errCode === '23505' ||
+    errMessage.toLowerCase().includes('duplicate key') ||
+    errMessage.includes('profiles_email_key');
+
+  if (emailConflict) {
+    const { data: fallbackInserted, error: fallbackError } = await insertProfile(
+      `${user.id}@local.invalid`
+    );
+
+    if (!fallbackError && fallbackInserted) {
+      return fallbackInserted as Profile;
+    }
+  }
+
+  throw insertError ?? new Error('Profile repair failed');
 };
 
 export const useProfile = () => {
@@ -75,7 +128,13 @@ export const useProfile = () => {
           return;
         }
 
-        const inserted = await ensureProfile();
+        let inserted: Profile | null = null;
+
+        try {
+          inserted = await ensureProfileClientSide(user);
+        } catch {
+          inserted = await ensureProfile();
+        }
 
         if (!inserted) {
           throw new Error('No profile returned from ensure-profile');
